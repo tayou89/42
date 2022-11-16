@@ -6,16 +6,16 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 23:45:38 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/15 00:41:22 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/16 22:42:20 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	check_same(const char *haystack, const char *needle, size_t i, size_t len)
+size_t	check(const char *haystack, const char *needle, size_t i, size_t len)
 {
 	size_t	k;
-	
+
 	k = 0;
 	while (i < len && needle[k] != '\0' && haystack[k] != '\0')
 	{
@@ -46,7 +46,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		if (haystack[i] == needle[0])
 		{
 			same_point = i;
-			if (check_same(haystack + i, needle, i, len) == 0)
+			if (check(haystack + i, needle, i, len) == 0)
 				return ((char *) haystack + same_point);
 		}
 		i++;
