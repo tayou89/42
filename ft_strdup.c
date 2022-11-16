@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 22:33:13 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/16 23:15:16 by tayou            ###   ########.fr       */
+/*   Created: 2022/11/16 23:43:07 by tayou             #+#    #+#             */
+/*   Updated: 2022/11/16 23:52:32 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+char	*ft_strdup(const char *s1)
 {
-	unsigned char	*copy_b;
-	size_t			i;
+	char	*copy_s1;
+	int		s1_size;
+	int		i;
 
-	copy_b = (unsigned char *) b;
-	c = (unsigned char) c;
+	s1_size = ft_strlen(s1);
+	copy_s1 = (char *) malloc(sizeof(char) * s1_size + 1);
+	if (copy_s1 == 0)
+		return (0);
 	i = 0;
-	while (i < len)
+	while (s1[i] != '\0')
 	{
-		copy_b[i] = c;
+		copy_s1[i] = s1[i];
 		i++;
 	}
-	return ((void *) copy_b);
+	copy_s1[i] = '\0';
+	return (copy_s1);
 }
 /*
 #include <stdio.h>
@@ -33,17 +37,10 @@ void	*ft_memset(void *b, int c, size_t len)
 
 int	main()
 {
-	char	b[] = "abcdefg";
-	char	c;
-	int		len;
-
-	printf("문자를 입력하십시오: ");
-	scanf("%c", &c);
-	printf("길이(양의 정수)를 입력하십시오: ");
-	scanf("%d", &len);
-	printf("원본: %s\n", b);
-	printf("memset: %s\n", memset(b, c, len));
-	printf("ft_memset: %s\n", ft_memset(b, c, len));
+	char	*s1 = "";
+	
+	printf("strdup: %s\n", strdup(s1));
+	printf("ft_strdup: %s\n", ft_strdup(s1));
 	return (0);
 }
 */
