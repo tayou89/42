@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 23:52:33 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/14 22:07:22 by tayou            ###   ########.fr       */
+/*   Created: 2022/11/13 00:56:12 by tayou             #+#    #+#             */
+/*   Updated: 2022/11/14 22:09:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*copy_s;
-	size_t	i;
+	const unsigned char	*copy_s1;
+	const unsigned char	*copy_s2;
+	size_t				i;
 
-	copy_s = (char *) s;
+	copy_s1 = (const unsigned char *) s1;
+	copy_s2 = (const unsigned char *) s2;
+	if (n == 0)
+		return (0);
 	i = 0;
-	while (*copy_s != '\0' && i < n)
+	while (i < n)
 	{
-		if (*copy_s == c)
-			return ((void *) copy_s);
-		else
-		{
-			copy_s++;
+		if (copy_s1[i] == copy_s2[i])
 			i++;
-		}
+		else
+			return (copy_s1[i] - copy_s2[i]);
 	}
-	return ((void *) NULL);
+	return (0);
 }
 /*
 #include <stdio.h>
@@ -37,18 +38,15 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 int	main()
 {
-	char	s[200];
-	int		c;
+	char	*s1 = "abcdefg";
+	char	*s2 = "abcfefg";
 	size_t	n;
 
-	printf("string 입력: ");
-	scanf("%s", s);
-	printf("숫자 입력: ");
-	scanf("%d", &c);
-	printf("사이즈 입력: ");
+	printf("s1: %s\n", s1);
+	printf("s2: %s\n", s2);
 	scanf("%lu", &n);
-	printf("memchr: %s\n", memchr(s, c, n));
-	printf("ft_memchr: %s\n", ft_memchr(s, c, n));
+	printf("memcmp: %d\n", memcmp(s1, s2, n));
+	printf("ft_memcmp: %d\n", ft_memcmp(s1, s2, n));
 	return (0);
 }
 */

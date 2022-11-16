@@ -6,9 +6,11 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 00:05:51 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/08 01:08:59 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/14 22:17:09 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {

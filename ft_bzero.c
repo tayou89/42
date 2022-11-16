@@ -6,25 +6,11 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:14:31 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/09 23:42:03 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/14 22:06:39 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*copy_b;
-	size_t			i;
-
-	copy_b = (unsigned char *) b;
-	c = (unsigned char) c;
-	i = 0;
-	while (i < len)
-	{
-		copy_b[i] = c;
-		i++;
-	}
-	return ((void *) copy_b);
-}
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

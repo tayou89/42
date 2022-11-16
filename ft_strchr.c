@@ -6,9 +6,11 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 23:14:47 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/08 00:43:37 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/14 22:02:48 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
