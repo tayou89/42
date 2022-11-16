@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 00:22:28 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/14 23:45:02 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:21:56 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void	*ft_memset(void *b, int c, size_t len);
-void	*ft_bzero(void *s, size_t n);
+void	ft_bzero(void *s, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);

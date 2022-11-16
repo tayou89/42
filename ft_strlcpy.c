@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:35:49 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/14 23:53:43 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/16 20:56:50 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 	dst[i] = '\0';
 	return (src_len);
 }
-
+/*
 #include <stdio.h>
 #include <string.h>
 
@@ -41,9 +41,10 @@ int	main()
 
 	printf("dst: %s\n", dst1);
 	printf("src: %s\n", src);
-	printf("strlcpy return: %lu", strlcpy(dst1, src, strlen(dst1)));
-	printf("ft_strlcpy return: %lu", ft_strlcpy(dst2, src, strlen(dst2)));
-	printf("changed strlcpy_dst: %s", dst1);
-	printf("changed ft_strlcpy_dst: %s", dst2);
+	printf("strlcpy return: %lu\n", strlcpy(dst1, src, strlen(dst1)));
+	printf("ft_strlcpy return: %lu\n", ft_strlcpy(dst2, src, strlen(dst2)));
+	printf("changed strlcpy_dst: %s\n", dst1);
+	printf("changed ft_strlcpy_dst: %s\n", dst2);
 	return (0);
 }
+*/
