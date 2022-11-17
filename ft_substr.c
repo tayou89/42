@@ -1,43 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 21:33:21 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/17 21:18:52 by tayou            ###   ########.fr       */
+/*   Created: 2022/11/17 20:15:09 by tayou             #+#    #+#             */
+/*   Updated: 2022/11/17 20:37:00 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*substring;
 	size_t	i;
 
-	if (n == 0)
+	substring = (char *) malloc(sizeof(char) * len + 1);
+	if (substring == 0)
 		return (0);
 	i = 0;
-	while (i < n && s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+	while (i < len && s[start] != '\0')
+	{
+		substring[i] = s[start];
 		i++;
-	if (i == n)
-		i--;
-	return (s1[i] - s2[i]);
+		start++;
+	}
+	substring[i] = '\0';
+	return (substring);
 }
 /*
 #include <stdio.h>
-#include <string.h>
 
 int	main()
 {
-	char	*s1 = "";
-	char	*s2 = "abcde";
-	size_t	n;
+	char			*s = "abcdefg";
+	unsigned int	start;
+	size_t			len;
 
-	scanf("%lu", &n);
-	printf("strncmp: %d\n", strncmp(s1, s2, n));
-	printf("ft_strncmp: %d\n", ft_strncmp(s1, s2, n));
+	printf("s: %s\n", s);
+	printf("start: ");
+	scanf("%u", &start);
+	printf("len: ");
+	scanf("%lu", &len);
+	printf("substring: %s\n", ft_substr(s, start, len));
 	return (0);
 }
 */

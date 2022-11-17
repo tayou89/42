@@ -6,22 +6,22 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:35:49 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/16 20:56:50 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/17 23:26:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t size)
 {
 	size_t	i;
 	size_t	src_len;
 
 	src_len = ft_strlen(src);
-	if (dstsize == 0)
+	if (size == 0)
 		return (0);
 	i = 0;
-	while (i < dstsize - 1 && src[i] != '\0')
+	while (i < size - 1 && src[i] != '\0')
 	{
 		dst[i] = src[i];
 		i++;
