@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:56:29 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/17 23:24:33 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/18 02:21:07 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	trimmed_s1 = get_trimmed(s1, set, s1_len, set_len);
 	return (trimmed_s1);
 }
+/*
 #include <stdio.h>
 
 int	main()
@@ -79,3 +80,4 @@ int	main()
 	printf("trimmed_s1: %s\n", ft_strtrim(s1, set));
 	return (0);
 }
+*/
