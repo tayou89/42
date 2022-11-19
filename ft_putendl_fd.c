@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 21:53:31 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/19 16:27:13 by tayou            ###   ########.fr       */
+/*   Created: 2022/11/19 16:54:09 by tayou             #+#    #+#             */
+/*   Updated: 2022/11/19 16:58:32 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
 /*
 #include <stdio.h>
-#include <ctype.h>
 
 int	main()
 {
-	int	c;
+	char	s[] = "abcdefg";
+	int		fd;
 
-	scanf("%d", &c);
-	printf("toupper: %d\n", toupper(c));
-	printf("ft_toupper:%d\n", ft_toupper(c));
+	printf("s: %s\n", s);
+	printf("fd: ");
+	scanf("%d", &fd);
+	ft_putendl_fd(s, fd);
 	return (0);
 }
 */

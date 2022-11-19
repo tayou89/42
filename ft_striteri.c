@@ -1,32 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 21:53:31 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/19 16:27:13 by tayou            ###   ########.fr       */
+/*   Created: 2022/11/19 16:19:14 by tayou             #+#    #+#             */
+/*   Updated: 2022/11/19 16:21:31 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
+	int	i;
+
+	if (s[0] == 0)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
 /*
 #include <stdio.h>
-#include <ctype.h>
+
+void	f(unsigned int i, char *c)
+{
+	int	remainder;
+
+	remainder = i % 2;
+	if (remainder == 0)
+		*c = 'z';
+}
 
 int	main()
 {
-	int	c;
+	char	s[] = "abcdefg";
 
-	scanf("%d", &c);
-	printf("toupper: %d\n", toupper(c));
-	printf("ft_toupper:%d\n", ft_toupper(c));
+	printf("s: %s\n", s);
+	ft_striteri(s, f);
+	printf("changed s: %s\n", s);
 	return (0);
 }
 */
