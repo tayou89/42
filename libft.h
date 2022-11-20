@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 00:22:28 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/19 21:18:59 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/20 22:53:57 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t size);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
@@ -73,6 +74,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *));
 
 #endif

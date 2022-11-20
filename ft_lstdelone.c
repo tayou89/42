@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 23:43:05 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/20 22:47:58 by tayou            ###   ########.fr       */
+/*   Created: 2022/11/20 02:01:49 by tayou             #+#    #+#             */
+/*   Updated: 2022/11/20 16:16:40 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "libft.h"
+
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	else
-		return (0);
+	if (lst == NULL || del == NULL)
+		return ;
+	del(lst->content);
+	free(lst);
 }
 /*
 #include <stdio.h>
-#include <ctype.h>
+
+void	del(void *s)
+{
+	if (s == NULL)
+		return ;
+	else
+		s = NULL;
+}
 
 int	main()
 {
-	int	c;
+	char	*s = "abcdefg";
+	t_list	*lst;
 
-	scanf("%d", &c);
-	printf("isascii: %d\n", isascii(c));
-	printf("ft_isascii: %d\n", ft_isascii(c));
+	lst = ft_lstnew((void *) s);
+	printf("lst->content: %s\n", (char *) lst->content);
+	ft_lstdelone(lst, del);
+	printf("changed lst->content: %s\n", (char *) lst->content);
 	return (0);
 }
 */
