@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 21:35:49 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/20 22:30:39 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/21 20:29:31 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,26 @@ size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t size)
 	size_t	src_len;
 
 	src_len = ft_strlen(src);
-	if (size == 0)
-		return (0);
+	if (dst[0] == 0 || src[0] == 0)
+		return (src_len);
 	i = 0;
-	while (i < size - 1 && src[i] != '\0')
+	while (i + 1 < size && src[i] != '\0')
 	{
 		dst[i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
+	if (size > 0)
+		dst[i] = '\0';
 	return (src_len);
 }
-/*
+
 #include <stdio.h>
 #include <string.h>
 
 int	main()
 {
-	char	dst1[] = "zzzzzzzzzzzz";
-	char	dst2[] = "zzzzzzzzzzzz";
+	char	dst1[] = "zzzz";
+	char	dst2[] = "zzzz";
 	char	*src = "abcdefg";
 
 	printf("dst: %s\n", dst1);
@@ -47,4 +48,3 @@ int	main()
 	printf("changed ft_strlcpy_dst: %s\n", dst2);
 	return (0);
 }
-*/
