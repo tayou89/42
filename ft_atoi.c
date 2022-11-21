@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 21:45:39 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/17 22:27:49 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/21 22:04:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	check_sign(const char *str, int *i)
 		(*i)++;
 		return (-1);
 	}
+	else if (str[*i] == '+')
+	{
+		(*i)++;
+		return (1);
+	}
 	else
 		return (1);
 }
@@ -53,8 +58,6 @@ int	ft_atoi(const char *str)
 	int			sign;
 	long long	number;
 
-	if (str == 0)
-		return (0);
 	i = 0;
 	check_whitespace(str, &i);
 	sign = check_sign(str, &i);
@@ -71,10 +74,8 @@ int	ft_atoi(const char *str)
 
 int	main()
 {
-	char	*str = " 	 	-0abfde";
-
-	printf("atoi: %d\n", atoi(str));
-	printf("ft_atoi: %d\n", ft_atoi(str));
+	printf("atoi: %d\n", atoi(((void *) 0)));
+	printf("ft_atoi: %d\n", ft_atoi(((void *) 0)));
 	return (0);
 }
 */

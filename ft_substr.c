@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:15:09 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/17 20:37:00 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/21 22:06:56 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,17 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substring;
 	size_t	i;
+	size_t	s_len;
 
 	substring = (char *) malloc(sizeof(char) * len + 1);
 	if (substring == 0)
 		return (0);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+	{
+		substring[0] = '\0';
+		return (substring);
+	}
 	i = 0;
 	while (i < len && s[start] != '\0')
 	{
