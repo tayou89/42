@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:52:33 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/21 22:16:12 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/21 22:29:02 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	unsigned char	*copy_s;
+	unsigned char	copy_c;
 	size_t			i;
 	size_t			s_len;
 
 	copy_s = (unsigned char *) s;
+	copy_c = (unsigned char) c;
 	s_len = ft_strlen(s);
 	if (c == 0)
 		return (&copy_s[s_len]);
 	i = 0;
 	while (*copy_s != '\0' && i < n)
 	{
-		if (*copy_s == c)
+		if (*copy_s == copy_c)
 			return ((void *) copy_s);
 		else
 		{
