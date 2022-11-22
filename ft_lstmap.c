@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:02:06 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/20 18:36:50 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/23 00:06:22 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_list	*ft_lstmap(t_list *lst, void (*f)(void *), void (*del)(void *))
 	}
 	return (new_lst);
 }
-/*
 #include <stdio.h>
 
 void	f(void *content)
@@ -101,4 +100,3 @@ int	main()
 	}
 	return (0);
 }
-*/

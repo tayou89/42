@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:50:18 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/22 23:35:41 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/22 23:56:58 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,44 +16,47 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*copy_lst;
 
-	copy_lst = *lst;
-	if (copy_lst == NULL)
+	if (*lst == NULL)
 	{
-		copy_lst = new;
+		*lst = new;
 		return ;
 	}
+	copy_lst = *lst;
 	while (copy_lst->next != NULL)
 		copy_lst = copy_lst->next;
 	copy_lst->next = new;
 }
-
+/*
 #include <stdio.h>
 
 int	main()
 {
-	t_list	*lst[3];
+	t_list	*lst = ((void *) 0);
 	t_list	*new;
-	char	*s1 = "111111";
-	char	*s2 = "222222";
-	char	*s3 = "333333";
-	char	*s4 = "new";
 	int		size;
+	t_list	*copy;
+	char	*s[4];;
 	int		i;
 
-	lst[0] = ft_lstnew((void *) s1);
-	lst[1] = ft_lstnew((void *) s2);
-	lst[2] = ft_lstnew((void *) s3);
-	new = ft_lstnew((void *) s4);
-	i = 0;
-	while (i < 2)
+	s[0] = "11111";
+	s[1] = "22222";
+	s[2] = "33333";
+	s[3] = "new";
+	lst = ft_lstnew((void *) s[0]);
+	copy = lst;
+	i = 1;
+	while (i < 3)
 	{
-		lst[i]->next = lst[i + 1];
+		copy->next = ft_lstnew((void *) s[i]);
+		copy = copy->next;
 		i++;
 	}
-	size = ft_lstsize(lst[0]);
+	new = ft_lstnew((void *) "new");
+	size = ft_lstsize(lst);
 	printf("before list_size: %d\n", size);
-	ft_lstadd_back(&lst[0], new);
-	size = ft_lstsize(lst[0]);
+	ft_lstadd_back(&lst, new);
+	size = ft_lstsize(lst);
 	printf("after list_size: %d\n", size);
 	return (0);
 }
+*/
