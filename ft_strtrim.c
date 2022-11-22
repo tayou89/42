@@ -6,65 +6,55 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:56:29 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/21 23:07:56 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/22 22:47:07 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	get_len(char *start_address, char *end_address)
+char	*get_string(char const *s1, int start_point, int end_point)
 {
-	size_t	trimmed_len;
+	char	*string;
+	int		string_size;
+	int		i;
 
-	trimmed_len = 0;
-	while (start_address <= end_address)
-	{
-		start_address++;
-		trimmed_len++;
-	}
-	return (trimmed_len);
-}
-
-char	*get_trimmed(char const *s1, char const *set, size_t s1_l, size_t set_l)
-{
-	char	*start_address;
-	char	*end_address;
-	char	*trimmed_string;
-	size_t	trimmed_len;
-
-	if (ft_strnstr(s1, set, s1_l) == 0)
-		return (ft_strdup(s1));
-	start_address = ft_strnstr(s1, set, s1_l) + set_l;
-	if (ft_strnstr(start_address, set, s1_l) == 0)
+	string_size = end_point - start_point + 1;
+	string = (char *) malloc(sizeof(char) * string_size + 1);
+	if (string == 0)
 		return (0);
-	end_address = ft_strnstr(start_address, set, s1_l) - 1;
-	trimmed_len = get_len(start_address, end_address);
-	trimmed_string = (char *) malloc(sizeof(char) * trimmed_len + 1);
-	if (trimmed_string == 0)
-		return (0);
-	while (start_address <= end_address)
+	i = 0;
+	while (start_point <= end_point)
 	{
-		*trimmed_string = *start_address;
-		trimmed_string++;
-		start_address++;
+		string[i] = s1[start_point];
+		i++;
+		start_point++;
 	}
-	*trimmed_string = '\0';
-	return (trimmed_string - trimmed_len);
+	string[i] = '\0';
+	return (string);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*trimmed_s1;
-	int		s1_len;
-	int		set_len;
+	int		start_point;
+	int		end_point;
+	int		i;
 
-	s1_len = (int) ft_strlen(s1);
-	set_len = (int) ft_strlen(set);
-	if (s1_len == 0)
+	if (s1 == 0)
 		return (0);
-	if (set_len == 0)
+	if (set == 0)
 		return (ft_strdup(s1));
-	trimmed_s1 = get_trimmed(s1, set, s1_len, set_len);
+	i = 0;
+	while (s1[i] != '\0' && ft_strchr(set, s1[i]) != 0)
+		i++;
+	start_point = i;
+	i = ft_strlen(s1) - 1;
+	while (i >= 0 && ft_strchr(set, s1[i]) != 0)
+		i--;
+	end_point = i;
+	if (start_point > end_point)
+		return (ft_strdup(""));
+	trimmed_s1 = get_string(s1, start_point, end_point);
 	return (trimmed_s1);
 }
 /*
@@ -72,8 +62,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 int	main()
 {
-	char	*s1 = "The boy is good";
-	char	*set = "";
+	char	*s1 = "";
+	char	*set = " \n\t";
 
 	printf("s1: %s\n", s1);
 	printf("set: %s\n", set);

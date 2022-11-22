@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:28:26 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/18 02:20:18 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/22 23:34:44 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ int	get_array_size(char const *s, char c)
 	int	i;
 	int	array_size;
 
-	i = 0;
-	if (s[i] == c)
-		i++;
 	array_size = 0;
+	i = 0;
+	while (s[i] == c && s[i] != '\0')
+		i++;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
-			array_size++;
-		i++;
-	}
-	if (s[i - 1] != c)
+		while (s[i] != c && s[i] != '\0')
+			i++;
 		array_size++;
+		while (s[i] == c && s[i] != '\0')
+			i++;
+	}
 	return (array_size);
 }
 
@@ -65,26 +65,25 @@ char	**get_array(char **array, char const *s, char c)
 {
 	int		i;
 	int		k;
-	int		start_point;
-	int		end_point;
-	int		sub_array_size;
+	int		start;
+	int		end;
 
 	i = 0;
-	if (s[i] == c)
+	while (s[i] == c && s[i] != '\0')
 		i++;
 	k = 0;
 	while (s[i] != '\0')
 	{
-		start_point = i;
+		start = i;
 		while (s[i] != c && s[i] != '\0')
 			i++;
-		end_point = i - 1;
-		sub_array_size = end_point - start_point + 1;
-		array[k] = (char *) malloc(sizeof(char) * sub_array_size + 1);
+		end = i - 1;
+		array[k] = (char *) malloc(sizeof(char) * (end - start + 1) + 1);
 		if (array[k] == 0)
 			return (free_array(array));
-		array[k] = fill_array(array[k], s, start_point, end_point);
-		i++;
+		array[k] = fill_array(array[k], s, start, end);
+		while (s[i] == c && s[i] != '\0')
+			i++;
 		k++;
 	}
 	return (array);
@@ -94,17 +93,21 @@ char	**ft_split(char const *s, char c)
 {
 	char	**array;
 	int		array_size;
-	int		s_size;
 
-	s_size = ft_strlen(s);
-	if (s_size == 0)
-		return (0);
+	if (s[0] == '\0')
+	{
+		array = (char **) malloc(sizeof(char *) * 1);
+		if (array == 0)
+			return (0);
+		array[0] = 0;
+		return (array);
+	}
 	array_size = get_array_size(s, c);
 	array = (char **) malloc(sizeof(char *) * (array_size + 1));
 	if (array == 0)
 		return (0);
 	array = get_array(array, s, c);
-	array[array_size] = NULL;
+	array[array_size] = 0;
 	return (array);
 }
 /*
@@ -112,7 +115,7 @@ char	**ft_split(char const *s, char c)
 
 int	main()
 {
-	char	*s = "He is a good man";
+	char	*s = "\0    He   is   a   good   man ";
 	char	c;
 	char	**string_array;
 	int		i;

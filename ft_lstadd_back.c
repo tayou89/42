@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 21:50:18 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/20 16:16:17 by tayou            ###   ########.fr       */
+/*   Updated: 2022/11/22 23:35:41 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		copy_lst = copy_lst->next;
 	copy_lst->next = new;
 }
-/*
+
 #include <stdio.h>
 
 int	main()
 {
-	t_list	*lst[10];
+	t_list	*lst[3];
 	t_list	*new;
 	char	*s1 = "111111";
 	char	*s2 = "222222";
@@ -56,5 +56,4 @@ int	main()
 	size = ft_lstsize(lst[0]);
 	printf("after list_size: %d\n", size);
 	return (0);
-}	
-*/
+}
