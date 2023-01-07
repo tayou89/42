@@ -27,7 +27,6 @@ else
 endif
 
 all : $(NAME)
-	sleep 1
 
 clean : 
 	$(RM) $(RMFLAGS) $(OBJS_PART1) $(OBJS_PART2) $(OBJS_BONUS)

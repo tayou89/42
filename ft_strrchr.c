@@ -6,7 +6,7 @@
 /*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 00:05:06 by tayou             #+#    #+#             */
-/*   Updated: 2022/11/21 20:45:10 by tayou            ###   ########.fr       */
+/*   Updated: 2023/01/07 14:30:18 by tayou            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,21 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	size;
+	char	copy_c;
+	int		size;
+	int		i;
 
+	copy_c = (char) c;
 	size = ft_strlen(s);
-	while (s[size] != (char) c && size >= 0)
-		size--;
-	if (size < 0)
+	i = size;
+	while (i >= 0)
+	{
+		if (s[i] != copy_c)
+			i--;
+		else
+			break ;
+	}
+	if (i < 0)
 		return (0);
-	return ((char *) &s[size]);
+	return ((char *) &s[i]);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-int	main()
-{
-	char	str[200];
-	int		c;
-	
-	scanf("%s", str);
-	scanf("%d", &c);
-	printf("str: %s\n", str);
-	printf("c: %d\n", c);
-	printf("strrchr: %s\n", strrchr(str, c));
-	printf("ft_strrchr: %s\n", ft_strrchr(str, c));
-	return (0);
-}
-*/
