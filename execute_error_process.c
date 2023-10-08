@@ -1,25 +1,32 @@
 #include "microshell.h"
 
-void	execute_error_process(int error_number, int exit_number, char *path, t_data *data)
+char	*get_error_message(int error_number);
+
+#include <stdio.h>
+
+void	execute_error_process(int error_number, int exit_number, char *message, t_data *data)
 {
 	char	*error_message;
 
+	printf("error_number: %d\n", error_number);
 	error_message = get_error_message(error_number);
 	write(2, error_message, ft_strlen(error_message));
-	if (path != (void *) 0)
-		write(2, path, ft_strlen(path));
+	if (message != (void *) 0)
+		write(2, message, ft_strlen(message));
 	write(2, "\n", 1);
-	free_data(data);
+	if (data != (void *) 0)
+		free_data(data);
+	exit(exit_number);
 }
 
-char 	*get_error_message(int error_number)
+char	*get_error_message(int error_number)
 {
 	if (error_number == SYS_ERROR)
 		return ("error: fatal");
-	else if (error_number = CD_ARG_ERROR)
+	else if (error_number == CD_ARGV_ERROR)
 		return ("error: cd: bad arguments");
-	else if (error_number = CD_PATH_ERROR)
+	else if (error_number == CD_PATH_ERROR)
 		return ("error: cd: cannot change directory to ");
-	else if (error_number = EXECVE_ERROR)
+	else
 		return ("error: cannot execute ");
 }
