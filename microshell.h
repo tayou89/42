@@ -12,6 +12,14 @@
 # define CD_PATH_ERROR	2
 # define EXECVE_ERROR	3
 
+# define READ		0
+# define WRITE		1
+
+# define EVEN_READ	1
+# define EVEN_WRITE	0
+# define ODD_READ	0
+# define ODD_WRITE	1
+
 typedef struct s_count
 {
 	int	pipe;
@@ -22,7 +30,9 @@ typedef struct s_data
 {
 	char	**envp;
 	pid_t	*pid;
-	int		**pipe_fd;
+	int		before_fd;
+	int		fd[2];
+	int		child_number;
 	t_count	count;
 	int		status;
 }	t_data;

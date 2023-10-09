@@ -13,3 +13,19 @@ int	ft_strlen(char *string)
 	size = i;
 	return (size);
 }
+
+int	duplicate_fd_1(int object_fd, t_data *data)
+{
+	int	result_fd;
+
+	result_fd = dup(object_fd);
+	if (result_fd == -1)
+		execute_error_process(SYS_ERROR, 1, (void *) 0, data);
+	return (result_fd);
+}
+
+void	duplicate_fd_2(int object_fd, int connect_fd, t_data *data)
+{
+	if (dup(object_fd, connect_fd) == -1)
+		execute_error_process(SYS_ERROR, 1, (void *) 0, data);
+}
