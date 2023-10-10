@@ -13,7 +13,6 @@ void	execute_parent_process(char **argv, t_data *data)
 	{
 		parent_string = get_parent_string(&argv[i], &i);
 		execute_child_process(parent_string, data);
-		free_pipe_fd(data);
 		wait_child_process(data);
 	}
 }
@@ -41,7 +40,7 @@ void	wait_child_process(t_data *data)
 	while (i < data->count.child)
 	{
 		if (waitpid(data->pid[i], &data->status, 0) == -1)
-			kill(0, SIGINT);
+			execute_error_process(SYS_ERROR, 1, (void *) 0, data);
 		i++;
 	}
 	free(data->pid);

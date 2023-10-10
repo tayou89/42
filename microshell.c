@@ -8,6 +8,7 @@ int	main(int argc, char **argv, char **envp)
 
 	check_argc(argc);
 	data.envp = envp;
+	data.child_number = 0;
 	execute_parent_process(argv, &data);
 	return (data.status);
 }

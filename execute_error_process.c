@@ -2,13 +2,10 @@
 
 char	*get_error_message(int error_number);
 
-#include <stdio.h>
-
 void	execute_error_process(int error_number, int exit_number, char *message, t_data *data)
 {
 	char	*error_message;
 
-	printf("error_number: %d\n", error_number);
 	error_message = get_error_message(error_number);
 	write(2, error_message, ft_strlen(error_message));
 	if (message != (void *) 0)

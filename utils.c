@@ -26,6 +26,6 @@ int	duplicate_fd_1(int object_fd, t_data *data)
 
 void	duplicate_fd_2(int object_fd, int connect_fd, t_data *data)
 {
-	if (dup(object_fd, connect_fd) == -1)
+	if (dup2(object_fd, connect_fd) == -1)
 		execute_error_process(SYS_ERROR, 1, (void *) 0, data);
 }
