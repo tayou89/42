@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tayou <tayou@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 18:26:43 by tayou             #+#    #+#             */
+/*   Updated: 2023/09/13 18:26:45 by tayou            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSING_H
 # define PARSING_H
 
@@ -7,7 +19,6 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <errno.h>
 # include <string.h>
 
 # define ARGC_ERROR				0
@@ -25,6 +36,8 @@
 # define COLOR_INFO_COUNT		3
 # define COORDINATE_INFO_COUNT	3
 # define VECTOR_INFO_COUNT		3
+
+# define DOUBLE_DIGIT_MAX		15
 
 typedef struct s_info
 {

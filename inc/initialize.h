@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jhwang <jhwang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/13 18:36:30 by jhwang            #+#    #+#             */
+/*   Updated: 2023/09/13 18:48:33 by jhwang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INITIALIZE_H
 # define INITIALIZE_H
 
@@ -20,4 +32,5 @@
 void	*init_all(t_mlx *mlx);
 int		hook_close(t_rt *scene);
 int		hook_keyup(int keycode, t_rt *scene);
+void	exit_program(t_rt *scene);
 #endif
