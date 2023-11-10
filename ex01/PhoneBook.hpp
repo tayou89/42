@@ -24,7 +24,8 @@ class	PhoneBook
 		void	DisplaySavedContact(void);
 		int		GetNextIndex(void);
 		int		CountNumberOfContact(void);
-		int		IsValidContact(int index);
+		int		IsContactExist(void);
+		int		IsValidIndex(int index);
 };
 
 #endif

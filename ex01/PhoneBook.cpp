@@ -1,14 +1,13 @@
 #include "PhoneBook.hpp"
 
-static void	ShowTitle(void);
-static void	PrintAtCenter(const std::string string, int width);
+static void	PrintColumnText(const std::string text[COLUMN_COUNT]);
 
 PhoneBook::PhoneBook(void) : index(0), numberOfContact(0) {}
 
 Contact	PhoneBook::AddContact(void)
 {
-	GetNextIndex();
 	contact[index].GetFieldInfo();
+	GetNextIndex();
 	CountNumberOfContact();
 	return (contact[index]);
 }
@@ -34,73 +33,44 @@ void	PhoneBook::SearchContact(void)
 	int	indexToSearch;
 
 	DisplaySavedContact();
-	if (IsContactExist == FALSE)
+	if (IsContactExist() == FALSE)
 		return ;
 	std::cout << "Index to search: ";
 	std::cin >> indexToSearch;
-	while (IsValidContact(indexToSearch) == FALSE)
-	{
-		std::cout << "Error: Invalid Index.\n";
-		if (std::cin.fail() == TRUE)
-		{
-			std::cin.clear();
-			std::cin.ignore(100, '\n');
-		}
-		std::cout << "Index to search: ";
-		std::cin >> indexToSearch;
-	}
-	contact[indexToSearch - 1].DisplayContactInfo();
+	if (IsValidIndex(indexToSearch) == FALSE)
+		return ;
+	else
+		contact[indexToSearch - 1].DisplayContactInfo();
 }
 
 void	PhoneBook::DisplaySavedContact(void)
 {
+	std::string	text[COLUMN_COUNT] = {"Index", "First Name", "Last Name", "Nick Name"};
 	int			contactIndex;
 	int			i;
 
-	ShowTitle();
-	for (contactIndex = 1; contactIndex <= numberOfContact; contactIndex++)
+	PrintColumnText(text);
+	for (contactIndex = 0; contactIndex < numberOfContact; contactIndex++)
 	{
-		std::cout << COLUMN_SEPERATOR;
-		PrintAtCenter(std::to_string(contactIndex), COLUMN_WIDTH);
-		std::cout << COLUMN_SEPERATOR;
-		for (i = 0; i < COLUMN_COUNT - 1; i++)
-		{
-			PrintAtCenter(contact[contactIndex].ReturnField(i), COLUMN_WIDTH);
-			std::cout << COLUMN_SEPERATOR;
-		}
-		std::cout << std::endl;
+		text[0] = std::to_string(contactIndex + 1);
+		for (i = 1; i < COLUMN_COUNT; i++)
+			text[i] = contact[contactIndex].ReturnField(i - 1);
+		PrintColumnText(text);
 	}
 }
 
-
-static void	ShowTitle(void)
+static void	PrintColumnText(const std::string text[COLUMN_COUNT])
 {
-	std::string	title[COLUMN_COUNT] = {"Index", "First Name", "Last Name", "Nick Name"};
-	int			i;
+	int	i;
 
 	std::cout << COLUMN_SEPERATOR;
-	for (i = 0; i < COLUMN_COUNT; i ++)
+	for (i = 0; i < COLUMN_COUNT; i++)
 	{
-		PrintAtCenter(title[i], COLUMN_WIDTH);
+		std::cout.width(COLUMN_WIDTH);
+		std::cout << std::left << text[i];
 		std::cout << COLUMN_SEPERATOR;
 	}
 	std::cout << std::endl;
-}
-
-static void	PrintAtCenter(const std::string string, int width)
-{
-	int	leftSpace = (width - string.length()) / 2;
-	int	rightSpace = width - leftSpace - string.length();
-	int	i;
-
-	for (i = 0; i < leftSpace; i++)
-		std::cout << ' ';
-	if (string.length() > (unsigned long) width)
-		std::cout << string.substr(0, width - 1) << ".";
-	else
-		std::cout << string;
-	for (i = 0; i < rightSpace; i++)
-		std::cout << ' ';
 }
 
 int	PhoneBook::IsContactExist(void)
@@ -119,5 +89,13 @@ int	PhoneBook::IsValidIndex(int index)
 	if (index >= 1 && index <= numberOfContact)
 		return (TRUE);
 	else
+	{
+		if (std::cin.fail() == TRUE)
+		{
+			std::cin.clear();
+			std::cin.ignore(100, '\n');
+		}
+		std::cout << "Error: Invalid Index.\n";
 		return (FALSE);
+	}
 }
