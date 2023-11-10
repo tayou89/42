@@ -77,7 +77,7 @@ int	PhoneBook::IsContactExist(void)
 {
 	if (numberOfContact == 0)
 	{
-		std::cout << "No contact to search";
+		std::cout << "No contact to search.\n";
 		return (FALSE);
 	}
 	else
