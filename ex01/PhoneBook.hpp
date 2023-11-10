@@ -1,15 +1,30 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# define CONTACT_MAX	8
+# include "Contact.hpp"
+
+# define TRUE				1
+# define FALSE				0
+
+# define CONTACT_MAX		8
+# define COLUMN_COUNT		4
+# define COLUMN_WIDTH		10
+# define COLUMN_SEPERATOR	"|"
 
 class	PhoneBook
 {
 	private:
 		Contact	contact[CONTACT_MAX];
+		int		index;
+		int		numberOfContact;
 	public:
-		AddContact(PhoneBook &phoneBook);
-		SearchContact(const PhoneBook &phoneBook);
+		PhoneBook(void);
+		Contact	AddContact(void);
+		void	SearchContact(void);
+		void	DisplaySavedContact(void);
+		int		GetNextIndex(void);
+		int		CountNumberOfContact(void);
+		int		IsValidContact(int index);
 };
 
 #endif

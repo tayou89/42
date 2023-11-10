@@ -1,4 +1,5 @@
-#include "PhoneBook.h"
+#include "PhoneBook.hpp"
+#include "Command.hpp"
 
 int	main(void)
 {
@@ -8,6 +9,7 @@ int	main(void)
 	GetCommand(command);
 	while (command != "EXIT")
 	{
+		ExecuteCommand(command, phoneBook);
 		GetCommand(command);
 	}
 	return (0);
