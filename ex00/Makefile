@@ -1,4 +1,4 @@
-NAME = megaphone
+NAME = Megaphone
 GPP = g++
 GPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
@@ -23,4 +23,4 @@ $(NAME) : $(OBJECT_FILE)
 %.o : %.cpp
 	$(GPP) $(GPPFLAGS) -o $@ -c $< 
 
-.PHONY : all clean fclean re libft bonus
+.PHONY : all clean fclean re

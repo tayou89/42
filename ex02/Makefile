@@ -1,12 +1,10 @@
-NAME = PhoneBook
+NAME = Account
 GPP = g++
 GPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
-FILE_NAME = PhoneBookMain \
-			PhoneBook \
-			Contact \
-			Command
+FILE_NAME = test \
+			Account
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
 
