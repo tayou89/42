@@ -3,7 +3,7 @@ GPP = g++
 GPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
-FILE_NAME = test \
+FILE_NAME = tests \
 			Account
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
