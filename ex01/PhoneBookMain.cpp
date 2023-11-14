@@ -1,5 +1,5 @@
 #include "PhoneBook.hpp"
-#include "Command.hpp"
+#include "command.hpp"
 
 int	main(void)
 {

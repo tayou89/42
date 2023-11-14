@@ -1,4 +1,4 @@
-#include "Command.hpp"
+#include "command.hpp"
 
 void	GetCommand(std::string &command)
 {

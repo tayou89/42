@@ -52,7 +52,7 @@ void	PhoneBook::DisplaySavedContact(void)
 	PrintColumnText(text);
 	for (contactIndex = 0; contactIndex < numberOfContact; contactIndex++)
 	{
-		text[0] = std::to_string(contactIndex + 1);
+		text[0] = IntToString(contactIndex + 1);
 		for (i = 1; i < COLUMN_COUNT; i++)
 			text[i] = contact[contactIndex].ReturnField(i - 1);
 		PrintColumnText(text);
