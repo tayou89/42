@@ -54,15 +54,21 @@ int	IsValidInput(void)
 {
 	if (std::cin.eof() == TRUE)
 	{
-		clearerr(stdin);
-		std::cin.clear();
-		std::cin.ignore(LLONG_MAX, '\n');
+		while (std::cin.eof() == TRUE)
+		{
+			clearerr(stdin);
+			std::cin.clear();
+			std::cin.ignore(LLONG_MAX, '\n');
+		}
 		return (FALSE);
 	}
 	else if (std::cin.fail() == TRUE)
 	{
-		std::cin.clear();
-		std::cin.ignore(LLONG_MAX, '\n');
+		while (std::cin.fail() == TRUE)
+		{
+			std::cin.clear();
+			std::cin.ignore(LLONG_MAX, '\n');
+		}
 		return (FALSE);
 	}
 	else
