@@ -40,7 +40,8 @@ void	PhoneBook::SearchContact(void)
 		return ;
 	std::cout << "Index to search: ";
 	std::getline(std::cin, string);
-	if (IsValidInput() == TRUE && IsValidIndex(string, &indexToSearch) == TRUE)
+	if (IsValidInput() == TRUE && IsValidIndex(string, &indexToSearch) == TRUE
+		&& string != "")
 		contact[indexToSearch - 1].DisplayContactInfo();
 	else
 		std::cout << "Error: Invalid Index." << std::endl;
@@ -93,7 +94,7 @@ int	PhoneBook::IsValidIndex(const std::string string, int *index)
 {
 	if (StringToInteger(string, index) == FALSE)
 		return (FALSE);
-	else if (*index < 1 && *index > numberOfContact)
+	else if (*index < 1 || *index > numberOfContact)
 		return (FALSE);
 	else
 		return (TRUE);

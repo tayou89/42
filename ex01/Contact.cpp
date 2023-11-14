@@ -11,7 +11,7 @@ Contact	Contact::GetFieldInfo(void)
 	{
 		std::cout << prompt[i];
 		std::getline(std::cin, field[i]);
-		if (IsValidInput() == FALSE)
+		if (IsValidInput() == FALSE || field[i] == "")
 			continue ;
 		i++;
 	}
