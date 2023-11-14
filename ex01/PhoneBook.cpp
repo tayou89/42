@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include "utils.hpp"
 
 static void	PrintColumnText(const std::string text[COLUMN_COUNT]);
 
