@@ -1,16 +1,19 @@
 #include "Contact.hpp"
+#include "utils.hpp"
 
 Contact	Contact::GetFieldInfo(void)
 {
 	const char	*prompt[FIELD_COUNT] = 
 	{"First name: ", "Last name: ", "Nick name: ", "Phone number: ", "Darkest secret: "};
-	int			i;
+	int			i = 0;
 
-	for (i = 0; i < FIELD_COUNT; i++)
+	while (i < FIELD_COUNT)
 	{
 		std::cout << prompt[i];
-		std::cin.ignore();
 		std::getline(std::cin, field[i]);
+		if (IsValidInput() == FALSE)
+			continue ;
+		i++;
 	}
 	return (*this);
 }
