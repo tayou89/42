@@ -1,5 +1,7 @@
 #include "utils.hpp"
 #include <cctype>
+#include <cstdio>
+#include <climits>
 
 std::string	IntToString(int number)
 {
