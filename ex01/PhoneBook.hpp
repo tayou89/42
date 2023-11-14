@@ -25,7 +25,7 @@ class	PhoneBook
 		int		GetNextIndex(void);
 		int		CountNumberOfContact(void);
 		int		IsContactExist(void);
-		int		IsValidIndex(int index);
+		int		IsValidIndex(const std::string string, int *index);
 };
 
 #endif

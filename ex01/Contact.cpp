@@ -9,7 +9,8 @@ Contact	Contact::GetFieldInfo(void)
 	for (i = 0; i < FIELD_COUNT; i++)
 	{
 		std::cout << prompt[i];
-		std::cin >> field[i];
+		std::cin.ignore();
+		std::getline(std::cin, field[i]);
 	}
 	return (*this);
 }

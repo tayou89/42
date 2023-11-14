@@ -1,5 +1,5 @@
 NAME = megaphone
-GPP = g++
+GPP = c++
 GPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf

@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 #include "utils.hpp"
+#include <iomanip>
 
 static void	PrintColumnText(const std::string text[COLUMN_COUNT]);
 
@@ -31,17 +32,18 @@ int	PhoneBook::CountNumberOfContact(void)
 
 void	PhoneBook::SearchContact(void)
 {
-	int	indexToSearch;
+	std::string	string;
+	int			indexToSearch = 0;
 
 	DisplaySavedContact();
 	if (IsContactExist() == FALSE)
 		return ;
 	std::cout << "Index to search: ";
-	std::cin >> indexToSearch;
-	if (IsValidIndex(indexToSearch) == FALSE)
-		return ;
-	else
+	std::getline(std::cin, string);
+	if (IsValidInput() == TRUE && IsValidIndex(string, &indexToSearch) == TRUE)
 		contact[indexToSearch - 1].DisplayContactInfo();
+	else
+		std::cout << "Error: Invalid Index." << std::endl;
 }
 
 void	PhoneBook::DisplaySavedContact(void)
@@ -67,8 +69,10 @@ static void	PrintColumnText(const std::string text[COLUMN_COUNT])
 	std::cout << COLUMN_SEPERATOR;
 	for (i = 0; i < COLUMN_COUNT; i++)
 	{
-		std::cout.width(COLUMN_WIDTH);
-		std::cout << std::left << text[i];
+		if (text[i].length() > COLUMN_WIDTH)
+			std::cout << text[i].substr(0, COLUMN_WIDTH - 1) << ".";
+		else
+			std::cout << std::setw(COLUMN_WIDTH) << text[i];
 		std::cout << COLUMN_SEPERATOR;
 	}
 	std::cout << std::endl;
@@ -85,18 +89,12 @@ int	PhoneBook::IsContactExist(void)
 		return (TRUE);
 }
 
-int	PhoneBook::IsValidIndex(int index)
+int	PhoneBook::IsValidIndex(const std::string string, int *index)
 {
-	if (index >= 1 && index <= numberOfContact)
-		return (TRUE);
-	else
-	{
-		if (std::cin.fail() == TRUE)
-		{
-			std::cin.clear();
-			std::cin.ignore(100, '\n');
-		}
-		std::cout << "Error: Invalid Index.\n";
+	if (StringToInteger(string, index) == FALSE)
 		return (FALSE);
-	}
+	else if (*index < 1 && *index > numberOfContact)
+		return (FALSE);
+	else
+		return (TRUE);
 }
