@@ -6,7 +6,18 @@ static void	PrintColumnText(const std::string text[COLUMN_COUNT]);
 
 PhoneBook::PhoneBook(void) : index(0), numberOfContact(0) {}
 
-Contact	PhoneBook::AddContact(void)
+void	PhoneBook::SetCommand(void)
+{
+	std::cout << "Command: ";
+	std::getline(cin, _command)
+}
+
+std::string	PhoneBook::getCommand(void)
+{
+	return (_command);
+}
+
+Contact	PhoneBook::addContact(void)
 {
 	contact[index].GetFieldInfo();
 	GetNextIndex();

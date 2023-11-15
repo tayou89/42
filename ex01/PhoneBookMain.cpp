@@ -4,9 +4,8 @@
 int	main(void)
 {
 	PhoneBook	phoneBook;
-	std::string	command;
 
-	GetCommand(command);
+	phoneBook.setCommand();
 	while (command != "EXIT")
 	{
 		ExecuteCommand(command, phoneBook);

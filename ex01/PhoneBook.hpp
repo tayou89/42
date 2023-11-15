@@ -2,6 +2,7 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+# include <iostream>
 
 # define TRUE				1
 # define FALSE				0
@@ -13,10 +14,6 @@
 
 class	PhoneBook
 {
-	private:
-		Contact	contact[CONTACT_MAX];
-		int		index;
-		int		numberOfContact;
 	public:
 		PhoneBook(void);
 		Contact	AddContact(void);
@@ -26,6 +23,12 @@ class	PhoneBook
 		int		CountNumberOfContact(void);
 		int		IsContactExist(void);
 		int		IsValidIndex(const std::string string, int *index);
+
+	private:
+		Contact		_contact[CONTACT_MAX];
+		std::string	_command;
+		int			_index;
+		int			_numberOfContact;
 };
 
 #endif
