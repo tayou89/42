@@ -16,19 +16,25 @@ class	PhoneBook
 {
 	public:
 		PhoneBook(void);
-		Contact	AddContact(void);
-		void	SearchContact(void);
-		void	DisplaySavedContact(void);
-		int		GetNextIndex(void);
-		int		CountNumberOfContact(void);
-		int		IsContactExist(void);
-		int		IsValidIndex(const std::string string, int *index);
+		std::string	GetCommand(void);
+		void		ExecuteCommand(void);
+
+		Input		input;
 
 	private:
+		void		_AddContact(void);
+		void		_SearchContact(void) const;
+		void		_DisplaySavedContact(void) const;
+		void		_ResetContactIndex(void);
+		void		_CountContact(void);
+		int			_IsContactExist(void);
+		int			_IsValidIndex(const std::string string, int *index);
+		void		_HandleEOF(const char *message);
+
 		Contact		_contact[CONTACT_MAX];
 		std::string	_command;
-		int			_index;
-		int			_numberOfContact;
+		int			_contactIndex;
+		int			_contactCount;
 };
 
 #endif

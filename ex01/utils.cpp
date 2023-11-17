@@ -49,28 +49,3 @@ int	StringToInteger(const std::string string, int *number)
 	*number = afterNumber;
 	return (TRUE);
 }
-
-int	IsValidInput(void)
-{
-	if (std::cin.eof() == TRUE)
-	{
-		while (std::cin.eof() == TRUE)
-		{
-			clearerr(stdin);
-			std::cin.clear();
-			std::cin.ignore(LLONG_MAX, '\n');
-		}
-		return (FALSE);
-	}
-	else if (std::cin.fail() == TRUE)
-	{
-		while (std::cin.fail() == TRUE)
-		{
-			std::cin.clear();
-			std::cin.ignore(LLONG_MAX, '\n');
-		}
-		return (FALSE);
-	}
-	else
-		return (TRUE);
-}

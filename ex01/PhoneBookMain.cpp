@@ -5,11 +5,7 @@ int	main(void)
 {
 	PhoneBook	phoneBook;
 
-	phoneBook.setCommand();
-	while (command != "EXIT")
-	{
-		ExecuteCommand(command, phoneBook);
-		GetCommand(command);
-	}
+	while (phoneBook.GetCommand() != "EXIT")
+		phoneBook.ExecuteCommand();
 	return (0);
 }

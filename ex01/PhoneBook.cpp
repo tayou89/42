@@ -4,53 +4,63 @@
 
 static void	PrintColumnText(const std::string text[COLUMN_COUNT]);
 
-PhoneBook::PhoneBook(void) : index(0), numberOfContact(0) {}
-
-void	PhoneBook::SetCommand(void)
+PhoneBook::PhoneBook(void) : 
+	_contactIndex(0), _contactCount(0), _command("")
 {
-	std::cout << "Command: ";
-	std::getline(cin, _command)
 }
 
-std::string	PhoneBook::getCommand(void)
+std::string	PhoneBook::GetCommand(void)
 {
-	return (_command);
+	input.get("Command: ");
 }
 
-Contact	PhoneBook::addContact(void)
+void	PhoneBook::ExecuteCommand(void)
 {
-	contact[index].GetFieldInfo();
-	GetNextIndex();
-	CountNumberOfContact();
-	return (contact[index]);
-}
-
-int	PhoneBook::GetNextIndex(void)
-{
-	if (index == CONTACT_MAX - 1)
-		index = 0;
+	if (_command == "ADD")
+		_AddContact();
+	else if (_command == "SEARCH")
+		_SearchContact();
 	else
-		index += 1;
-	return (index);
+		return ;
 }
 
-int	PhoneBook::CountNumberOfContact(void)
+void	PhoneBook::_AddContact(void)
 {
-	if (numberOfContact < CONTACT_MAX)
-		numberOfContact++;
-	return (numberOfContact);
+	_contact[_contactIndex].GetFieldInfo();
+	_ResetContactIndex();
+	_CountContact();
 }
 
-void	PhoneBook::SearchContact(void)
+void	PhoneBook::_ResetContactIndex(void)
 {
-	std::string	string;
-	int			indexToSearch = 0;
+	if (_contactIndex == CONTACT_MAX - 1)
+		_contactIndex = 0;
+	else
+		_contactIndex += 1;
+}
 
-	DisplaySavedContact();
+void	PhoneBook::_CountContact(void)
+{
+	if (contactCount < CONTACT_MAX)
+		contactCount++;
+}
+
+void	PhoneBook::_SearchContact(void) const
+{
+	std::string			string;
+	std::stringstream	stringstream;
+	const char			*errorMessage = "Error: Invalid Index.";
+	int					indexToSearch = 0;
+
+	_DisplaySavedContact();
 	if (IsContactExist() == FALSE)
 		return ;
 	std::cout << "Index to search: ";
 	std::getline(std::cin, string);
+	stringstream.str(string);
+	stringstream >> indexToSearch;
+	if (std::cin.eof() == TRUE)
+		HandleEOF(errorMessage);
 	if (IsValidInput() == TRUE && IsValidIndex(string, &indexToSearch) == TRUE
 		&& string != "")
 		contact[indexToSearch - 1].DisplayContactInfo();
@@ -58,7 +68,7 @@ void	PhoneBook::SearchContact(void)
 		std::cout << "Error: Invalid Index." << std::endl;
 }
 
-void	PhoneBook::DisplaySavedContact(void)
+void	PhoneBook::_DisplaySavedContact(void) const
 {
 	std::string	text[COLUMN_COUNT] = {"Index", "First Name", "Last Name", "Nick Name"};
 	int			contactIndex;
@@ -109,4 +119,15 @@ int	PhoneBook::IsValidIndex(const std::string string, int *index)
 		return (FALSE);
 	else
 		return (TRUE);
+}
+
+void	PhoneBook::_HandleEOF(const char *message)
+{
+	while (std::cin.eof() == TRUE)
+	{
+		clearerr(stdin);
+		std::cin.clear();
+	}
+	if (message != NULL)
+		std::cout << message << std::endl;
 }
