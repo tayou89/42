@@ -13,6 +13,7 @@ class	Input
 
 	private:
 		void		_HandleEOF(void) const;
+		void		_EmptyStream(void);
 };
 
 #endif
