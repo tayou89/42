@@ -1,6 +1,6 @@
 NAME = megaphone
-GPP = c++
-GPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPP = c++
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = megaphone
@@ -18,9 +18,9 @@ fclean : clean
 re : fclean all
 
 $(NAME) : $(OBJECT_FILE)
-	$(GPP) $(GPPFLAGS) -o $(NAME) $^
+	$(CPP) $(CPPFLAGS) -o $(NAME) $^
 	
 %.o : %.cpp
-	$(GPP) $(GPPFLAGS) -o $@ -c $< 
+	$(CPP) $(CPPFLAGS) -o $@ -c $< 
 
 .PHONY : all clean fclean re

@@ -19,7 +19,6 @@ std::string	Conversion::ToString(const int number)
 
 	_stringStream << number;
 	_stringStream >> string;
-//	_EmptyStream();
 	_stringStream.clear();
 	return (string);
 }
