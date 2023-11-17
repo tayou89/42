@@ -6,8 +6,8 @@ RMFLAGS = -rf
 FILE_NAME = phoneBookMain \
 			PhoneBook \
 			Contact \
-			command \
-			utils
+			Input \
+			Conversion
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
 

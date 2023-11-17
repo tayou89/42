@@ -9,13 +9,10 @@
 class	Input
 {
 	public:
-		Input(void);
 		std::string	Get(const char *prompt);
 
 	private:
 		void		_HandleEOF(void) const;
-
-		std::string	_input;
 };
 
 #endif

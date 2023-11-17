@@ -2,6 +2,7 @@
 # define CONTACT_HPP
 
 # include <iostream>
+# include "Input.hpp"
 
 # define FIELD_COUNT	5
 
@@ -17,11 +18,13 @@ typedef enum FieldType
 class	Contact
 {
 	private:
-		std::string	field[FIELD_COUNT];
+		std::string	_field[FIELD_COUNT];
+		Input		_input;
+
 	public:
-		Contact		GetFieldInfo(void);
-		Contact		DisplayContactInfo(void);
-		std::string	ReturnField(int fieldType);	
+		void		GetFieldInfo(void);
+		void		PrintFieldInfo(void) const;
+		std::string	GetField(int fieldType) const;
 };
 
 #endif

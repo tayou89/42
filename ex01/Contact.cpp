@@ -1,7 +1,6 @@
 #include "Contact.hpp"
-#include "utils.hpp"
 
-Contact	Contact::GetFieldInfo(void)
+void	Contact::GetFieldInfo(void)
 {
 	const char	*prompt[FIELD_COUNT] = 
 	{"First name: ", "Last name: ", "Nick name: ", "Phone number: ", "Darkest secret: "};
@@ -9,21 +8,13 @@ Contact	Contact::GetFieldInfo(void)
 
 	while (i < FIELD_COUNT)
 	{
-		std::cout << prompt[i];
-		std::getline(std::cin, field[i]);
-		if (IsValidInput() == FALSE || field[i] == "")
-			continue ;
-		i++;
+		_field[i] = _input.Get(prompt[i]);
+		if (_field[i] != "")
+			i++;
 	}
-	return (*this);
 }
 
-std::string	Contact::ReturnField(int fieldType)
-{
-	return (field[fieldType]);
-}
-
-Contact	Contact::DisplayContactInfo(void)
+void	Contact::PrintFieldInfo(void) const
 {
 	const char	*prompt[FIELD_COUNT] = 
 	{"First name: ", "Last name: ", "Nick name: ", "Phone number: ", "Darkest secret: "};
@@ -32,8 +23,12 @@ Contact	Contact::DisplayContactInfo(void)
 	for (i = 0; i < FIELD_COUNT; i++)
 	{
 		std::cout << prompt[i];
-		std::cout << field[i];
+		std::cout << _field[i];
 		std::cout << std::endl;
 	}
-	return (*this);
+}
+
+std::string	Contact::GetField(int fieldType) const
+{
+	return (_field[fieldType]);
 }

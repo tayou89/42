@@ -1,8 +1,10 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# include "Contact.hpp"
 # include <iostream>
+# include "Contact.hpp"
+# include "Input.hpp"
+# include "Conversion.hpp"
 
 # define TRUE				1
 # define FALSE				0
@@ -19,19 +21,18 @@ class	PhoneBook
 		std::string	GetCommand(void);
 		void		ExecuteCommand(void);
 
-		Input		input;
-
 	private:
 		void		_AddContact(void);
-		void		_SearchContact(void) const;
-		void		_DisplaySavedContact(void) const;
+		void		_SearchContact(void);
+		void		_DisplaySavedContact(void);
 		void		_ResetContactIndex(void);
 		void		_CountContact(void);
-		int			_IsContactExist(void);
-		int			_IsValidIndex(const std::string string, int *index);
-		void		_HandleEOF(const char *message);
+		int			_IsPhoneBookEmpty(void) const;
+		int			_IsValidIndex(int index) const;
 
 		Contact		_contact[CONTACT_MAX];
+		Input		_input;
+		Conversion	_conversion;
 		std::string	_command;
 		int			_contactIndex;
 		int			_contactCount;
