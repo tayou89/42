@@ -17,7 +17,6 @@ std::string Input::Get(const char *prompt)
 
 void	Input::_HandleEOF(void) const
 {
-	fflush(stdin);
 	while (std::cin.eof() == TRUE)
 	{
 		clearerr(stdin);
@@ -28,6 +27,5 @@ void	Input::_HandleEOF(void) const
 
 void	Input::_EmptyStream(void)
 {
-	std::cin.clear();
 	fflush(stdin);
 }
