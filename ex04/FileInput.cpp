@@ -20,7 +20,7 @@ void	FileInput::SetFilePath(const std::string filePath)
 
 void	FileInput::SetFileStream(void)
 {
-	_fileStream.open(_filePath);
+	_fileStream.open(_filePath.c_str());
 	if (_fileStream.is_open() == false)
 		_error.HandleFileOpenError(_filePath);
 }

@@ -1,5 +1,6 @@
 #include "Error.hpp"
 #include <iostream>
+#include <cstdlib>
 
 Error::Error(void)
 	: _errorPrompt("Error: ")

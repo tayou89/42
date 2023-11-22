@@ -19,16 +19,19 @@ int	main(int argc, char *argv[])
 		PrintTitle(complain[0]);
 		Harl.complain(complain[0]);
 		std::cout << std::endl;
+		__attribute__((fallthrough))
 
 	case 1:
 		PrintTitle(complain[1]);
 		Harl.complain(complain[1]);
 		std::cout << std::endl;
+		__attribute__((fallthrough))
 
 	case 2:
 		PrintTitle(complain[2]);
 		Harl.complain(complain[2]);
 		std::cout << std::endl;
+		__attribute__((fallthrough))
 
 	case 3:
 		PrintTitle(complain[3]);
