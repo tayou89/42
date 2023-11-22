@@ -6,12 +6,22 @@ class	WordChange
 	public:
 		void		SetTargetWord(const std::string targetWord);
 		void		SetNewWord(const std::string newWord);
-		int			IsTargetWordExist(std::string string) const;
-		std::string	ReplaceWithNewWord(std::string string);
+		void		SetTargetString(const std::string targetString);
+		std::string	ReplaceWithNewWord(void);
 
 	private:
+		int			_IsTargetWordExist(void) const;
+		void		_GetTargetIndex(void);
+		void		_EraseTargetWord(void);
+		void		_InsertNewWord(void);
+		void		_ResetSearchIndex(void);
+		void		_InitIndex(void);
+
+		std::string	_targetString;
 		std::string	_targetWord;
 		std::string	_newWord;
+		int			_targetIndex;
+		int			_searchIndex;
 };
 
 #endif
