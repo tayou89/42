@@ -5,14 +5,24 @@ FileInput::FileInput(void)
 {
 }
 
+std::string	FileInput::GetFilePath(void) const
+{
+	return (_filePath);
+}
+
 void	FileInput::SetFilePath(const std::string filePath)
 {
-	this->_filePath = filePath;
+	if (filePath == "")
+		_error.HandleFilePathError(filePath);
+	else
+		this->_filePath = filePath;
 }
 
 void	FileInput::SetFileStream(void)
 {
 	_fileStream.open(_filePath);
+	if (_fileStream.is_open() == false)
+		_error.HandleFileOpenError(_filePath);
 }
 
 std::string	FileInput::ReadLine(void)
@@ -23,12 +33,7 @@ std::string	FileInput::ReadLine(void)
 	return (fileLine);
 }
 
-int	FileInput::IsFileStreamSet(void) const;
-{
-	return (_fileStream.is_open());
-}
-
-std::string FileInput::IsEndOfFile(void) const;
+int	FileInput::IsEndOfFile(void) const
 {
 	return (_fileStream.eof());
 }

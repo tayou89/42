@@ -1,9 +1,13 @@
 #ifndef WORD_CHANGE_HPP
 # define WORD_CHANGE_HPP
 
+# include <string>
+# include "Error.hpp"
+
 class	WordChange
 {
 	public:
+		WordChange(void);
 		void		SetTargetWord(const std::string targetWord);
 		void		SetNewWord(const std::string newWord);
 		void		SetTargetString(const std::string targetString);
@@ -22,6 +26,7 @@ class	WordChange
 		std::string	_newWord;
 		int			_targetIndex;
 		int			_searchIndex;
+		Error		_error;
 };
 
 #endif

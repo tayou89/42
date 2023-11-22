@@ -7,6 +7,8 @@ WordChange::WordChange(void)
 
 void	WordChange::SetTargetWord(const std::string targetWord)
 {
+	if (targetWord == "")
+		_error.HandleTargetWordError(targetWord);
 	this->_targetWord = targetWord;
 }
 
@@ -48,7 +50,7 @@ void	WordChange::_GetTargetIndex(void)
 
 void	WordChange::_EraseTargetWord(void)
 {
-	_targetString.erase(_targetIndex, _targetString.length());
+	_targetString.erase(_targetIndex, _targetWord.length());
 }
 
 void	WordChange::_InsertNewWord(void)

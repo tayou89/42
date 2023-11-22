@@ -1,27 +1,29 @@
 #include "FileOutput.hpp"
 
 FileOutput::FileOutput(void)
-	: _fileName("")
+	: _filePath("")
 {
 }
 
-void	FileOutput::SetFileName(const std::string fileName)
+std::string	FileOutput::GetFilePath(void) const
 {
-	this->_fileName = fileName;
+	return (_filePath);
+}
+
+void	FileOutput::SetFilePath(const std::string filePath)
+{
+	this->_filePath = filePath;
 }
 
 void	FileOutput::SetFileStream(void)
 {
-	_fileStream.open(_fileName);
+	_fileStream.open(_filePath);
+	if (_fileStream.is_open() == false)
+		_error.HandleFileOpenError(_filePath);
 }
 
 void	FileOutput::WriteLine(const std::string line)
 {
 	if (line != "")
 		_fileStream << line << std::endl;
-}
-
-int	FileOutput::IsFileStreamSet(void) const
-{
-	return (_fileStream.is_open());
 }

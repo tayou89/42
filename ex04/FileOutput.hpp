@@ -3,19 +3,21 @@
 
 # include <string>
 # include <fstream>
+# include "Error.hpp"
 
 class	FileOutput
 {
 	public:
 		FileOutput(void);
-		void	SetFileName(const std::string fileName);
-		void	SetFileStream(void);
+		std::string	GetFilePath(void) const;
+		void	SetFilePath(const std::string filePath);
+		void	SetFileStream(void);	
 		void	WriteLine(const std::string line);
-		int		IsFileStreamSet(void) const;
 
 	private:
-		std::string		_fileName;
+		std::string		_filePath;
 		std::ofstream	_fileStream;
+		Error			_error;
 };
 
 #endif
