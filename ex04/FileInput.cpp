@@ -29,7 +29,7 @@ std::string	FileInput::ReadLine(void)
 {
 	std::string	fileLine;
 
-	std::getline(_fileStream, fileLine);
+	std::getline(_fileStream, fileLine, '\0');
 	return (fileLine);
 }
 

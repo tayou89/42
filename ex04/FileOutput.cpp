@@ -24,6 +24,5 @@ void	FileOutput::SetFileStream(void)
 
 void	FileOutput::WriteLine(const std::string line)
 {
-	if (line != "")
-		_fileStream << line << std::endl;
+	_fileStream << line;
 }
