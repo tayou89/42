@@ -2,8 +2,8 @@
 
 int	main(void)
 {
-	Harl	Harl;
+	Harl	harl;
 
-	Harl.complain("DEBUG");
+	harl.complain("INFO");
 	return (0);
 }
