@@ -2,7 +2,19 @@
 #include <iostream>
 
 Harl::Harl(void)
+	: complainLevel(-1)	
 {
+	std::string string[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
+	void		(Harl::*pointer[4])(void)
+				= { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
+	int			complainCount = 4;
+	int			i;
+
+	for (i = 0; i < complainCount; i++)
+	{
+		this->complainName[i] = string[i];
+		this->functionPTR[i] = pointer[i];
+	}
 }
 
 void	Harl::debug(void)
@@ -29,21 +41,60 @@ void	Harl::error(void)
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-void	Harl::complain(std::string level)
+void	Harl::setComplainLevel(std::string complainName)
 {
-	std::string	functionName[4] = {	"DEBUG", 
-									"INFO", 
-									"WARNING", 
-									"ERROR" };
-	void	(Harl::*functionPTR[4])(void) = {	&Harl::debug, 
-												&Harl::info, 
-												&Harl::warning, 
-												&Harl::error };
-	int		functionIndex = 0;
+	int	complainCount = 4;
+	int	i;
 
-	while (functionName[functionIndex] != level)
-		functionIndex++;
-	if (functionIndex >= 4)
-		return ;
-	(this->*functionPTR[functionIndex])();
+	for (i = 0; i < complainCount; i++)
+	{
+		if (this->complainName[i] == complainName)
+		{
+			this->complainLevel = i;
+			break;
+		}
+	}
+}
+
+void	Harl::printComplainTitle(int complainLevel)
+{
+	std::cout << "[ " << complainName[complainLevel] << " ]" << std::endl;
+}
+
+void	Harl::complain(int complainLevel)
+{
+	(this->*functionPTR[complainLevel])();
+}
+
+void	Harl::printFilteredComplain(void)
+{
+	switch (complainLevel)
+	{
+	case 0:
+		printComplainTitle(0);
+		complain(0);
+		std::cout << std::endl;
+		__attribute__((fallthrough));
+		
+	case 1:
+		printComplainTitle(1);
+		complain(1);
+		std::cout << std::endl;
+		__attribute__((fallthrough));
+
+	case 2:
+		printComplainTitle(2);
+		complain(2);
+		std::cout << std::endl;
+		__attribute__((fallthrough));
+
+	case 3:
+		printComplainTitle(3);
+		complain(3);
+		std::cout << std::endl;
+		break ;
+
+	default:
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	}
 }
