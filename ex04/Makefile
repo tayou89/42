@@ -1,13 +1,13 @@
-NAME = copyfile
+NAME = replace 
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
-			FileCopy \
+			FileReplace \
 			FileInput \
 			FileOutput \
-			WordChange \
+			WordReplace \
 			Error
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))

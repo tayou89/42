@@ -9,10 +9,12 @@ class	FileOutput
 {
 	public:
 		FileOutput(void);
-		std::string	GetFilePath(void) const;
+		~FileOutput(void);
+
 		void	SetFilePath(const std::string filePath);
-		void	SetFileStream(void);	
-		void	WriteLine(const std::string line);
+		void	OpenFile(void);	
+		void	CloseFile(void);	
+		void	WriteOnFile(const std::string line);
 
 	private:
 		std::string		_filePath;

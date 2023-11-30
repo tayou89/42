@@ -5,9 +5,10 @@ FileOutput::FileOutput(void)
 {
 }
 
-std::string	FileOutput::GetFilePath(void) const
+FileOutput::~FileOutput(void)
 {
-	return (_filePath);
+	if (_fileStream.is_open() == true)
+		_fileStream.close();
 }
 
 void	FileOutput::SetFilePath(const std::string filePath)
@@ -15,14 +16,19 @@ void	FileOutput::SetFilePath(const std::string filePath)
 	this->_filePath = filePath;
 }
 
-void	FileOutput::SetFileStream(void)
+void	FileOutput::OpenFile(void)
 {
 	_fileStream.open(_filePath.c_str());
 	if (_fileStream.is_open() == false)
 		_error.HandleFileOpenError(_filePath);
 }
 
-void	FileOutput::WriteLine(const std::string line)
+void	FileOutput::CloseFile(void)
 {
-	_fileStream << line;
+	_fileStream.close();
+}
+
+void	FileOutput::WriteOnFile(const std::string string)
+{
+	_fileStream << string;
 }

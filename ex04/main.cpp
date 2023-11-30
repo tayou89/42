@@ -1,20 +1,17 @@
-#include "FileCopy.hpp"
+#include "FileReplace.hpp"
 #include "Error.hpp"
 
 int	main(int argc, char *argv[])
 {
-	FileCopy	fileCopy;
+	FileReplace	fileReplace;
+	std::string	replaceExtension = ".replace";
 	Error		error;
-	std::string	fileName;
-	std::string	copyFileName;
 
 	if (argc != 4)
 		error.HandleArgumentCountError();
-	fileName = argv[1];
-	copyFileName = fileName + COPYFILE_EXTENSION;
-	fileCopy.SetWordChange(argv[2], argv[3]);
-	fileCopy.SetFileInput(fileName);
-	fileCopy.SetFileOutput(copyFileName);
-	fileCopy.CopyFileWithWordChange();
+	fileReplace.SetReplacingWord(argv[2], argv[3]);
+	fileReplace.OpenInputFile(argv[1]);
+	fileReplace.OpenOutputFile(argv[1] + replaceExtension);
+	fileReplace.MakeReplacedFile();
 	return (0);
 }

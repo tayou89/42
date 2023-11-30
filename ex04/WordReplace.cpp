@@ -1,28 +1,28 @@
-#include "WordChange.hpp"
+#include "WordReplace.hpp"
 
-WordChange::WordChange(void)
+WordReplace::WordReplace(void)
 	: _targetIndex(-1), _searchIndex(0)
 {
 }
 
-void	WordChange::SetTargetWord(const std::string targetWord)
+void	WordReplace::SetTargetWord(const std::string targetWord)
 {
 	if (targetWord == "")
 		_error.HandleTargetWordError(targetWord);
 	this->_targetWord = targetWord;
 }
 
-void	WordChange::SetNewWord(const std::string newWord)
+void	WordReplace::SetNewWord(const std::string newWord)
 {
 	this->_newWord = newWord;
 }
 
-void	WordChange::SetTargetString(const std::string targetString)
+void	WordReplace::SetTargetString(const std::string targetString)
 {
 	this->_targetString = targetString;
 }
 
-std::string	WordChange::ReplaceWithNewWord(void)
+std::string	WordReplace::ReplaceWithNewWord(void)
 {
 	while (_IsTargetWordExist() == true)
 	{
@@ -35,7 +35,7 @@ std::string	WordChange::ReplaceWithNewWord(void)
 	return (_targetString);
 }
 
-int	WordChange::_IsTargetWordExist(void) const
+int	WordReplace::_IsTargetWordExist(void) const
 {
 	if (_targetString.find(_targetWord, _searchIndex) == std::string::npos)
 		return (false);
@@ -43,27 +43,27 @@ int	WordChange::_IsTargetWordExist(void) const
 		return (true);
 }
 
-void	WordChange::_GetTargetIndex(void)
+void	WordReplace::_GetTargetIndex(void)
 {
 	_targetIndex = _targetString.find(_targetWord, _searchIndex);
 }
 
-void	WordChange::_EraseTargetWord(void)
+void	WordReplace::_EraseTargetWord(void)
 {
 	_targetString.erase(_targetIndex, _targetWord.length());
 }
 
-void	WordChange::_InsertNewWord(void)
+void	WordReplace::_InsertNewWord(void)
 {
 	_targetString.insert(_targetIndex, _newWord);
 }
 
-void	WordChange::_ResetSearchIndex(void)
+void	WordReplace::_ResetSearchIndex(void)
 {
 	_searchIndex = _targetIndex + _newWord.length();
 }
 
-void	WordChange::_InitIndex(void)
+void	WordReplace::_InitIndex(void)
 {
 	_targetIndex = -1;
 	_searchIndex = 0;

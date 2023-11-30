@@ -1,13 +1,13 @@
-#ifndef WORD_CHANGE_HPP
-# define WORD_CHANGE_HPP
+#ifndef WORD_REPLACE_HPP
+# define WORD_REPLACE_HPP
 
 # include <string>
 # include "Error.hpp"
 
-class	WordChange
+class	WordReplace
 {
 	public:
-		WordChange(void);
+		WordReplace(void);
 		void		SetTargetWord(const std::string targetWord);
 		void		SetNewWord(const std::string newWord);
 		void		SetTargetString(const std::string targetString);

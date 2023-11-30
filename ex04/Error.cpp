@@ -32,8 +32,6 @@ void	Error::HandleTargetWordError(std::string wrongTargetWord) const
 	exit(0);
 }
 
-
-
 void	Error::_PrintErrorMessage(std::string errorMessage, std::string errorSource) const
 {
 	std::cout << _errorPrompt << errorMessage;
