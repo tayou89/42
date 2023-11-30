@@ -7,9 +7,12 @@ WordReplace::WordReplace(void)
 
 void	WordReplace::SetTargetWord(const std::string targetWord)
 {
-	if (targetWord == "")
-		_error.HandleTargetWordError(targetWord);
 	this->_targetWord = targetWord;
+}
+
+std::string	WordReplace::GetTargetWord(void) const
+{
+	return (_targetWord);
 }
 
 void	WordReplace::SetNewWord(const std::string newWord)
@@ -17,13 +20,14 @@ void	WordReplace::SetNewWord(const std::string newWord)
 	this->_newWord = newWord;
 }
 
-void	WordReplace::SetTargetString(const std::string targetString)
+void	WordReplace::_SetTargetString(const std::string string)
 {
-	this->_targetString = targetString;
+	this->_targetString = string;
 }
 
-std::string	WordReplace::ReplaceWithNewWord(void)
+std::string	WordReplace::ReplaceWithNewWord(const std::string string)
 {
+	_SetTargetString(string);
 	while (_IsTargetWordExist() == true)
 	{
 		_GetTargetIndex();

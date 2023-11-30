@@ -2,7 +2,6 @@
 # define WORD_REPLACE_HPP
 
 # include <string>
-# include "Error.hpp"
 
 class	WordReplace
 {
@@ -10,10 +9,11 @@ class	WordReplace
 		WordReplace(void);
 		void		SetTargetWord(const std::string targetWord);
 		void		SetNewWord(const std::string newWord);
-		void		SetTargetString(const std::string targetString);
-		std::string	ReplaceWithNewWord(void);
+		std::string	GetTargetWord(void) const;
+		std::string	ReplaceWithNewWord(const std::string string);
 
 	private:
+		void		_SetTargetString(const std::string string);
 		int			_IsTargetWordExist(void) const;
 		void		_GetTargetIndex(void);
 		void		_EraseTargetWord(void);
@@ -26,7 +26,6 @@ class	WordReplace
 		std::string	_newWord;
 		int			_targetIndex;
 		int			_searchIndex;
-		Error		_error;
 };
 
 #endif

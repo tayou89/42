@@ -14,6 +14,7 @@ class	Error
 
 	private:
 		void	_PrintErrorMessage(std::string errorMessage, std::string errorSource) const;
+
 		std::string	_errorPrompt;
 };
 

@@ -16,11 +16,19 @@ void	FileOutput::SetFilePath(const std::string filePath)
 	this->_filePath = filePath;
 }
 
+std::string	FileOutput::GetFilePath(void) const
+{
+	return (_filePath);
+}
+
 void	FileOutput::OpenFile(void)
 {
 	_fileStream.open(_filePath.c_str());
-	if (_fileStream.is_open() == false)
-		_error.HandleFileOpenError(_filePath);
+}
+
+int	FileOutput::IsFileOpen(void) const
+{
+	return (_fileStream.is_open());
 }
 
 void	FileOutput::CloseFile(void)
