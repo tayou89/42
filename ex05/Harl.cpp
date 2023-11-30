@@ -31,19 +31,14 @@ void	Harl::error(void)
 
 void	Harl::complain(std::string level)
 {
-	std::string	functionName[4] = {	"DEBUG", 
-									"INFO", 
-									"WARNING", 
-									"ERROR" };
-	void	(Harl::*functionPTR[4])(void) = {	&Harl::debug, 
-												&Harl::info, 
-												&Harl::warning, 
-												&Harl::error };
-	int		functionIndex = 0;
+	std::string	functionName[4] = {	"DEBUG", "INFO", "WARNING", "ERROR" };
+	void		(Harl::*functionPTR[4])(void) 
+					= { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
+	int			i;
 
-	while (functionName[functionIndex] != level)
-		functionIndex++;
-	if (functionIndex >= 4)
-		return ;
-	(this->*functionPTR[functionIndex])();
+	for (i = 0; i < 4; i++)
+	{
+		if (functionName[i] == level)
+			(this->*functionPTR[i])();
+	}
 }
