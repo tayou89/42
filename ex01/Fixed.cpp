@@ -3,8 +3,38 @@
 #include <cmath>
 
 Fixed::Fixed(void)
+	: _fixedPointValue(0)
 {
 	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::~Fixed(void)
+{
+	std::cout << "Destructor called" << std::endl;
+}
+
+Fixed::Fixed(const Fixed &origin)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	*this = origin;
+}
+
+Fixed	&Fixed::operator=(const Fixed &origin)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &origin)
+		this->_fixedPointValue = origin.getRawBits();
+	return (*this);
+}
+
+int		Fixed::getRawBits(void) const
+{
+	return (_fixedPointValue);
+}
+
+void	Fixed::setRawBits(int const number)
+{
+	_fixedPointValue = number;
 }
 
 Fixed::Fixed(const int number)
@@ -17,34 +47,6 @@ Fixed::Fixed(const float number)
 {
 	std::cout << "Float constructor called" << std::endl;
 	_fixedPointValue = roundf(number * (1 << _fractionalBits));
-}
-
-Fixed::Fixed(const Fixed &origin)
-{
-	std::cout << "Copy constructor called" << std::endl;
-	*this = origin;
-}
-
-Fixed::~Fixed(void)
-{
-	std::cout << "Destructor called" << std::endl;
-}
-
-Fixed	&Fixed::operator=(const Fixed &origin)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->_fixedPointValue = origin.getRawBits();
-	return (*this);
-}
-
-int		Fixed::getRawBits(void) const
-{
-	return (_fixedPointValue);
-}
-
-void	Fixed::setRawBits(int const number)
-{
-	_fixedPointValue = number;
 }
 
 float	Fixed::toFloat(void) const
