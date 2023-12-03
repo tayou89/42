@@ -19,7 +19,7 @@ Point	&Point::operator=(const Point &object)
 	if (this != &object)
 	{
 		const_cast<Fixed &>(x) = object.getCoordinateX();
-		const_cast<Fixed &>(y) = object.getCorrdinateY();
+		const_cast<Fixed &>(y) = object.getCoordinateY();
 	}
 	return (*this);
 }

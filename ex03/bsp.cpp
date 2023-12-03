@@ -2,6 +2,8 @@
 #include "Point.hpp"
 #include "Fixed.hpp"
 
+Fixed	getTriangleArea(Point a, Point b, Point c);
+
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
 	Fixed	triangleArea = getTriangleArea(a, b, c);
@@ -23,24 +25,18 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point)
 
 Fixed	getTriangleArea(Point a, Point b, Point c)
 {
-	Fixed	negative(-1);
+	Fixed	triangleArea;
+	Fixed	termA;
+	Fixed	termB;
 
-}
-
-void	printEveryPoint(Point const a, Point const b, Point const c, Point const point)
-{
-	printPoint("Triangle point 1: ", a);
-	printPoint("Triangle point 2: ", b);
-	printPoint("Triangle point 3: ", c);
-	printPoint("Point to check: ", point);
-}
-
-void	printPoint(std::string prompt, Point point)
-{
-	Fixed	coordinateX = point.getCoordinateX();
-	Fixed	coordinateY = point.getCoordinateY();
-
-	std::cout << prompt;
-	std::cout << "( " << coordinateX.toFloat();
-	std::cout << ", " << coordinateY.toFloat() << " )";
+	termA = a.getCoordinateX() * b.getCoordinateY() +
+			b.getCoordinateX() * c.getCoordinateY() +
+			c.getCoordinateX() * a.getCoordinateY();
+	termB = a.getCoordinateX() * c.getCoordinateY() +
+			c.getCoordinateX() * b.getCoordinateY() +
+			b.getCoordinateX() * a.getCoordinateY();
+	triangleArea = Fixed(0.5f) * (termA - termB);
+	if (triangleArea < Fixed(0))
+		triangleArea = triangleArea * Fixed(-1);
+	return (triangleArea);
 }

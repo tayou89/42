@@ -4,7 +4,9 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
-			Fixed
+			Fixed \
+			Point \
+			bsp
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
