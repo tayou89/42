@@ -29,6 +29,11 @@ Point::Point(const float number1, const float number2)
 {
 }
 
+Point::Point(const Fixed number1, const Fixed number2)
+	: x(number1), y(number2)
+{
+}
+
 Fixed	Point::getCoordinateX(void) const
 {
 	return (x);
@@ -39,21 +44,11 @@ Fixed	Point::getCoordinateY(void) const
 	return (y);
 }
 
-void	Point::setCoordinateX(const Fixed x)
-{
-	this->x = x;
-}
-
-void	Point::setCoordinateY(const Fixed y)
-{
-	this->y = y;
-}
-
 Point	Point::operator-(const Point &object) const
 {
-	Point	result;
+	Fixed	x = this->x - object.getCoordinateX();
+	Fixed	y = this->y - object.getCoordinateY();
+	Point	result(x, y);
 
-	result.setCoordinateX(this->x - object.getCoordinateX());
-	result.setCoordinateY(this->y - object.getCoordinateY());
 	return (result);
 }
