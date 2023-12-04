@@ -2,30 +2,28 @@
 #include "Point.hpp"
 #include "Fixed.hpp"
 
+bool	bsp(Point const a, Point const b, Point const c, Point const point);
 void	printEveryPoint(Point const a, Point const b, Point const c, Point const point);
 void	printPoint(std::string prompt, Point point);
-bool	bsp(Point const a, Point const b, Point const c, Point const point);
+void	printBSPResult(bool BSPResult);
 
 int	main(void)
 {
-	Point	trianglePointA(5, 5);
-	Point	trianglePointB(2, 9);
-	Point	trianglePointC(0, 5);
-	Point	pointToCheck1(3, 7);
-	Point	pointToCheck2(4, 7);
+	Point	trianglePointA(1.5f, 0);
+	Point	trianglePointB(-1.5f, 0);
+	Point	trianglePointC(0, 1.5f);
+	Point	pointToCheck1(0, 1.49f);
+	Point	pointToCheck2(0, 1.6f);
+	bool	result;
 
 	printEveryPoint(trianglePointA, trianglePointB, trianglePointC, pointToCheck1);
-	if (bsp(trianglePointA, trianglePointB, trianglePointC, pointToCheck1) == true)
-		std::cout << "The point is inside of triangle." << std::endl;
-	else
-		std::cout << "The point is not inside of triangle." << std::endl;
+	result = bsp(trianglePointA, trianglePointB, trianglePointC, pointToCheck1);
+	printBSPResult(result);
 	std::cout << std::endl;
 
 	printEveryPoint(trianglePointA, trianglePointB, trianglePointC, pointToCheck2);
-	if (bsp(trianglePointA, trianglePointB, trianglePointC, pointToCheck2) == true)
-		std::cout << "The point is inside of triangle." << std::endl;
-	else
-		std::cout << "The point is not inside of triangle." << std::endl;
+	result = bsp(trianglePointA, trianglePointB, trianglePointC, pointToCheck2);
+	printBSPResult(result);
 	return (0);
 }
 
@@ -45,4 +43,12 @@ void	printPoint(std::string prompt, Point point)
 	std::cout << prompt;
 	std::cout << "( " << coordinateX.toFloat();
 	std::cout << ", " << coordinateY.toFloat() << " )" << std::endl;
+}
+
+void	printBSPResult(bool BSPResult)
+{
+	if (BSPResult == true)
+		std::cout << "The point is inside of triangle." << std::endl;
+	else
+		std::cout << "The point is not inside of triangle." << std::endl;
 }

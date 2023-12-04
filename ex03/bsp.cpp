@@ -2,41 +2,57 @@
 #include "Point.hpp"
 #include "Fixed.hpp"
 
-Fixed	getTriangleArea(Point a, Point b, Point c);
+Fixed	getCrossProduct(Point vector1, Point vector2);
+bool	isPointOnTriangleEdge(Fixed crossProduct[3]);
+bool	isPointOnTriangleInside(Fixed crossProduct[3]);
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
-	Fixed	triangleArea = getTriangleArea(a, b, c);
-	Fixed	insideArea1 = getTriangleArea(a, b, point);
-	Fixed	insideArea2 = getTriangleArea(b, c, point);
-	Fixed	insideArea3 = getTriangleArea(a, c, point);
-	Fixed	insideAreaSum = insideArea1 + insideArea2 + insideArea3;
+	Fixed	crossProduct[3] = { getCrossProduct(b - a, point - a),
+								getCrossProduct(c - b, point - b),
+								getCrossProduct(a - c, point - c) };
 
-	if (insideArea1 == 0 || insideArea2 == 0 || insideArea3 == 0)
+	if (isPointOnTriangleInside(crossProduct) == true)
+		return (true);
+	else
 	{
-		std::cout << "The Point is on the edge of the triangle." << std::endl;
+		if (isPointOnTriangleEdge(crossProduct) == true)
+			std::cout << "The point is on the edge of triangle." << std::endl;
 		return (false);
 	}
-	if (insideAreaSum == triangleArea)
+}
+
+Fixed	getCrossProduct(Point vector1, Point vector2)
+{
+	Fixed	crossProductZvalue;
+
+	crossProductZvalue = vector1.getCoordinateX() * vector2.getCoordinateY()
+					   - vector1.getCoordinateY() * vector2.getCoordinateX();
+	return (crossProductZvalue);
+}
+
+bool	isPointOnTriangleEdge(Fixed crossProduct[3])
+{
+	int	i;
+
+	for (i = 0; i < 3; i++)
+	{
+		if (crossProduct[i] == Fixed(0))
+			return (true);
+	}
+	return (false);
+}
+
+bool	isPointOnTriangleInside(Fixed crossProduct[3])
+{
+	if (crossProduct[0] > Fixed(0) &&
+		crossProduct[1] > Fixed(0) &&
+		crossProduct[2] > Fixed(0))
+		return (true);
+	else if (crossProduct[0] < Fixed(0) &&
+			 crossProduct[1] < Fixed(0) &&
+			 crossProduct[2] < Fixed(0))
 		return (true);
 	else
 		return (false);
-}
-
-Fixed	getTriangleArea(Point a, Point b, Point c)
-{
-	Fixed	triangleArea;
-	Fixed	termA;
-	Fixed	termB;
-
-	termA = a.getCoordinateX() * b.getCoordinateY() +
-			b.getCoordinateX() * c.getCoordinateY() +
-			c.getCoordinateX() * a.getCoordinateY();
-	termB = a.getCoordinateX() * c.getCoordinateY() +
-			c.getCoordinateX() * b.getCoordinateY() +
-			b.getCoordinateX() * a.getCoordinateY();
-	triangleArea = Fixed(0.5f) * (termA - termB);
-	if (triangleArea < Fixed(0))
-		triangleArea = triangleArea * Fixed(-1);
-	return (triangleArea);
 }

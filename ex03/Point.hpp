@@ -10,8 +10,9 @@ class	Point
 		~Point(void);
 		Point(const Point &object);
 		Point	&operator=(const Point &object);
-		Point(const float number1, const float number2);
 
+		Point(const float number1, const float number2);
+		Point	operator-(const Point &object) const;
 		Fixed	getCoordinateX(void) const;
 		Fixed	getCoordinateY(void) const;
 

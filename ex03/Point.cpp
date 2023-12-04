@@ -38,3 +38,22 @@ Fixed	Point::getCoordinateY(void) const
 {
 	return (y);
 }
+
+void	Point::setCoordinateX(const Fixed x)
+{
+	this->x = x;
+}
+
+void	Point::setCoordinateY(const Fixed y)
+{
+	this->y = y;
+}
+
+Point	Point::operator-(const Point &object) const
+{
+	Point	result;
+
+	result.setCoordinateX(this->x - object.getCoordinateX());
+	result.setCoordinateY(this->y - object.getCoordinateY());
+	return (result);
+}
