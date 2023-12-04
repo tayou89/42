@@ -16,10 +16,13 @@ Point::Point(const Point &object)
 
 Point	&Point::operator=(const Point &object)
 {
+	Fixed	&xREF = const_cast<Fixed &>(this->x);
+	Fixed	&yREF = const_cast<Fixed &>(this->y);
+
 	if (this != &object)
 	{
-		const_cast<Fixed &>(x) = object.getCoordinateX();
-		const_cast<Fixed &>(y) = object.getCoordinateY();
+		xREF = object.getCoordinateX();
+		yREF = object.getCoordinateY();
 	}
 	return (*this);
 }
