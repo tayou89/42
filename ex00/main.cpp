@@ -17,6 +17,9 @@ int	main(void)
 	A.takeDamage(B.getAttackDamage());
 	B.attack("A");
 	A.takeDamage(B.getAttackDamage());
+	B.attack("A");
+	A.takeDamage(B.getAttackDamage());
 	A.beRepaired(4);
+	A.attack("B");
 	return (0);
 }
