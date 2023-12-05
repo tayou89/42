@@ -28,10 +28,10 @@ ClapTrap	&ClapTrap::operator=(const ClapTrap &object)
 {
 	if (this == &object)
 		return (*this);
-	this->name = object.getName();
-	this->hitPoints = object.getHitPoints();
-	this->energyPoints = object.getEnergyPoints();
-	this->attackDamage = object.getAttackDamage();
+	name = object.name;
+	hitPoints = object.hitPoints;
+	energyPoints = object.energyPoints;
+	attackDamage = object.attackDamage;
 	return (*this);
 }
 
@@ -64,29 +64,4 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	}
 	else
 		std::cout << "Clap Trap " << name << " can't be repaired." << std::endl;
-}
-
-std::string	ClapTrap::getName(void) const
-{
-	return (this->name);
-}
-
-int	ClapTrap::getHitPoints(void) const
-{
-	return (this->hitPoints);
-}
-
-int	ClapTrap::getEnergyPoints(void) const
-{
-	return (this->energyPoints);
-}
-
-int	ClapTrap::getAttackDamage(void) const
-{
-	return (this->attackDamage);
-}
-
-void	ClapTrap::setAttackDamage(unsigned int amount)
-{
-	attackDamage = amount;
 }

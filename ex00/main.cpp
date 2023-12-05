@@ -5,20 +5,13 @@ int	main(void)
 	ClapTrap	A("A");
 	ClapTrap	B("B");
 
-	A.setAttackDamage(4);
-	B.setAttackDamage(3);
-
 	A.attack("B");
-	B.takeDamage(A.getAttackDamage());
+	B.takeDamage(5);
 	B.attack("A");
-	A.takeDamage(B.getAttackDamage());
+	A.takeDamage(6);
 	B.beRepaired(3);
 	B.attack("A");
-	A.takeDamage(B.getAttackDamage());
-	B.attack("A");
-	A.takeDamage(B.getAttackDamage());
-	B.attack("A");
-	A.takeDamage(B.getAttackDamage());
+	A.takeDamage(6);
 	A.beRepaired(4);
 	A.attack("B");
 	return (0);
