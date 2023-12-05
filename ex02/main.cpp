@@ -25,6 +25,5 @@ int	main(void)
 	B.beRepaired(50);
 	C.beRepaired(50);
 	C.highFivesGuys();
-
 	return (0);
 }
