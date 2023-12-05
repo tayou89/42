@@ -1,4 +1,5 @@
 #include "FragTrap.hpp"
+#include <iostream>
 
 FragTrap::FragTrap(void)
 {
@@ -27,10 +28,12 @@ FragTrap	&FragTrap::operator=(const FragTrap &object)
 	hitPoints = object.hitPoints;
 	energyPoints = object.energyPoints;
 	attackDamage = object.attackDamage;
+	return (*this);
 }
 
 FragTrap::FragTrap(const std::string name)
 {
+	std::cout << name << " FragTrap constructor is called." << std::endl;
 	this->name = name;
 	hitPoints = 100;
 	energyPoints = 100;

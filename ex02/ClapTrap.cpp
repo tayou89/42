@@ -47,7 +47,7 @@ void	ClapTrap::attack(const std::string &target)
 	{
 		if (hitPoints <= 0)
 			std::cout << "ClapTrap " << name << " doesn't have a hit point\n"; 
-		if (energyPoitns <= 0)
+		if (energyPoints <= 0)
 			std::cout << "ClapTrap " << name << " doesn't have an energy point\n";
 		std::cout << "ClapTrap " << name << " can't attack " << target << std::endl;
 	}
@@ -74,8 +74,18 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		if (hitPoints <= 0)
 			std::cout << "ClapTrap " << name << " doesn't have a hit point\n"; 
-		if (energyPoitns <= 0)
+		if (energyPoints <= 0)
 			std::cout << "ClapTrap " << name << " doesn't have an energy point\n";
 		std::cout << "ClapTrap " << name << " can't be repaired." << std::endl;
 	}
+}
+
+int	ClapTrap::getAttackDamage(void) const
+{
+	return (attackDamage);
+}
+
+int	ClapTrap::getHitPoints(void) const
+{
+	return (hitPoints);
 }
