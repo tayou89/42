@@ -3,7 +3,7 @@
 
 ScavTrap::ScavTrap(void)
 {
-	std::cout << "ScavTrap default constructor is called." << std::endl;
+	std::cout << name << " ScavTrap constructor is called." << std::endl;
 	hitPoints = 100;
 	energyPoints = 50;
 	attackDamage = 20;
@@ -11,12 +11,12 @@ ScavTrap::ScavTrap(void)
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "ScavTrap " << name << " destructor is called." << std::endl;
+	std::cout << name << " ScavTrap destructor is called." << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &object)
 {
-	std::cout << "ScavTrap copy constructor is called." << std::endl;
+	std::cout << object.name << " ScavTrap copy constructor is called." << std::endl;
 	*this = object;
 }
 
@@ -33,7 +33,7 @@ ScavTrap	&ScavTrap::operator=(const ScavTrap &object)
 
 ScavTrap::ScavTrap(const std::string name)
 {
-	std::cout << "ScavTrap " << name << " constructor is called." << std::endl;
+	std::cout << name << " ScavTrap constructor is called." << std::endl;
 	this->name = name;
 	hitPoints = 100;
 	energyPoints = 50;

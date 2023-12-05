@@ -4,17 +4,31 @@ int	main(void)
 {
 	ScavTrap	A("A");
 	ScavTrap	B("B");
+	ScavTrap	C(A);
+	ScavTrap	D;
 
 	A.attack("B");
-	B.takeDamage(5);
-	/*
+	B.takeDamage(20);
+
 	B.attack("A");
-	A.takeDamage(6);
-	B.beRepaired(3);
+	A.takeDamage(20);
+	B.beRepaired(30);
+	B.guardGate();
+
 	B.attack("A");
-	A.takeDamage(6);
-	A.beRepaired(4);
+	A.takeDamage(20);
+
+	B.attack("A");
+	A.takeDamage(20);
+
+	B.attack("A");
+	A.takeDamage(20);
+
+	B.attack("A");
+	A.takeDamage(20);
+
+	A.beRepaired(30);
 	A.attack("B");
-	*/
+	A.guardGate();
 	return (0);
 }
