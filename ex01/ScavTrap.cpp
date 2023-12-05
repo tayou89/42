@@ -49,7 +49,7 @@ void	ScavTrap::attack(const std::string &target)
 		--energyPoints;
 	}
 	else
-		std::cout << "ScavTrap" << name << " can't attack " << target << std::endl;
+		std::cout << "ScavTrap " << name << " can't attack " << target << std::endl;
 }
 
 void	ScavTrap::guardGate(void)
