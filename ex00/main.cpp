@@ -4,6 +4,8 @@ int	main(void)
 {
 	ClapTrap	A("A");
 	ClapTrap	B("B");
+	ClapTrap	C(A);
+	ClapTrap	D;	
 
 	A.attack("B");
 	B.takeDamage(5);

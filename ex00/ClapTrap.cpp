@@ -9,7 +9,7 @@ ClapTrap::ClapTrap(void)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor is called." << std::endl;
+	std::cout << "Destructor " << name << " is called." << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
