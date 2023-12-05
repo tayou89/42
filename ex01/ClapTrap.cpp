@@ -4,23 +4,23 @@
 ClapTrap::ClapTrap(void)
 	: hitPoints(10), energyPoints(10), attackDamage(0)
 {
-	std::cout << "Default constructor is called." << std::endl;
+	std::cout << "ClapTrap default constructor is called." << std::endl;
 }
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor is called." << std::endl;
+	std::cout << "ClapTrap " << name << " destructor is called." << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
 	: name(name), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-	std::cout << "Constructor is called." << std::endl;
+	std::cout << "ClapTrap constructor " << name << " is called." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &object)
 {
-	std::cout << "Copy constructor is called." << std::endl;
+	std::cout << "ClapTrap copy constructor is called." << std::endl;
 	*this = object;
 }
 
@@ -28,10 +28,10 @@ ClapTrap	&ClapTrap::operator=(const ClapTrap &object)
 {
 	if (this == &object)
 		return (*this);
-	this->name = object.getName();
-	this->hitPoints = object.getHitPoints();
-	this->energyPoints = object.getEnergyPoints();
-	this->attackDamage = object.getAttackDamage();
+	name = object.name;
+	hitPoints = object.hitPoints;
+	energyPoints = object.energyPoints;
+	attackDamage = object.attackDamage;
 	return (*this);
 }
 
@@ -64,29 +64,4 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	}
 	else
 		std::cout << "Clap Trap " << name << " can't be repaired." << std::endl;
-}
-
-std::string	ClapTrap::getName(void) const
-{
-	return (this->name);
-}
-
-int	ClapTrap::getHitPoints(void) const
-{
-	return (this->hitPoints);
-}
-
-int	ClapTrap::getEnergyPoints(void) const
-{
-	return (this->energyPoints);
-}
-
-int	ClapTrap::getAttackDamage(void) const
-{
-	return (this->attackDamage);
-}
-
-void	ClapTrap::setAttackDamage(unsigned int amount)
-{
-	attackDamage = amount;
 }
