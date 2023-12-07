@@ -27,6 +27,9 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &object)
 	if (this == &object)
 		return (*this);
 	name = object.name;
+	ClapTrap::name = object.ClapTrap::name;
+	ScavTrap::name = object.ScavTrap::name;
+	FragTrap::name = object.FragTrap::name;
 	hitPoints = object.hitPoints;
 	energyPoints = object.energyPoints;
 	attackDamage = object.attackDamage;
