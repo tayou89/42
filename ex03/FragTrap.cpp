@@ -15,6 +15,7 @@ FragTrap::~FragTrap(void)
 }
 
 FragTrap::FragTrap(const FragTrap &object)
+	: ClapTrap(object.ClapTrap::name)
 {
 	std::cout << object.name << " FragTrap copy constructor is called." << std::endl;
 	*this = object;

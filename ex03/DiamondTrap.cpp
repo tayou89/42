@@ -16,7 +16,9 @@ DiamondTrap::~DiamondTrap(void)
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &object)
-    : ClapTrap(object.name + "_clap_name")
+    : 	ClapTrap(object.ClapTrap::name), 
+		ScavTrap(object.ScavTrap::name), 
+		FragTrap(object.FragTrap::name)
 {
 	std::cout << object.name << " DiamondTrap copy constructor is called." << std::endl;
     *this = object;
