@@ -20,4 +20,17 @@ AMateria	&AMateria::operator=(const AMateria &object)
 	return (*this);
 }
 
-std::string const	&getType(void) const
+AMateria::AMateria(std::string const &type)
+	: type(type);
+{
+}
+
+std::string const	&AMateria::&getType(void) const
+{
+	return (type);
+}
+
+void	AMateria::use(ICharacter &target)	
+{
+	std::cout << "I don't what to do for " << target.getName() << std::endl;
+}
