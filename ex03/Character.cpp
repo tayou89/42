@@ -1,7 +1,7 @@
 #include "Character.hpp"
 
 Character::Character(void)
-	: _name(""), _inventory( NULL, NULL, NULL, NULL)
+	: _name(""), _inventory( NULL, NULL, NULL, NULL )
 {
 }
 
@@ -50,8 +50,28 @@ std::string const	&Character::getName(void) const
 
 void	Character::equip(AMateria *m)	
 {
+	int	i;
 
+	for (i = 0; i < _inventorySlotCount; i++)
+	{
+		if (_inventory[i] == NULL)
+		{
+			_inventory[i] = m;
+			return ;
+		}
+	}
 }
+
+void	Character::unequip(int idx)
+{
+	_inventory[idx] = NULL;
+}
+
+void	Character::use(int idx, ICharacter &target)
+{
+	_inventory[idx]->use(target);
+}
+
 void	Character::_deleteInventorySlot(int idx)
 {
 	if (this->_inventory[idx] != NULL)
