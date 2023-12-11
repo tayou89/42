@@ -11,10 +11,17 @@ class   MateriaSource : public IMateriaSource
         MateriaSource(void);
         virtual ~MateriaSource(void);
         MateriaSource(const MateriaSource &object);
-        MateriaSource   &operator=(const MateriaSource &object);
+        MateriaSource   	&operator=(const MateriaSource &object);
 
         virtual void        learnMateria(AMateria *aMateriaPTR);
         virtual AMateria    *createMateria(std::string const &type);
-}
+
+    private:
+		void		_deleteMateriaSource(int idx);
+
+        const int   _materiaMaxCount;
+        AMateria    *_materia[4];
+
+};
 
 #endif

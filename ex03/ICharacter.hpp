@@ -2,9 +2,10 @@
 # define I_CHARACTER_HPP
 
 # include <string>
-# include "AMateria.hpp"
 
-class ICharacter
+class	AMateria;
+
+class	ICharacter
 {
 	public:
 		ICharacter(void);

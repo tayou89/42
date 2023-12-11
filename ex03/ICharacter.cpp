@@ -15,5 +15,7 @@ ICharacter::ICharacter(const ICharacter &object)
 
 ICharacter	&ICharacter::operator=(const ICharacter &object)
 {
+	if (this == &object)
+		return (*this);
 	return (*this);
 }

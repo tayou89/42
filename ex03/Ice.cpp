@@ -1,4 +1,5 @@
 # include "Ice.hpp"
+# include <iostream>
 
 Ice::Ice(void)
     : AMateria("ice")
@@ -28,7 +29,7 @@ AMateria    *Ice::clone(void) const
     return (newIcePTR);
 }
 
-void	use(ICharacter &target)
+void	Ice::use(ICharacter &target)
 {
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;	
 }

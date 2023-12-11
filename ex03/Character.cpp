@@ -1,8 +1,12 @@
 #include "Character.hpp"
 
 Character::Character(void)
-	: _name(""), _inventory( NULL, NULL, NULL, NULL )
+	: _name(""), _inventorySlotCount(4) 
 {
+	int	i;
+
+	for (i = 0; i < _inventorySlotCount; i++)
+		_inventory[i] = NULL;
 }
 
 Character::~Character(void)
@@ -14,6 +18,7 @@ Character::~Character(void)
 }
 
 Character::Character(const Character &object)
+	: _name(object.getName()), _inventorySlotCount(object._inventorySlotCount)
 {
 	int	i;
 
@@ -30,17 +35,22 @@ Character	&Character::operator=(const Character &object)
 
 	if (this == &object)
 		return (*this);
-	for (i = 0; i < _inventroySlotCount; i++)
+	for (i = 0; i < _inventorySlotCount; i++)
 	{
 		_deleteInventorySlot(i);
 		if (object._inventory[i] != NULL)
 			this->_inventory[i] = object._inventory[i]->clone();
 	}	
+	return (*this);
 }
 
 Character::Character(const std::string name)
-	: name(name), _inventory( NULL, NULL, NULL, NULL )
+	: _name(name), _inventorySlotCount(4)
 {
+	int	i;
+
+	for (i = 0; i < _inventorySlotCount; i++)
+		_inventory[i] = NULL;
 }
 
 std::string const	&Character::getName(void) const

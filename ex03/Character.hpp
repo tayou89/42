@@ -23,8 +23,8 @@ class Character : public ICharacter
 		void		_deleteInventorySlot(int idx);
 
 		std::string	_name;
-		const int	_inventorySlotCount = 4;
-		AMateria	*_inventory[inventorySlotCount];
+		const int	_inventorySlotCount;
+		AMateria	*_inventory[4];
 };
 
 #endif

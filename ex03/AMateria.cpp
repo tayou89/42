@@ -1,4 +1,5 @@
 #include "AMateria.hpp"
+#include <iostream>
 
 AMateria::AMateria(void)
 {
@@ -21,11 +22,11 @@ AMateria	&AMateria::operator=(const AMateria &object)
 }
 
 AMateria::AMateria(std::string const &type)
-	: type(type);
+	: type(type)
 {
 }
 
-std::string const	&AMateria::&getType(void) const
+std::string const	&AMateria::getType(void) const
 {
 	return (type);
 }

@@ -1,4 +1,5 @@
-# include "Cure.hpp"
+#include "Cure.hpp"
+#include <iostream> 
 
 Cure::Cure(void)
     : AMateria("cure")
@@ -28,7 +29,7 @@ AMateria    *Cure::clone(void) const
     return (newCurePTR);
 }
 
-void	use(ICharacter &target)
+void	Cure::use(ICharacter &target)
 {
-	std::cout << "* heals " << taget.getName() << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
