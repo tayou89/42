@@ -18,7 +18,7 @@ MateriaSource::~MateriaSource(void)
 }
 
 MateriaSource::MateriaSource(const MateriaSource &object)
-	: _materiaMaxCount(4)
+	: IMateriaSource(), _materiaMaxCount(4)
 {
 	int	i;
 

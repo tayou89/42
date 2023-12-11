@@ -9,7 +9,6 @@ int	main(void)
 	Animal		*animalPTR[arraySize];
 	int			i;
 
-	atexit(leaks);
 	for (i = 0; i < (arraySize / 2); i++)
 		animalPTR[i] = new Dog();
 	for (; i < arraySize; i++)

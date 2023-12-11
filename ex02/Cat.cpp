@@ -15,6 +15,7 @@ Cat::~Cat(void)
 }
 
 Cat::Cat(const Cat &object)
+	: AAnimal()
 {
 	std::cout << "Cat copy constructor is called." << std::endl;
 	brainPTR = new Brain();

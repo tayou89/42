@@ -18,7 +18,9 @@ Character::~Character(void)
 }
 
 Character::Character(const Character &object)
-	: _name(object.getName()), _inventorySlotCount(object._inventorySlotCount)
+	:	ICharacter(), 
+		_name(object.getName()), 
+		_inventorySlotCount(object._inventorySlotCount)
 {
 	int	i;
 

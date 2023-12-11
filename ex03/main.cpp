@@ -4,14 +4,8 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-void	leaks(void)
-{
-	system("leaks interface");
-}
-
 int main(void)
 {
-	atexit(leaks);
     IMateriaSource  *src = new MateriaSource();
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
