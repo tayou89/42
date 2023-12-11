@@ -31,5 +31,7 @@ int	main(void)
 	delete animalPTR;
 	delete dogPTR;
 	delete catPTR;
+	delete wrongAnimalPTR;
+	delete wrongCatPTR;
 	return (0);
 }
