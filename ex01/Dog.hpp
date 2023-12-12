@@ -12,8 +12,13 @@ class	Dog : public Animal
 		Dog(const Dog &object);
 		Dog	&operator=(const Dog &object);
 
-		virtual void	makeSound(void) const;
-	
+		Dog(const std::string *ideas, const int ideaCount);
+		virtual void		makeSound(void) const;
+		virtual void		setBrainIdea(std::string idea);
+		virtual std::string	getBrainIdea(const int ideaIndex) const;
+		virtual int			getBrainIdeaCount(void) const;
+		virtual void		*getBrainPTR(void) const;
+
 	private:
 		Brain	*brainPTR;
 };

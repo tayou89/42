@@ -3,24 +3,57 @@
 #include "Cat.hpp"
 #include <iostream>
 
+void	testAnimalSound(Animal **animalArray, const int arraySize);
+void	showAnimalIdea(Animal *animalPTR);
+
 int	main(void)
 {
-	const int	arraySize = 4;	
-	Animal		*animalPTR[arraySize];
-	int			i;
+	std::string	dogIdeas[4] = { "Home", "Meat", "Sausage", "Happy" };
+	std::string catIdeas[4] = { "Fish", "Mouse", "Nap", "Clean" };
+	Dog			sampleDog(dogIdeas, 4);
+	Cat			sampleCat(catIdeas, 4);
 
-	for (i = 0; i < (arraySize / 2); i++)
-		animalPTR[i] = new Dog();
-	for (; i < arraySize; i++)
-		animalPTR[i] = new Cat();
+	const int	arraySize = 4;
+	Animal		*animalArray[arraySize] = { new Dog(), new Dog(sampleDog), 
+											new Cat(), new Cat(sampleCat) };
+	int			i;
+	
+	testAnimalSound(animalArray, arraySize);
+	std::cout << std::endl;
+
+	std::cout << "Sample dog brain address: " << sampleDog.getBrainPTR() << std::endl;
+	std::cout << "Sample cat brain address: " << sampleCat.getBrainPTR() << std::endl;
 	std::cout << std::endl;
 
 	for (i = 0; i < arraySize; i++)
 	{
-		std::cout << "Animal Type: " << animalPTR[i]->getType() << std::endl;
-		animalPTR[i]->makeSound();
-		delete animalPTR[i];
+		showAnimalIdea(animalArray[i]);
+		delete animalArray[i];
 		std::cout << std::endl;
 	}
 	return (0);
+}
+
+void	testAnimalSound(Animal **animalArray, const int arraySize)
+{
+	int	i;
+	
+	for (i = 0; i < arraySize; i++)
+	{
+		std::cout << "Animal Type: " << animalArray[i]->getType() << std::endl;
+		animalArray[i]->makeSound();	
+		std::cout << std::endl;
+	}
+}
+
+void	showAnimalIdea(Animal *animalPTR)
+{
+	int	i;
+
+	std::cout << "Animal type: " << animalPTR->getType() << std::endl;
+	std::cout << "Animal brain address: " << animalPTR->getBrainPTR() << std::endl;
+	if (animalPTR->getBrainIdeaCount() == 0)
+		std::cout << "I don't have any idea." << std::endl;
+	for (i = 0; i < animalPTR->getBrainIdeaCount(); i++)
+		std::cout << "idea[" << i << "]: " << animalPTR->getBrainIdea(i) << std::endl;
 }
