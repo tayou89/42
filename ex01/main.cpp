@@ -10,14 +10,15 @@ int	main(void)
 {
 	std::string	dogIdeas[4] = { "Home", "Meat", "Sausage", "Happy" };
 	std::string catIdeas[4] = { "Fish", "Mouse", "Nap", "Clean" };
-	Dog			sampleDog(dogIdeas, 4);
-	Cat			sampleCat(catIdeas, 4);
+	Dog			sampleDog(dogIdeas, 4); std::cout << std::endl;
+	Cat			sampleCat(catIdeas, 4);	std::cout << std::endl;
 
 	const int	arraySize = 4;
 	Animal		*animalArray[arraySize] = { new Dog(), new Dog(sampleDog), 
 											new Cat(), new Cat(sampleCat) };
 	int			i;
 	
+	std::cout << std::endl;
 	testAnimalSound(animalArray, arraySize);
 	std::cout << std::endl;
 
