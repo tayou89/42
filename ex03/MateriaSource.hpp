@@ -19,8 +19,8 @@ class   MateriaSource : public IMateriaSource
     private:
 		void		_deleteMateriaSource(int idx);
 
-        const int   _materiaMaxCount;
-        AMateria    *_materia[4];
+        static const int   _materiaMaxCount = 4;
+        AMateria    *_materia[_materiaMaxCount];
 
 };
 

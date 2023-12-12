@@ -18,13 +18,14 @@ class Character : public ICharacter
 		virtual void				equip(AMateria *m);
 		virtual void				unequip(int idx);
 		virtual void				use(int idx, ICharacter &target);
+		static const int	_inventorySlotCount = 4;
+		AMateria			*_inventory[_inventorySlotCount];
 
 	private:
-		void		_deleteInventorySlot(int idx);
+		void				_deleteInventorySlot(int idx);
+		bool				_isValidInventoryIndex(int idx);
 
-		std::string	_name;
-		const int	_inventorySlotCount;
-		AMateria	*_inventory[4];
+		std::string			_name;
 };
 
 #endif

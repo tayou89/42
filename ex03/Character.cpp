@@ -1,12 +1,8 @@
 #include "Character.hpp"
 
 Character::Character(void)
-	: _name(""), _inventorySlotCount(4) 
+	: _inventory(), _name("") 
 {
-	int	i;
-
-	for (i = 0; i < _inventorySlotCount; i++)
-		_inventory[i] = NULL;
 }
 
 Character::~Character(void)
@@ -18,9 +14,7 @@ Character::~Character(void)
 }
 
 Character::Character(const Character &object)
-	:	ICharacter(), 
-		_name(object.getName()), 
-		_inventorySlotCount(object._inventorySlotCount)
+	:	ICharacter(), _name(object.getName()), _inventory()
 {
 	int	i;
 
@@ -47,7 +41,7 @@ Character	&Character::operator=(const Character &object)
 }
 
 Character::Character(const std::string name)
-	: _name(name), _inventorySlotCount(4)
+	: _name(name) 
 {
 	int	i;
 
@@ -76,12 +70,16 @@ void	Character::equip(AMateria *m)
 
 void	Character::unequip(int idx)
 {
-	_inventory[idx] = NULL;
+	if (_isValidInventoryIndex(idx) == true)
+		_inventory[idx] = NULL;
 }
 
 void	Character::use(int idx, ICharacter &target)
 {
-	_inventory[idx]->use(target);
+	if (_isValidInventoryIndex(idx) == false)
+		return ;
+	if (_inventory[idx] != NULL)
+		_inventory[idx]->use(target);
 }
 
 void	Character::_deleteInventorySlot(int idx)
@@ -91,4 +89,12 @@ void	Character::_deleteInventorySlot(int idx)
 		delete this->_inventory[idx];
 		this->_inventory[idx] = NULL;
 	}
+}
+
+bool	Character::_isValidInventoryIndex(int idx)
+{
+	if (idx >= 0 && idx < _inventorySlotCount)
+		return (true);
+	else
+		return (false);
 }

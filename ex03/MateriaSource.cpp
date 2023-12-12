@@ -1,12 +1,8 @@
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource(void)
-    : _materiaMaxCount(4)
+	: _materia()
 {
-	int	i;
-
-	for (i = 0; i < _materiaMaxCount; i++)
-		_materia[i] = NULL;
 }
 
 MateriaSource::~MateriaSource(void)
@@ -18,7 +14,7 @@ MateriaSource::~MateriaSource(void)
 }
 
 MateriaSource::MateriaSource(const MateriaSource &object)
-	: IMateriaSource(), _materiaMaxCount(4)
+	: IMateriaSource(), _materia()
 {
 	int	i;
 
@@ -56,8 +52,10 @@ void	MateriaSource::learnMateria(AMateria *aMateriaPTR)
 			return ;
 		}
 	}
-	delete aMateriaPTR;
+	if (aMateriaPTR != NULL)
+		delete aMateriaPTR;
 }
+
 
 AMateria	*MateriaSource::createMateria(std::string const &type)
 {
@@ -65,7 +63,7 @@ AMateria	*MateriaSource::createMateria(std::string const &type)
 
 	for (i = 0; i < _materiaMaxCount; i++)
 	{
-		if (_materia[i]->getType() == type)
+		if (_materia[i] != NULL && _materia[i]->getType() == type)
 			return (_materia[i]->clone());
 	}	
 	return (0);

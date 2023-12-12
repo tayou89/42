@@ -57,6 +57,12 @@
                 }
             },
             {
+                "scope": "storage.modifier.specifier.static",
+                "settings":{
+                    "foreground": "#f799ffde",
+                }
+            },
+            {
                 "scope": "keyword.operator.new",
                 "settings": {
                     "foreground": "#f799ffde",
@@ -96,6 +102,18 @@
                 "scope": "entity.name.function.preprocessor",
                 "settings": {
                     "foreground": "#f799ffde",
+                }
+            },
+            {
+                "scope": "meta.function.definition.parameters.special.member.destructor",
+                "settings": {
+                    "foreground": "#f799ffde",
+                }
+            },
+            {
+                "scope": "constant.language",
+                "settings": {
+                    "foreground": "#f89a27da",
                 }
             },
             {
