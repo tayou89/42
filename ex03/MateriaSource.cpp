@@ -52,6 +52,8 @@ void	MateriaSource::learnMateria(AMateria *aMateriaPTR)
 			return ;
 		}
 	}
+	std::cout << "LearnMateria failed: "
+			  << "MateriaSource is already full." <<std::endl;
 	if (aMateriaPTR != NULL)
 		delete aMateriaPTR;
 }
@@ -66,6 +68,7 @@ AMateria	*MateriaSource::createMateria(std::string const &type)
 		if (_materia[i] != NULL && _materia[i]->getType() == type)
 			return (_materia[i]->clone());
 	}	
+	std::cout << "Creating Materia failed: " << type << std::endl;
 	return (0);
 }
 

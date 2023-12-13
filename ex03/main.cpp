@@ -6,9 +6,9 @@
 
 int main(void)
 {
-    IMateriaSource  *src = new MateriaSource();
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
+    MateriaSource   sampleMateriaSource = makeSampleMateriaSource();;
+    IMateriaSource  *materiaSourcePTR 
+					= new MateriaSource(sampleMateriaSource);
 
     ICharacter  *me = new Character("me");
 
@@ -29,4 +29,16 @@ int main(void)
     delete  src;
 
     return (0);
+}
+
+MateriaSource	makeSampleMateriaSource(void)
+{
+	MateriaSource	materiaSource();
+
+	materiaSource.createMateria("ice");
+	materiaSource.leanrMateria(new Ice());
+	materiaSource.learnMateria(new Ice());
+	materiaSource.learnMateria(new Cure());
+	materiaSource.learnMateria(new Cure());
+	materiaSource.learnMateria(new Cure());
 }
