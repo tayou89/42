@@ -1,9 +1,12 @@
 #include "MateriaSource.hpp"
-#include <iostream>
 
 MateriaSource::MateriaSource(void)
-	: _materia()
+    : _materiaMaxCount(4)
 {
+	int	i;
+
+	for (i = 0; i < _materiaMaxCount; i++)
+		_materia[i] = NULL;
 }
 
 MateriaSource::~MateriaSource(void)
@@ -15,7 +18,7 @@ MateriaSource::~MateriaSource(void)
 }
 
 MateriaSource::MateriaSource(const MateriaSource &object)
-	: IMateriaSource(), _materia()
+	: IMateriaSource(), _materiaMaxCount(4)
 {
 	int	i;
 
@@ -44,25 +47,17 @@ MateriaSource	&MateriaSource::operator=(const MateriaSource &object)
 void	MateriaSource::learnMateria(AMateria *aMateriaPTR)
 {
 	int	i;
-	
-	if (aMateriaPTR == NULL)
-	{
-		std::cout << "Invalid materia: MateriSource can't learn.\n";
-		return ;
-	}
+
 	for (i = 0; i < _materiaMaxCount; i++)
 	{
 		if (_materia[i] == NULL)
 		{
 			_materia[i] = aMateriaPTR;
-			std::cout << "MateriaSource learned " << aMateriaPTR->getType() << std::endl;
 			return ;
 		}
 	}
-	std::cout << "LearnMateria failed. MateriaSource is already full.\n";
 	delete aMateriaPTR;
 }
-
 
 AMateria	*MateriaSource::createMateria(std::string const &type)
 {
@@ -70,13 +65,9 @@ AMateria	*MateriaSource::createMateria(std::string const &type)
 
 	for (i = 0; i < _materiaMaxCount; i++)
 	{
-		if (_materia[i] != NULL && _materia[i]->getType() == type)
-		{
-			std::cout << "MateriaSource created " << type << std::endl;
+		if (_materia[i]->getType() == type)
 			return (_materia[i]->clone());
-		}
 	}	
-	std::cout << "MateriaSource can't create " << type << std::endl;;
 	return (0);
 }
 

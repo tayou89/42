@@ -20,12 +20,11 @@ class Character : public ICharacter
 		virtual void				use(int idx, ICharacter &target);
 
 	private:
-		void				_deleteInventorySlot(int idx);
-		bool				_isValidInventoryIndex(int idx);
+		void		_deleteInventorySlot(int idx);
 
-		static const int	_inventorySlotCount = 4;
-		AMateria			*_inventory[_inventorySlotCount];
-		std::string			_name;
+		std::string	_name;
+		const int	_inventorySlotCount;
+		AMateria	*_inventory[4];
 };
 
 #endif

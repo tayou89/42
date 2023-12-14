@@ -1,9 +1,12 @@
 #include "Character.hpp"
-#include <iostream>
 
 Character::Character(void)
-	: _inventory(), _name("") 
+	: _name(""), _inventorySlotCount(4) 
 {
+	int	i;
+
+	for (i = 0; i < _inventorySlotCount; i++)
+		_inventory[i] = NULL;
 }
 
 Character::~Character(void)
@@ -15,7 +18,9 @@ Character::~Character(void)
 }
 
 Character::Character(const Character &object)
-	:	ICharacter(), _inventory(), _name(object.getName())
+	:	ICharacter(), 
+		_name(object.getName()), 
+		_inventorySlotCount(object._inventorySlotCount)
 {
 	int	i;
 
@@ -42,7 +47,7 @@ Character	&Character::operator=(const Character &object)
 }
 
 Character::Character(const std::string name)
-	: _name(name) 
+	: _name(name), _inventorySlotCount(4)
 {
 	int	i;
 
@@ -59,48 +64,24 @@ void	Character::equip(AMateria *m)
 {
 	int	i;
 
-	if (m == NULL)
-	{
-		std::cout << "Invalid materia: " << _name << " can't equip.\n";
-		return ;
-	}
 	for (i = 0; i < _inventorySlotCount; i++)
 	{
 		if (_inventory[i] == NULL)
 		{
 			_inventory[i] = m;
-			std::cout << _name << ": inventory[" << i << "] is equipped.\n";
 			return ;
 		}
 	}
-	std::cout << _name << " can't equip materia: inventory is alrealy full.\n";
-	delete m;
-	m = NULL;
 }
 
 void	Character::unequip(int idx)
 {
-	if (_isValidInventoryIndex(idx) == true)
-	{
-		_inventory[idx] = NULL;
-		std::cout << _name << ": inventory[" << idx << "] is unequipped.\n";
-	}
-	else
-		std::cout << _name << ": inventory[" << idx << "] is invalid to equipped.\n";
+	_inventory[idx] = NULL;
 }
 
 void	Character::use(int idx, ICharacter &target)
 {
-	if (_isValidInventoryIndex(idx) == false || _inventory[idx] == NULL)
-	{
-		std::cout << _name << ": can't use materia: "; 
-		if (_isValidInventoryIndex(idx) == false)
-			std::cout << "Inventory[" << idx << "] is invalid." << std::endl;
-		else
-			std::cout << "Inventory[" << idx << "] is not equipped." << std::endl; 
-	}
-	else
-		_inventory[idx]->use(target);
+	_inventory[idx]->use(target);
 }
 
 void	Character::_deleteInventorySlot(int idx)
@@ -110,12 +91,4 @@ void	Character::_deleteInventorySlot(int idx)
 		delete this->_inventory[idx];
 		this->_inventory[idx] = NULL;
 	}
-}
-
-bool	Character::_isValidInventoryIndex(int idx)
-{
-	if (idx >= 0 && idx < _inventorySlotCount)
-		return (true);
-	else
-		return (false);
 }

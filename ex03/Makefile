@@ -1,12 +1,12 @@
-NAME = Interface
+NAME = interface
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
 			AMateria Ice Cure \
-			Character \
-			MateriaSource
+			ICharacter Character \
+			IMateriaSource MateriaSource
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
