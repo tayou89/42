@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include <iostream>
 
 Character::Character(void)
 	: _inventory(), _name("") 
@@ -14,7 +15,7 @@ Character::~Character(void)
 }
 
 Character::Character(const Character &object)
-	:	ICharacter(), _name(object.getName()), _inventory()
+	:	ICharacter(), _inventory(), _name(object.getName())
 {
 	int	i;
 
@@ -58,27 +59,47 @@ void	Character::equip(AMateria *m)
 {
 	int	i;
 
+	if (m == NULL)
+	{
+		std::cout << "Invalid materia: " << _name << " can't equip.\n";
+		return ;
+	}
 	for (i = 0; i < _inventorySlotCount; i++)
 	{
 		if (_inventory[i] == NULL)
 		{
 			_inventory[i] = m;
+			std::cout << _name << ": inventory[" << i << "] is equipped.\n";
 			return ;
 		}
 	}
+	std::cout << _name << " can't equip materia: inventory is alrealy full.\n";
+	delete m;
+	m = NULL;
 }
 
 void	Character::unequip(int idx)
 {
 	if (_isValidInventoryIndex(idx) == true)
+	{
 		_inventory[idx] = NULL;
+		std::cout << _name << ": inventory[" << idx << "] is unequpped.\n";
+	}
+	else
+		std::cout << _name << ": inventory[" << idx << "] is invalid to equipped.\n";
 }
 
 void	Character::use(int idx, ICharacter &target)
 {
-	if (_isValidInventoryIndex(idx) == false)
-		return ;
-	if (_inventory[idx] != NULL)
+	if (_isValidInventoryIndex(idx) == false || _inventory[idx] == NULL)
+	{
+		std::cout << _name << ": can't use materia: "; 
+		if (_isValidInventoryIndex(idx) == false)
+			std::cout << "Inventory[" << idx << "] is invalid." << std::endl;
+		else
+			std::cout << "Inventory[" << idx << "] is not equipped." << std::endl; 
+	}
+	else
 		_inventory[idx]->use(target);
 }
 

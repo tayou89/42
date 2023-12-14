@@ -21,7 +21,6 @@ class   MateriaSource : public IMateriaSource
 
         static const int   _materiaMaxCount = 4;
         AMateria    *_materia[_materiaMaxCount];
-
 };
 
 #endif

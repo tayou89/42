@@ -5,8 +5,8 @@ RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
 			AMateria Ice Cure \
-			ICharacter Character \
-			IMateriaSource MateriaSource
+			Character \
+			MateriaSource
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))

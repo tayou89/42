@@ -1,4 +1,5 @@
 #include "MateriaSource.hpp"
+#include <iostream>
 
 MateriaSource::MateriaSource(void)
 	: _materia()
@@ -43,19 +44,23 @@ MateriaSource	&MateriaSource::operator=(const MateriaSource &object)
 void	MateriaSource::learnMateria(AMateria *aMateriaPTR)
 {
 	int	i;
-
+	
+	if (aMateriaPTR == NULL)
+	{
+		std::cout << "Invalid materia: MateriSource can't learn.\n";
+		return ;
+	}
 	for (i = 0; i < _materiaMaxCount; i++)
 	{
 		if (_materia[i] == NULL)
 		{
 			_materia[i] = aMateriaPTR;
+			std::cout << "MateriaSource learned" << aMateriaPTR->getType() << std::endl;
 			return ;
 		}
 	}
-	std::cout << "LearnMateria failed: "
-			  << "MateriaSource is already full." <<std::endl;
-	if (aMateriaPTR != NULL)
-		delete aMateriaPTR;
+	std::cout << "LearnMateria failed. MateriaSource is already full.\n";
+	delete aMateriaPTR;
 }
 
 
@@ -66,9 +71,12 @@ AMateria	*MateriaSource::createMateria(std::string const &type)
 	for (i = 0; i < _materiaMaxCount; i++)
 	{
 		if (_materia[i] != NULL && _materia[i]->getType() == type)
+		{
+			std::cout << "MateriaSource created " << type << std::endl;
 			return (_materia[i]->clone());
+		}
 	}	
-	std::cout << "Creating Materia failed: " << type << std::endl;
+	std::cout << "MateriaSource can't create " << type << std::endl;;
 	return (0);
 }
 
