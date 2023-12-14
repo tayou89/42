@@ -10,11 +10,15 @@ int	main(void)
 	int			i;
 
 	for (i = 0; i < (arraySize / 2); i++)
-		aAnimalPTR[i] = new Dog();	std::cout << std::endl;
+	{
+		aAnimalPTR[i] = new Dog();	
+		std::cout << std::endl;
+	}
 	for (; i < arraySize; i++)
+	{
 		aAnimalPTR[i] = new Cat();	std::cout << std::endl;
-	std::cout << std::endl;
-
+		std::cout << std::endl;
+	}
 	for (i = 0; i < arraySize; i++)
 	{
 		std::cout << "AAnimal Type: " << aAnimalPTR[i]->getType() << std::endl;
