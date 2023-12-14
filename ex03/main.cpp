@@ -17,11 +17,20 @@ int main(void)
     ICharacter  *me = new Character(sampleCharacter); 
     ICharacter  *bob = new Character("bob");
 
+	AMateria	*aMateriaPTR = NULL;
+
     me->use(0, *bob);
     me->use(1, *bob);
     me->use(2, *bob);
     me->use(3, *bob);
-    me->use(4, *bob);
+    std::cout << std::endl;
+
+    aMateriaPTR = materiaSRC->createMateria("cure");
+    me->equip(aMateriaPTR);
+    me->use(3, *me);
+    delete aMateriaPTR;
+	me->unequip(3);
+    me->use(3, *me);
 
     delete  bob;
     delete  me;
@@ -55,8 +64,6 @@ Character   makeSampleCharacter(IMateriaSource *materiaSourcePTR)
     sampleCharacter.equip(materiaSourcePTR->createMateria("abc"));
     sampleCharacter.equip(materiaSourcePTR->createMateria("ice"));
     sampleCharacter.equip(materiaSourcePTR->createMateria("ice"));
-    sampleCharacter.equip(materiaSourcePTR->createMateria("cure"));
-    sampleCharacter.equip(materiaSourcePTR->createMateria("cure"));
     sampleCharacter.equip(materiaSourcePTR->createMateria("cure"));
     std::cout << std::endl;
     return (sampleCharacter);

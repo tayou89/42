@@ -55,7 +55,7 @@ void	MateriaSource::learnMateria(AMateria *aMateriaPTR)
 		if (_materia[i] == NULL)
 		{
 			_materia[i] = aMateriaPTR;
-			std::cout << "MateriaSource learned" << aMateriaPTR->getType() << std::endl;
+			std::cout << "MateriaSource learned " << aMateriaPTR->getType() << std::endl;
 			return ;
 		}
 	}

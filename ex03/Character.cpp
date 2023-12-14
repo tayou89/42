@@ -83,7 +83,7 @@ void	Character::unequip(int idx)
 	if (_isValidInventoryIndex(idx) == true)
 	{
 		_inventory[idx] = NULL;
-		std::cout << _name << ": inventory[" << idx << "] is unequpped.\n";
+		std::cout << _name << ": inventory[" << idx << "] is unequipped.\n";
 	}
 	else
 		std::cout << _name << ": inventory[" << idx << "] is invalid to equipped.\n";
