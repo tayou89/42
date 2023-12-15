@@ -5,7 +5,7 @@ Bureaucrat::Bureaucrat(void)
     : _name(""), _grade(_lowestGrade)
 {
     std::cout << "Bureaucrat default constructor is called.\n";
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
 }
 
 Bureaucrat::~Bureaucrat(void)
@@ -17,7 +17,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &object)
     : _name(object.getName()), _grade(object.getGrade())
 {
     std::cout << "Bureaucrat " << _name << " copy constructor is called.\n";
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
 }
 
 Bureaucrat  &Bureaucrat::operator=(const Bureaucrat &object)
@@ -35,7 +35,7 @@ Bureaucrat  &Bureaucrat::operator=(const Bureaucrat &object)
 Bureaucrat::Bureaucrat(const int grade)
     : _name("")
 {
-    std::cout << "Bureaucrat constructor is called." << '\n';
+    std::cout << "Bureaucrat constructor is called." << std::endl;
     _setGrade(grade);
 }
 
@@ -50,7 +50,7 @@ Bureaucrat::Bureaucrat(const std::string name)
     : _name(name), _grade(_lowestGrade)
 {
 	std::cout << "Bureaucrat " << _name << " constructor is called.\n";
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
 }
 
 std::string Bureaucrat::getName(void) const
@@ -65,13 +65,13 @@ int Bureaucrat::getGrade(void) const
 
 void    Bureaucrat::incrementGrade(void)
 {
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
     _setGrade(_grade - 1);
 }
 
 void    Bureaucrat::decrementGrade(void)
 {
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
     _setGrade(_grade + 1);
 }
 
@@ -79,14 +79,14 @@ void    Bureaucrat::_setGrade(const int grade)
 {
     try
     {
-		std::cout << "Bureaucat: Trying to set grade " << grade << '\n';
+		std::cout << "Trying to set grade " << grade << std::endl;
         if (grade < _highestGrade)
             throw Bureaucrat::GradeTooHighException();
         if (grade > _lowestGrade)
             throw Bureaucrat::GradeTooLowException();
         this->_grade = grade;
-        std::cout << "Sucess to set grade.\n";
-		std::cout << *this << '\n';
+        std::cout << "Sucess to set grade." << std::endl;
+		std::cout << *this << std::endl;
     }
     catch (const Bureaucrat::GradeTooHighException &exception)
     {
@@ -100,25 +100,6 @@ void    Bureaucrat::_setGrade(const int grade)
         _grade = _lowestGrade;
         std::cout << *this << '\n';
     } 
-}
-
-void	Bureaucrat::signForm(Form &form)
-{
-	if (form.getIsSigned() == true)
-		std::cout << form << " is already signed.\n";
-	else
-	{
-		try
-		{
-			form.beSigned(*this);	
-			std::cout << *this << " signed " << form << ".\n";
-		}
-		catch(const std::exception &exception)
-		{
-			std::cout << *this << " couldn't sign " << form
-					<< " becuase " << exception.what() << ".\n";
-		}
-	}
 }
 
 const char  *Bureaucrat::GradeTooHighException::what(void) const throw()
