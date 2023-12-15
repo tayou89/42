@@ -6,21 +6,40 @@
 class   Bureaucrat
 {
     public:
-        Bureacrat(void);
-        ~Bureacrat(void);;
-        Bureacrat(const Bureacrat &object);
-        Bureacrat   &operator=(const Bureacrat &object);
+        Bureaucrat(void);
+        ~Bureaucrat(void);;
+        Bureaucrat(const Bureaucrat &object);
+        Bureaucrat   &operator=(const Bureaucrat &object);
+
+		Bureaucrat(const int grade);
+		Bureaucrat(const std::string name, const int grade);
+		Bureaucrat(const std::string name);
 
         std::string getName(void) const;
-        std::string getGrade(void) const;
+        int         getGrade(void) const;
         void        incrementGrade(void);
         void        decrementGrade(void);
 
+        class   GradeTooHighException : public std::exception
+        {
+            public:
+                virtual const char  *what(void) const throw();
+        };
+        class   GradeTooLowException : public std::exception
+        {
+            public:
+                virtual const char  *what(void) const throw();
+        };
+
     private:
-        const std::string   name;
-        int                 grade;
+        void                _setGrade(const int grade);
+
+        static const int	_highestGrade = 1;
+		static const int	_lowestGrade = 150;
+        const std::string   _name;
+        int                 _grade;
 };
 
-ostream &operator=(ostream &stream, const Bureacrat &object);
+std::ostream &operator<<(std::ostream &stream, const Bureaucrat &object);
 
 #endif
