@@ -13,6 +13,10 @@ int main(void)
 	A.decrementGrade();			std::cout << std::endl;
 	B.incrementGrade();			std::cout << std::endl;
 
+	std::cout << "Execute D = C" << std::endl;
+	D = C;
+	std::cout << C << std::endl << D << std::endl << std::endl;
+
 	E.incrementGrade();			std::cout << std::endl;
 	E.incrementGrade();			std::cout << std::endl;
 	E.incrementGrade();			std::cout << std::endl;
