@@ -35,7 +35,7 @@ Bureaucrat  &Bureaucrat::operator=(const Bureaucrat &object)
 Bureaucrat::Bureaucrat(const int grade)
     : _name("")
 {
-    std::cout << "Bureaucrat constructor is called." << '\n';
+    std::cout << "Bureaucrat constructor is called.\n";
     _setGrade(grade);
 }
 
@@ -65,13 +65,13 @@ int Bureaucrat::getGrade(void) const
 
 void    Bureaucrat::incrementGrade(void)
 {
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
     _setGrade(_grade - 1);
 }
 
 void    Bureaucrat::decrementGrade(void)
 {
-	std::cout << *this << '\n';
+	std::cout << *this << std::endl;
     _setGrade(_grade + 1);
 }
 
@@ -79,13 +79,13 @@ void    Bureaucrat::_setGrade(const int grade)
 {
     try
     {
-		std::cout << "Bureaucat: Trying to set grade " << grade << '\n';
+		std::cout << "Trying to set grade " << grade << '\n';
         if (grade < _highestGrade)
             throw Bureaucrat::GradeTooHighException();
         if (grade > _lowestGrade)
             throw Bureaucrat::GradeTooLowException();
         this->_grade = grade;
-        std::cout << "Sucess to set grade.\n";
+        std::cout << "Sucess to set grade." <<	'\n';
 		std::cout << *this << '\n';
     }
     catch (const Bureaucrat::GradeTooHighException &exception)
@@ -102,25 +102,6 @@ void    Bureaucrat::_setGrade(const int grade)
     } 
 }
 
-void	Bureaucrat::signForm(Form &form)
-{
-	if (form.getIsSigned() == true)
-		std::cout << form << " is already signed.\n";
-	else
-	{
-		try
-		{
-			form.beSigned(*this);	
-			std::cout << *this << " signed " << form << ".\n";
-		}
-		catch(const std::exception &exception)
-		{
-			std::cout << *this << " couldn't sign " << form
-					<< " becuase " << exception.what() << ".\n";
-		}
-	}
-}
-
 const char  *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
     return ("Grade is too high");
@@ -133,6 +114,6 @@ const char  *Bureaucrat::GradeTooLowException::what(void) const throw()
 
 std::ostream    &operator<<(std::ostream &stream, const Bureaucrat &object)
 {
-    stream << object.getName() << ", bureaucrat grade " << object.getGrade() << ".";
+    stream << object.getName() << ", bureaucrat grade " << object.getGrade();
 	return (stream);
 }

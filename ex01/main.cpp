@@ -1,28 +1,31 @@
 #include "Bureaucrat.hpp" 
+#include "Form.hpp"
 #include <iostream>
+
+void	formConstructorTest(void);
+void	bureaucratSignTest(void);
 
 int main(void)
 {
-	Bureaucrat	A("A");			std::cout << std::endl;
-	Bureaucrat	B("B", 1);		std::cout << std::endl;
-	Bureaucrat	C("C", 0);		std::cout << std::endl;
-	Bureaucrat	D("D", 151);	std::cout << std::endl;
-	Bureaucrat	E("E", 3);		std::cout << std::endl;
-	Bureaucrat	G("G", 148);	std::cout << std::endl;
-
-	A.decrementGrade();			std::cout << std::endl;
-	B.incrementGrade();			std::cout << std::endl;
-
-	std::cout << "Execute D = C" << std::endl;
-	D = C;
-	std::cout << C << std::endl << D << std::endl << std::endl;
-
-	E.incrementGrade();			std::cout << std::endl;
-	E.incrementGrade();			std::cout << std::endl;
-	E.incrementGrade();			std::cout << std::endl;
-
-	G.decrementGrade();			std::cout << std::endl;
-	G.decrementGrade();			std::cout << std::endl;
-	G.decrementGrade();			std::cout << std::endl;
+	formConstructorTest();
+	bureaucratSignTest();
     return (0);
+}
+
+void	formConstructorTest(void)
+{
+	Form	formA;				std::cout << '\n';
+	Form	formB("B");			std::cout << '\n';
+	Form	formC("C", 0);		std::cout << '\n';
+	Form	formD("D", 1, 151);	std::cout << '\n';
+}
+
+void	bureaucratSignTest(void)
+{
+	Bureaucrat	bureaucratA("A", 50);	std::cout << '\n';
+	Form 		formA("A", 2);			std::cout << '\n';
+	Form 		formB("B", 51);			std::cout << '\n';
+
+	bureaucratA.signForm(formA);		std::cout << '\n';
+	bureaucratA.signForm(formB);		std::cout << '\n';
 }

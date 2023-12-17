@@ -1,4 +1,5 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
 Form::Form(void)
@@ -39,25 +40,23 @@ Form	&Form::operator=(const Form &object)
 Form::Form(const std::string name)
 	: _name(name), _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
-	std::cout << "Form " << _name << " constructor is called.\n"
+	std::cout << "Form " << _name << " constructor is called.\n";
 	std::cout << *this << '\n';
 }
 
 Form::Form(const std::string name, const int signGrade)
-	: _name(name), _signGrade(_lowestGrade)
+	: _name(name), _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
-	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
 	std::cout <<"Form " << _name << " constructor is called.\n";
-	std::cout << *this << '\n';
+	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
 }
 
 Form::Form(const std::string name, const int signGrade, const int executeGrade)
-	: _name(name)
+	: _name(name), _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
+	std::cout << "Form " << _name << " constructor is called.\n";
 	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
 	_setGrade(const_cast<int &>(this->_executeGrade), executeGrade);
-	std::cout << "Form " << _name << " constructor is called.\n";
-	std::cout << *this << '\n';
 }
 
 std::string	Form::getName(void) const
