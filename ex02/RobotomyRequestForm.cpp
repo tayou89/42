@@ -1,0 +1,52 @@
+#include "RobotomyRequestForm.hpp"
+#include <iostream>
+#include <ctime>
+
+RobotomyRequestForm::RobotomyRequestForm(void)
+	: AForm(72, 45), _target("")
+{
+	std::cout << "RobotomyRequestForm defulat constructor is called, "
+	          << "having a target " << _target << ".\n";
+}
+
+RobotomyRequestForm::~RobotomyRequestForm(void)
+{
+	std::cout << "RobotomyRequestForm having a target " << _target
+	          << " destructor is called.\n";
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &object)
+	: AForm(object.getName(), object.getSignGrade(), object.getExecuteGrade()),
+	  _target(object.getTarget())
+{
+	std::cout << "RobotomyRequestForm copy constructor is called, "
+	          << "having a target " << _target << ".\n";
+}
+
+RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &object)
+{
+	AForm::operator=(object);
+	_target = object.getTarget();
+}
+
+RobotomyRequestForm::RobotomyRequestForm(const std::string target)
+	: AForm(72, 45), _target(target)
+{
+	std::cout << "RobotomyRequestForm defulat constructor is called, "
+	          << "having a target " << _target << ".\n";
+}
+
+void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
+{
+	std::time_t	currentTime = std::time(NULL);
+
+	if (getIsSigned() == false)
+		throw ("form is not signed");
+	if (executor.getGrade() > getExecuteGrade())
+		throw AForm::GradeTooLowException();
+	std::cout << "ZzzzzzzzzzzZzzzzzzzzzzzzzZZZZZZZZZZZzzzzzz....\n";
+	if (currentTime % 2 == 0)
+		std::cout << _target << " has been sucessfully robotomized.\n";
+	else
+		std::cout << "Robotomize target " << _target << " has been failed.\n";
+}

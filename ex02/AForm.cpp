@@ -1,29 +1,29 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-Form::Form(void)
+AForm::AForm(void)
 	: 	_name(""), _isSigned(false), 
 		_signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
-	std::cout << "Form default constructor is called.\n";
+	std::cout << "AForm default constructor is called.\n";
 	std::cout << *this << '\n';
 }
-
-Form::~Form(void)
+		
+AForm::~AForm(void)
 {
-	std::cout << "Form " << _name << " destructor is called.\n";
+	std::cout << "AForm " << _name << " destructor is called.\n";
 }
 
-Form::Form(const Form &object)
-	:	_name(object.getName()), _isSigned(false),
+AForm::AForm(const AForm &object)
+	:	_name(object.getName()), _isSigned(object.getIsSigned()),
 		_signGrade(object.getSignGrade()), _executeGrade(object.getExecuteGrade())
 {
-	std::cout << "Form " << _name << " copy constructor is called.\n";
+	std::cout << "AForm " << _name << " copy constructor is called.\n";
 	std::cout << *this << '\n';
 }
 
-Form	&Form::operator=(const Form &object)
+AForm	&AForm::operator=(const AForm &object)
 {
 	if (this == &object)
 		return (*this);
@@ -38,71 +38,80 @@ Form	&Form::operator=(const Form &object)
 	return (*this);
 }
 
-Form::Form(const std::string name)
-	: _name(name), _isSigned(false),
+AForm::AForm(const std::string name)
+	: _name(name), _isSigned(false), 
 	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
-	std::cout << "Form " << _name << " constructor is called.\n";
+	std::cout << "AForm " << _name << " constructor is called.\n";
 	std::cout << *this << '\n';
 }
 
-Form::Form(const std::string name, const int signGrade)
+AForm::AForm(const std::string name, const int signGrade)
 	: _name(name), _isSigned(false),
 	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
-	std::cout <<"Form " << _name << " constructor is called.\n";
+	std::cout <<"AForm " << _name << " constructor is called.\n";
 	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
 }
 
-Form::Form(const std::string name, const int signGrade, const int executeGrade)
+AForm::AForm(const std::string name, const int signGrade, const int executeGrade)
 	: _name(name), _isSigned(false),
 	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
 {
-	std::cout << "Form " << _name << " constructor is called.\n";
+	std::cout << "AForm " << _name << " constructor is called.\n";
 	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
 	_setGrade(const_cast<int &>(this->_executeGrade), executeGrade);
 }
 
-std::string	Form::getName(void) const
+AForm::AForm(const int signGrade, const int executeGrade)
+	: _name(""), _isSigned(false), 
+	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
+{
+	std::cout << "AForm " << _name << " constructor is called.\n";
+	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
+	_setGrade(const_cast<int &>(this->_executeGrade), executeGrade);
+}
+
+std::string	AForm::getName(void) const
 {
 	return (_name);
 }
 
-bool	Form::getIsSigned(void) const
+bool	AForm::getIsSigned(void) const
 {
 	return (_isSigned);
 }
 
-int	Form::getSignGrade(void) const
+int	AForm::getSignGrade(void) const
 {
 	return (_signGrade);
 }
 
-int	Form::getExecuteGrade(void) const
+int	AForm::getExecuteGrade(void) const
 {
 	return (_executeGrade);
 }
 
-void	Form::_setGrade(int &gradeToSet, const int settingGrade)
+void	AForm::_setGrade(int &gradeToSet, const int settingGrade)
 {
 	try
 	{
-		std::cout << "Form: Trying to set grade " << settingGrade << '\n';
+		std::cout << "AForm: Trying to set grade " << settingGrade << '\n';
 		if (settingGrade < _highestGrade)
-			throw Form::GradeTooHighException();
+			throw AForm::GradeTooHighException();
 		if (settingGrade > _lowestGrade)
-			throw Form::GradeTooLowException();
+			throw AForm::GradeTooLowException();
 		gradeToSet = settingGrade;
 		std::cout << "Success to set grade." << '\n';
 		std::cout << *this << '\n';
 	}
-	catch (const Form::GradeTooHighException &exception)
+	catch (const AForm::GradeTooHighException &exception)
 	{
 		std::cerr << "Fail to set grade: " << exception.what() << ".\n";
 		gradeToSet = _highestGrade;
 		std::cerr << *this << ".\n"; 
 	}
-	catch (const Form::GradeTooLowException &exception)
+	catch (const AForm::GradeTooLowException &exception)
 	{
 		std::cerr << "Failed to set grade: " << exception.what() << ".\n";
 		gradeToSet = _lowestGrade;
@@ -110,26 +119,26 @@ void	Form::_setGrade(int &gradeToSet, const int settingGrade)
 	}
 }
 
-void	Form::beSigned(const Bureaucrat &bureaucrat)
+void	AForm::beSigned(const Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > _signGrade)
-		throw Form::GradeTooLowException();	
+		throw AForm::GradeTooLowException();	
 	_isSigned = true;	
 }
 
-const char	*Form::GradeTooHighException::what(void) const throw()
+const char	*AForm::GradeTooHighException::what(void) const throw()
 {
 	return ("Grade is too high");
 }
 
-const char	*Form::GradeTooLowException::what(void) const throw()
+const char	*AForm::GradeTooLowException::what(void) const throw()
 {
 	return ("Grade is too low");
 }
 
-std::ostream	&operator<<(std::ostream &stream, const Form &object)
+std::ostream	&operator<<(std::ostream &stream, const AForm &object)
 {
-	stream << "Form name: " << object.getName() << ", ";
+	stream << "AForm name: " << object.getName() << ", ";
 	if (object.getIsSigned() == true)
 		stream << "IsSigned: TRUE, ";
 	else
