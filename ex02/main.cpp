@@ -7,12 +7,12 @@
 int	main(void)
 {
 	std::string				target("Home");				
-	Bureaucrat				executor1("Tom", 1);		std::cout << '\n';													
-	Bureaucrat				executor2("Bread", 150);	std::cout << '\n';					
-	Bureaucrat				executor3("Lilly", 50);		std::cout << '\n';										
-	ShrubberyCreationForm	shrubberyForm(target);		std::cout << '\n';					
-	RobotomyRequestForm		robotForm(target);			std::cout << '\n';					
-	PresidentialPardonForm	pardonForm(target);			std::cout << '\n';					
+	Bureaucrat				executor1("Tom", 1);
+	Bureaucrat				executor2("Bread", 150);
+	Bureaucrat				executor3("Lilly", 50);
+	ShrubberyCreationForm	shrubberyForm(target);
+	RobotomyRequestForm		robotForm(target);
+	PresidentialPardonForm	pardonForm(target);
 
 	executor1.signForm(shrubberyForm);
 	executor1.signForm(robotForm);

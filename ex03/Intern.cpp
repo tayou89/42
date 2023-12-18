@@ -3,12 +3,10 @@
 
 Intern::Intern(void)
 {
-	std::cout << "Intern default constructor is called.\n";
 }
 
 Intern::~Intern(void)
 {
-	std::cout << "Intern destructor is called.\n";
 }
 
 Intern::Intern(const Intern &object)
@@ -48,7 +46,6 @@ AForm	*Intern::makeForm(const std::string &formName, const std::string &formTarg
 			std::cout << "Intern failed to create " << formName << '\n';
 			return (formPTR);
 	}
-	std::cout << '\n';
-	std::cout << "Intern creates\n" << *formPTR << '\n';
+	std::cout << "Intern creates " << *formPTR << '\n';
 	return (formPTR);
 }

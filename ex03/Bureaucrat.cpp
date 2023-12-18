@@ -4,20 +4,15 @@
 Bureaucrat::Bureaucrat(void)
     : _name(""), _grade(_lowestGrade)
 {
-    std::cout << "Bureaucrat default constructor is called.\n";
-	std::cout << *this << '\n';
 }
 
 Bureaucrat::~Bureaucrat(void)
 {
-    std::cout << "Bureaucrat " << _name << " destructor is called.\n";
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &object)
     : _name(object.getName()), _grade(object.getGrade())
 {
-    std::cout << "Bureaucrat " << _name << " copy constructor is called.\n";
-	std::cout << *this << '\n';
 }
 
 Bureaucrat  &Bureaucrat::operator=(const Bureaucrat &object)
@@ -32,25 +27,14 @@ Bureaucrat  &Bureaucrat::operator=(const Bureaucrat &object)
     return (*this);
 }
 
-Bureaucrat::Bureaucrat(const int grade)
-    : _name("")
-{
-    std::cout << "Bureaucrat constructor is called." << '\n';
-    _setGrade(grade);
-}
-
 Bureaucrat::Bureaucrat(const std::string name, const int grade)
-    : _name(name)
-{
-    std::cout << "Bureaucrat " << _name << " constructor is called.\n";
-    _setGrade(grade);
-}
-
-Bureaucrat::Bureaucrat(const std::string name)
     : _name(name), _grade(_lowestGrade)
 {
-	std::cout << "Bureaucrat " << _name << " constructor is called.\n";
-	std::cout << *this << '\n';
+	if (grade < _highestGrade)
+		throw Bureaucrat::GradeTooHighException();
+	if (grade > _lowestGrade)
+		throw Bureaucrat::GradeTooLowException();
+	_grade = grade;
 }
 
 std::string Bureaucrat::getName(void) const
@@ -65,41 +49,16 @@ int Bureaucrat::getGrade(void) const
 
 void    Bureaucrat::incrementGrade(void)
 {
-	std::cout << *this << '\n';
-    _setGrade(_grade - 1);
+	if (_grade - 1 < _highestGrade)
+		throw Bureaucrat::GradeTooHighException();
+	--_grade;
 }
 
 void    Bureaucrat::decrementGrade(void)
 {
-	std::cout << *this << '\n';
-    _setGrade(_grade + 1);
-}
-
-void    Bureaucrat::_setGrade(const int grade)
-{
-    try
-    {
-		std::cout << "Bureaucat: Trying to set grade " << grade << '\n';
-        if (grade < _highestGrade)
-            throw Bureaucrat::GradeTooHighException();
-        if (grade > _lowestGrade)
-            throw Bureaucrat::GradeTooLowException();
-        this->_grade = grade;
-        std::cout << "Sucess to set grade.\n";
-		std::cout << *this << '\n';
-    }
-    catch (const Bureaucrat::GradeTooHighException &exception)
-    {
-        std::cerr << "Failed to set grade: " << exception.what() << ".\n";
-        _grade = _highestGrade;
-        std::cerr << *this << '\n'; 
-    }
-    catch (const Bureaucrat::GradeTooLowException &exception)
-    {
-        std::cerr << "Failed to set grade: " << exception.what() << ".\n";
-        _grade = _lowestGrade;
-        std::cout << *this << '\n';
-    } 
+	if (_grade + 1 > _lowestGrade)
+		throw Bureaucrat::GradeTooLowException();
+	++_grade;
 }
 
 void	Bureaucrat::signForm(AForm &form)

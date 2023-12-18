@@ -2,40 +2,31 @@
 #include <iostream>	
 
 PresidentialPardonForm::PresidentialPardonForm(void)
-	: AForm("Presidential Pardon", 25, 5), _target("")
+	: AForm("Predential Pardon", _signGrade, _executeGrade), _target("")
 {
-	std::cout << "PresidentialPardonForm default constructor is called, "
-	          << "having a target " << _target << ".\n";
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(void)
 {
-	std::cout << "PresidentialPardonForm having a target " << _target
-	          << " destructor is called.\n";
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &object)
 	: AForm(object.getName(), object.getSignGrade(), object.getExecuteGrade()),
 	  _target(object.getTarget())
 {
-	std::cout << "PresidentialPardonForm copy constructor is called, "
-	          << "having a target " << _target << ".\n";
 }
 
 PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPardonForm &object)
 {
 	if (this == &object)
 		return (*this);
-	AForm::operator=(object);
 	_target = object.getTarget();
 	return (*this);
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string target)
-	: AForm("Presidential Pardon", 25, 5), _target(target)
+	: AForm("Predential Pardon", _signGrade, _executeGrade), _target(target)
 {
-	std::cout << "PresidentialPardonForm constructor is called, "
-	          << "having a target " << _target << ".\n"; 
 }
 
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const

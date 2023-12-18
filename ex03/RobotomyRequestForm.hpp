@@ -11,14 +11,17 @@ class	RobotomyRequestForm : public AForm
 		RobotomyRequestForm(void);
 		virtual ~RobotomyRequestForm(void);
 		RobotomyRequestForm(const RobotomyRequestForm &object);
-		RobotomyRequestForm	&operator=(const RobotomyRequestForm &object);
 
 		RobotomyRequestForm(const std::string target);
 		virtual void	execute(Bureaucrat const &executor) const;
 		std::string		getTarget(void) const;
 
 	private:
-		std::string	_target;
+		RobotomyRequestForm	&operator=(const RobotomyRequestForm &object);
+
+		static const int	_signGrade = 72;
+		static const int	_executeGrade = 45;
+		std::string			_target;
 };
 
 #endif

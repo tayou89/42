@@ -11,10 +11,7 @@ class	AForm
 		AForm(void);
 		virtual ~AForm(void);
 		AForm(const AForm &object);
-		AForm	&operator=(const AForm &object);
 
-		AForm(const std::string name);
-		AForm(const std::string name, const int signGrade);
 		AForm(const std::string name, const int signGrade, const int executeGrade);
 		AForm(const int signGrade, const int executeGrade);
 
@@ -43,7 +40,7 @@ class	AForm
 		};
 
 	private:
-		void				_setGrade(int &gradeToset, const int settingGrade);
+		AForm	&operator=(const AForm &object);
 
 		static const int	_highestGrade = 1;
 		static const int	_lowestGrade = 150;

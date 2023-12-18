@@ -3,40 +3,31 @@
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm(void)
-	: AForm("Robotomy Request", 72, 45), _target("")
+	: AForm("Robotomy Request", _signGrade, _executeGrade), _target("")
 {
-	std::cout << "RobotomyRequestForm defulat constructor is called, "
-	          << "having a target " << _target << ".\n";
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
-	std::cout << "RobotomyRequestForm having a target " << _target
-	          << " destructor is called.\n";
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &object)
 	: AForm(object.getName(), object.getSignGrade(), object.getExecuteGrade()),
 	  _target(object.getTarget())
 {
-	std::cout << "RobotomyRequestForm copy constructor is called, "
-	          << "having a target " << _target << ".\n";
 }
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &object)
 {
 	if (this == &object)
 		return (*this);
-	AForm::operator=(object);
 	_target = object.getTarget();
 	return (*this);
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target)
-	: AForm("Robotomy Request", 72, 45), _target(target)
+	: AForm("Robotomy Request", _signGrade, _executeGrade), _target(target)
 {
-	std::cout << "RobotomyRequestForm constructor is called, "
-	          << "having a target " << _target << ".\n";
 }
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
