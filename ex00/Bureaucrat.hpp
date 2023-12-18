@@ -11,12 +11,8 @@ class   Bureaucrat
         Bureaucrat(void);
         ~Bureaucrat(void);;
         Bureaucrat(const Bureaucrat &object);
-        Bureaucrat   &operator=(const Bureaucrat &object);
 
-		Bureaucrat(const int grade);
 		Bureaucrat(const std::string name, const int grade);
-		Bureaucrat(const std::string name);
-
         std::string getName(void) const;
         int         getGrade(void) const;
         void        incrementGrade(void);
@@ -34,7 +30,7 @@ class   Bureaucrat
         };
 
     private:
-        void                _setGrade(const int grade);
+        Bureaucrat   &operator=(const Bureaucrat &object);
 
         static const int	_highestGrade = 1;
 		static const int	_lowestGrade = 150;
