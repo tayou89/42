@@ -3,7 +3,7 @@
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm(void)
-	: AForm(72, 45), _target("")
+	: AForm("Robotomy Request", 72, 45), _target("")
 {
 	std::cout << "RobotomyRequestForm defulat constructor is called, "
 	          << "having a target " << _target << ".\n";
@@ -33,7 +33,7 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target)
-	: AForm(72, 45), _target(target)
+	: AForm("Robotomy Request", 72, 45), _target(target)
 {
 	std::cout << "RobotomyRequestForm constructor is called, "
 	          << "having a target " << _target << ".\n";
