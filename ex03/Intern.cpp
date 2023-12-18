@@ -26,8 +26,9 @@ AForm	*Intern::makeForm(const std::string &formName, const std::string &formTarg
 {
 	AForm		*formPTR = NULL;
 	const int	formNameCount = 3;
-	std::string	formNameList[formNameCount] =
-	{ "Shrubbery Creation", "Robotomy Request", "Presidential Pardon" };
+	std::string	formNameList[formNameCount] = { ShrubberyCreationForm().getName(), 
+												RobotomyRequestForm().getName(), 
+												PresidentialPardonForm().getName() };
 	int			i;
 
 	for (i = 0; (i < formNameCount) && (formName != formNameList[i]); i++);

@@ -2,7 +2,7 @@
 #include <iostream>	
 
 PresidentialPardonForm::PresidentialPardonForm(void)
-	: AForm("Predential Pardon", _signGrade, _executeGrade), _target("")
+	: AForm("Presidential Pardon", _signGrade, _executeGrade), _target("")
 {
 }
 
@@ -25,7 +25,7 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPard
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string target)
-	: AForm("Predential Pardon", _signGrade, _executeGrade), _target(target)
+	: AForm("Presidential Pardon", _signGrade, _executeGrade), _target(target)
 {
 }
 
