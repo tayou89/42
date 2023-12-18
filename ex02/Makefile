@@ -1,11 +1,14 @@
-NAME = Form 
+NAME = ExecuteForm 
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
 			Bureaucrat \
-			Form
+			AForm \
+			ShrubberyCreationForm \
+			RobotomyRequestForm \
+			PresidentialPardonForm
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))

@@ -1,31 +1,37 @@
-#include "Bureaucrat.hpp" 
-#include "Form.hpp"
 #include <iostream>
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-void	formConstructorTest(void);
-void	bureaucratSignTest(void);
-
-int main(void)
+int	main(void)
 {
-	formConstructorTest();
-	bureaucratSignTest();
-    return (0);
-}
+	std::string				target("Home");				
+	Bureaucrat				executor1("Tom", 1);		std::cout << '\n';													
+	Bureaucrat				executor2("Bread", 150);	std::cout << '\n';					
+	Bureaucrat				executor3("Lilly", 50);		std::cout << '\n';										
+	ShrubberyCreationForm	shrubberyForm(target);		std::cout << '\n';					
+	RobotomyRequestForm		robotForm(target);			std::cout << '\n';					
+	PresidentialPardonForm	pardonForm(target);			std::cout << '\n';					
 
-void	formConstructorTest(void)
-{
-	Form	formA;				std::cout << '\n';
-	Form	formB("B");			std::cout << '\n';
-	Form	formC("C", 0);		std::cout << '\n';
-	Form	formD("D", 1, 151);	std::cout << '\n';
-}
+	executor1.signForm(shrubberyForm);
+	executor1.signForm(robotForm);
+	executor1.signForm(pardonForm);
+	std::cout << '\n';
 
-void	bureaucratSignTest(void)
-{
-	Bureaucrat	bureaucratA("A", 50);	std::cout << '\n';
-	Form 		formA("A", 2);			std::cout << '\n';
-	Form 		formB("B", 51);			std::cout << '\n';
+	executor1.executeForm(shrubberyForm);
+	executor1.executeForm(robotForm);
+	executor1.executeForm(pardonForm);
+	std::cout << '\n';
 
-	bureaucratA.signForm(formA);		std::cout << '\n';
-	bureaucratA.signForm(formB);		std::cout << '\n';
+	executor2.executeForm(shrubberyForm);
+	executor2.executeForm(robotForm);
+	executor2.executeForm(pardonForm);
+	std::cout << '\n';
+
+	executor3.executeForm(shrubberyForm);
+	executor3.executeForm(robotForm);
+	executor3.executeForm(pardonForm);
+	std::cout << '\n';
+	return (0);
 }

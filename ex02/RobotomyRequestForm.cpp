@@ -25,14 +25,17 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &object)
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &object)
 {
+	if (this == &object)
+		return (*this);
 	AForm::operator=(object);
 	_target = object.getTarget();
+	return (*this);
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target)
 	: AForm(72, 45), _target(target)
 {
-	std::cout << "RobotomyRequestForm defulat constructor is called, "
+	std::cout << "RobotomyRequestForm constructor is called, "
 	          << "having a target " << _target << ".\n";
 }
 
@@ -46,7 +49,12 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		throw AForm::GradeTooLowException();
 	std::cout << "ZzzzzzzzzzzZzzzzzzzzzzzzzZZZZZZZZZZZzzzzzz....\n";
 	if (currentTime % 2 == 0)
-		std::cout << _target << " has been sucessfully robotomized.\n";
+		std::cout << "Target " << _target << " has been sucessfully robotomized.\n";
 	else
 		std::cout << "Robotomize target " << _target << " has been failed.\n";
+}
+
+std::string	RobotomyRequestForm::getTarget(void) const
+{
+	return (_target);
 }

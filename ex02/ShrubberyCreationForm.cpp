@@ -25,8 +25,11 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &object
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &object)
 {
+	if (this == &object)
+		return (*this);
 	AForm::operator=(object); 
 	_target = object.getTarget();
+	return (*this);
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
@@ -49,8 +52,8 @@ void	ShrubberyCreationForm::_writeASCIITree(void) const
 {
 	std::ofstream	fileStream;
 	std::string		fileName = _target + "_shrubbery";
-	std::string		asciiTree = 
-	"     ,    ,    *   ,  ,   , \n\
+	std::string		asciiTree = "\n\
+	      ,    ,    *   ,  ,   , \n\
 	   ,    ,      ***    ,  ,   \n\
 	      *	  ,   *****     *    \n\
 	  , ,*** ,   ******* , ***  ,\n\
