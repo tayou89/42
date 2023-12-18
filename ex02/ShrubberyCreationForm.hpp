@@ -18,8 +18,6 @@ class ShrubberyCreationForm : public AForm
 		std::string		getTarget(void) const;
 	
 	private:
-		void	_writeASCIITree(void) const;
-
 		std::string	_target;
 };
 

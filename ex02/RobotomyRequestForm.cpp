@@ -43,10 +43,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	std::time_t	currentTime = std::time(NULL);
 
-	if (getIsSigned() == false)
-		throw ("form is not signed");
-	if (executor.getGrade() > getExecuteGrade())
-		throw AForm::GradeTooLowException();
+	checkExecuteRequirements(executor);
 	std::cout << "ZzzzzzzzzzzZzzzzzzzzzzzzzZZZZZZZZZZZzzzzzz....\n";
 	if (currentTime % 2 == 0)
 		std::cout << "Target " << _target << " has been sucessfully robotomized.\n";

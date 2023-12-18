@@ -121,7 +121,7 @@ void	Bureaucrat::executeForm(AForm const &form)
 	try
 	{
 		form.execute(*this);
-		std::cout << *this << " execute\n" << form << ".\n";
+		std::cout << *this << " executed\n" << form << ".\n";
 	}
 	catch (const std::exception& exception)
 	{

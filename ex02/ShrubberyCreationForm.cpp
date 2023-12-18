@@ -40,16 +40,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
 }
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
-{
-	if (getIsSigned() == false)
-		throw ("form is not signed");
-	if (executor.getGrade() > getExecuteGrade())
-		throw AForm::GradeTooLowException();
-	_writeASCIITree();
-}
-
-void	ShrubberyCreationForm::_writeASCIITree(void) const
-{
+{	
+	checkExecuteRequirements(executor);
 	std::ofstream	fileStream;
 	std::string		fileName = _target + "_shrubbery";
 	std::string		asciiTree = "\n\
