@@ -11,12 +11,8 @@ class	Form
 		Form(void);
 		~Form(void);
 		Form(const Form &object);
-		Form	&operator=(const Form &object);
 
-		Form(const std::string name);
-		Form(const std::string name, const int signGrade);
 		Form(const std::string name, const int signGrade, const int executeGrade);
-
 		std::string	getName(void) const;
 		bool		getIsSigned(void) const;
 		int			getSignGrade(void) const;
@@ -35,7 +31,7 @@ class	Form
 		};
 
 	private:
-		void				_setGrade(int &gradeToset, const int settingGrade);
+		Form	&operator=(const Form &object);
 
 		static const int	_highestGrade = 1;
 		static const int	_lowestGrade = 150;

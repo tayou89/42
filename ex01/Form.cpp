@@ -4,23 +4,18 @@
 
 Form::Form(void)
 	: 	_name(""), _isSigned(false), 
-		_signGrade(_lowestGrade), _executeGrade(_lowestGrade)
+		_signGrade(_highestGrade), _executeGrade(_highestGrade)
 {
-	std::cout << "Form default constructor is called.\n";
-	std::cout << *this << '\n';
 }
 
 Form::~Form(void)
 {
-	std::cout << "Form " << _name << " destructor is called.\n";
 }
 
 Form::Form(const Form &object)
 	:	_name(object.getName()), _isSigned(false),
 		_signGrade(object.getSignGrade()), _executeGrade(object.getExecuteGrade())
 {
-	std::cout << "Form " << _name << " copy constructor is called.\n";
-	std::cout << *this << '\n';
 }
 
 Form	&Form::operator=(const Form &object)
@@ -38,29 +33,20 @@ Form	&Form::operator=(const Form &object)
 	return (*this);
 }
 
-Form::Form(const std::string name)
-	: _name(name), _isSigned(false),
-	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
-{
-	std::cout << "Form " << _name << " constructor is called.\n";
-	std::cout << *this << '\n';
-}
-
-Form::Form(const std::string name, const int signGrade)
-	: _name(name), _isSigned(false),
-	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
-{
-	std::cout <<"Form " << _name << " constructor is called.\n";
-	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
-}
-
 Form::Form(const std::string name, const int signGrade, const int executeGrade)
 	: _name(name), _isSigned(false),
-	  _signGrade(_lowestGrade), _executeGrade(_lowestGrade)
+	  _signGrade(_highestGrade), _executeGrade(_highestGrade)
 {
-	std::cout << "Form " << _name << " constructor is called.\n";
-	_setGrade(const_cast<int &>(this->_signGrade), signGrade);
-	_setGrade(const_cast<int &>(this->_executeGrade), executeGrade);
+	if (signGrade < _highestGrade || executeGrade < _highestGrade)
+		throw Form::GradeTooHighException();
+	if (signGrade > _lowestGrade || executeGrade > _lowestGrade)
+		throw Form::GradeTooLowException();
+
+	int	&signGradeREF = const_cast<int &>(this->_signGrade);
+	int	&executeGradeREF = const_cast<int &>(this->_executeGrade);
+
+	signGradeREF = signGrade;
+	executeGradeREF = executeGrade;
 }
 
 std::string	Form::getName(void) const
@@ -81,33 +67,6 @@ int	Form::getSignGrade(void) const
 int	Form::getExecuteGrade(void) const
 {
 	return (_executeGrade);
-}
-
-void	Form::_setGrade(int &gradeToSet, const int settingGrade)
-{
-	try
-	{
-		std::cout << "Form: Trying to set grade " << settingGrade << '\n';
-		if (settingGrade < _highestGrade)
-			throw Form::GradeTooHighException();
-		if (settingGrade > _lowestGrade)
-			throw Form::GradeTooLowException();
-		gradeToSet = settingGrade;
-		std::cout << "Success to set grade." << '\n';
-		std::cout << *this << '\n';
-	}
-	catch (const Form::GradeTooHighException &exception)
-	{
-		std::cerr << "Fail to set grade: " << exception.what() << ".\n";
-		gradeToSet = _highestGrade;
-		std::cerr << *this << ".\n"; 
-	}
-	catch (const Form::GradeTooLowException &exception)
-	{
-		std::cerr << "Failed to set grade: " << exception.what() << ".\n";
-		gradeToSet = _lowestGrade;
-		std::cerr << *this << ".\n";
-	}
 }
 
 void	Form::beSigned(const Bureaucrat &bureaucrat)

@@ -2,30 +2,60 @@
 #include "Form.hpp"
 #include <iostream>
 
-void	formConstructorTest(void);
-void	bureaucratSignTest(void);
+void	correctFormTest(void);
+void	wrongFormTest(void);
+void	signFormTest(void);
 
 int main(void)
 {
-	formConstructorTest();
-	bureaucratSignTest();
+	correctFormTest();	std::cout << '\n';
+	wrongFormTest();	std::cout << '\n';
+	signFormTest();		std::cout << '\n';
     return (0);
 }
 
-void	formConstructorTest(void)
+void	correctFormTest(void)
 {
-	Form	formA;				std::cout << '\n';
-	Form	formB("B");			std::cout << '\n';
-	Form	formC("C", 0);		std::cout << '\n';
-	Form	formD("D", 1, 151);	std::cout << '\n';
+	try
+	{
+		Form	A("A", 1, 150); 
+		std::cout << A << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Error: "<< e.what() << '\n';
+	}
 }
 
-void	bureaucratSignTest(void)
+void	wrongFormTest(void)
 {
-	Bureaucrat	bureaucratA("A", 50);	std::cout << '\n';
-	Form 		formA("A", 2);			std::cout << '\n';
-	Form 		formB("B", 51);			std::cout << '\n';
+	try
+	{
+		Form	A("A", 0, 150); 
+		std::cout << A << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-	bureaucratA.signForm(formA);		std::cout << '\n';
-	bureaucratA.signForm(formB);		std::cout << '\n';
+	try
+	{
+		Form	A("A", 1, 151); 
+		std::cout << A << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+}
+
+void	signFormTest(void)
+{
+	Form		A("A", 50, 50);
+	Bureaucrat	B("B", 20);
+	Bureaucrat	C("C", 70);
+	
+	B.signForm(A);
+	C.signForm(A);
 }
