@@ -8,10 +8,10 @@ void	testDecrementGrade(void);
 
 int main(void)
 {
-	testRightCase();
-	testWrongCase();	
-	testIncrementGrade();
-	testDecrementGrade();
+	testRightCase();		std::cout << '\n';
+	testWrongCase();		std::cout << '\n';
+	testIncrementGrade();	std::cout << '\n';
+	testDecrementGrade();	std::cout << '\n';
     return (0);
 }
 
