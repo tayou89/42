@@ -59,19 +59,9 @@ void	ScalarPrinter::printDouble(const double &doubleNumber)
 		std::cout << "double: " << doubleNumber << '\n';
 	else
 	{
-	//	double	integerPart;
-	//	double	fractionalPart = std::modf(doubleNumber, &integerPart);
-		//int		maxPrecision = std::numeric_limits<double>::digits10 + 1;
-		//int		minPrecision = std::cout.precision();
-
 		std::cout << std::fixed;
-		std::cout << std::cout.precision() << '\n';
-		//std::cout << "minprecision: " << minPrecision << '\n';
-	//	if (fractionalPart == 0)
-			//std::cout << std::setprecision(minPrecision) << "double: " << doubleNumber << '\n';
-			std::cout << "double: " << doubleNumber << '\n';
-	//	else
-		////	std::cout << std::setprecision(maxPrecision) << "double: " << doubleNumber << '\n';
+		std::cout.precision();
+		std::cout << "double: " << doubleNumber << '\n';
 	}
 }
 
