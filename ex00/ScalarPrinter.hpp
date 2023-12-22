@@ -6,9 +6,7 @@
 class	ScalarPrinter	
 {
 	public:
-		ScalarPrinter(void);
 		~ScalarPrinter(void);
-		ScalarPrinter(const ScalarPrinter &object);
 		ScalarPrinter	&operator=(const ScalarPrinter &object);
 
 		static void	printChar(const char &character);
@@ -20,6 +18,10 @@ class	ScalarPrinter
 		static void	printInt(const std::exception &exception);
 		static void	printFloat(const std::exception &exception);
 		static void	printDouble(const std::exception &exception);
+	
+	private:
+		ScalarPrinter(void);
+		ScalarPrinter(const ScalarPrinter &object);
 };		
 
 #endif

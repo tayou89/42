@@ -7,9 +7,7 @@
 class	Converter	
 {
 	public: 
-		Converter(void);
 		~Converter(void);
-		Converter(const Converter &object);
 		Converter	&operator=(const Converter &object);
 		
 		static double	stringToDouble(const std::string &string) throw (std::exception);	
@@ -27,6 +25,11 @@ class	Converter
 			public:
 				virtual const char	*what(void) const throw();
 		};
+	
+	private:
+		Converter(void);
+		Converter(const Converter &object);
+
 };		
 
 #endif
