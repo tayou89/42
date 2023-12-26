@@ -22,47 +22,7 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &object)
 	return (*this);
 }
 
-void	ScalarConverter::convert(const std::string &string)
+void	ScalarConverter::convert(const std::string string)
 {
-	double	doubleNumber;
-	char	character;
-	int		integer;
-	float	floatNumber;
-
-	try
-	{
-		doubleNumber = Converter::stringToDouble(string);
-	}
-	catch (const std::exception	&exception)
-	{
-		ScalarPrinter::printChar(exception);
-		ScalarPrinter::printInt(exception);
-		ScalarPrinter::printFloat(exception);
-		ScalarPrinter::printDouble(exception);
-		return ;
-	}
-
-	try
-	{
-		character = Converter::doubleToChar(doubleNumber);
-		ScalarPrinter::printChar(character);
-	}
-	catch (const std::exception &exception)
-	{
-		ScalarPrinter::printChar(exception);
-	}
-
-	try
-	{
-		integer = Converter::doubleToInt(doubleNumber);
-	 	ScalarPrinter::printInt(integer);
-	}
-	catch (const std::exception &exception)
-	{
-	 	ScalarPrinter::printInt(exception);
-	}
-
-	floatNumber = Converter::doubleToFloat(doubleNumber);
-	ScalarPrinter::printFloat(floatNumber);
-	ScalarPrinter::printDouble(doubleNumber);
+	std::string	scalarType =   
 }
