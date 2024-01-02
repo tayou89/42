@@ -2,6 +2,7 @@
 #include "TypeDetecter.hpp"
 #include "ScalarConverter.hpp"
 #include "ScalarPrinter.hpp"
+#include <iostream>
 
 ScalarConverter::ScalarConverter(void)
 {
@@ -27,5 +28,11 @@ void	ScalarConverter::convert(const std::string string)
 {
 	TypeDetecter	typeDetecter(string);
 
+	if (typeDetecter.getScalarType() == "char")
+	{
+		char	character = string[1];
 	
+		ScalarPrinter::printChar(character);
+		ScalarPrinter::printInt(character);
+	}
 }

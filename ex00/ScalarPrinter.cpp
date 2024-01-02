@@ -25,7 +25,10 @@ ScalarPrinter	&ScalarPrinter::operator=(const ScalarPrinter &object)
 
 void	ScalarPrinter::printChar(const char &character)
 {
-	std::cout << "char: \'" << character << "\'\n"; 
+	if (character > 32 && character < 127)
+		std::cout << "char: \'" << character << "\'\n"; 
+	else
+		std::cout << "char: Non displayable\n";
 }
 
 void	ScalarPrinter::printInt(const int &integer)

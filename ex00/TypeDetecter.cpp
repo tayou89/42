@@ -1,4 +1,5 @@
 #include "TypeDetecter.hpp"
+#include "Converter.hpp"
 #include <cstdlib>
 #include <sstream>
 
@@ -69,43 +70,26 @@ bool	TypeDetecter::isIntLiteral(const std::string &cppLiteral)
 
 bool	TypeDetecter::isFloatLiteral(const std::string &cppLiteral)
 {
-	std::stringstream	stringStream(cppLiteral);
-	int					number;
-	char				character = 0;
-	std::string			endString;
+	char		*string	= nullptr;
+	std::string	restString;	
 
-
-	stringStream >> number;
-	if (stringStream.fail() == true)
+	std::strtod(cppLiteral.c_str(), &string);
+	restString = const_cast<const char *>(string);
+	if (restString != "f")
 		return (false);
-	stringStream >> character;
-	if (stringStream.fail() == true || character != '.')
-		return (false);
-	stringStream >> number;
-	if (stringStream.fail() == true)
-		return (false);
-	stringStream >> endString;
-	if (stringStream.fail() == true || endString != "f")
-		return (false);
-	if (stringStream.eof() == false)
+	if (cppLiteral.find('.') == std::string::npos)
 		return (false);
 	return (true);
 }
 
 bool	TypeDetecter::isDoubleLiteral(const std::string &cppLiteral)
 {
-	std::stringstream	stringStream(cppLiteral);
-	int					number;
-	char				character = 0;
+	char	*restString = nullptr;
 
-	stringStream >> number;
-	if (stringStream.fail() == true)
+	std::strtod(cppLiteral.c_str(), &restString);
+	if (restString[0] != '\0')
 		return (false);
-	stringStream >> character;
-	if (stringStream.fail() == true || character != '.')
-		return (false);
-	stringStream >> number;
-	if (stringStream.fail() == true || stringStream.eof() == false)
+	if (cppLiteral.find('.') == std::string::npos)
 		return (false);
 	return (true);
 }

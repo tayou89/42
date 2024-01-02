@@ -1,50 +1,25 @@
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
+#include <typeinfo>
 
 int	main(int argc, char *argv[])
 {
-	std::string 		string = argv[1];
 	std::stringstream	stringStream;
-	double				number;
-	char				character;
-	std::string			restString;
-	//char				checkString[100];
-	//int					i;
+	std::string			string;
+	int					number;
+	char				character = '\n';
 
-	std::cout << number << '\n';
+	number = character;
+	std::cout << "number: " << number << '\n';
 	return (0);
-
 	if (argc != 2)
 		return (0);
+	string = argv[1];
 	stringStream << string;
-	//i = 0;
 	stringStream >> number;
-	if (stringStream.fail() == true)
-	{
-		std::cout << "string1 is not a float\n";
-		return (0);
-	}
-	stringStream >> character;
-	if (stringStream.fail() == true || character != '.')
-	{	
-		std::cout << "string2 is not a flaot\n";
-		return (0);
-	}
-	stringStream >> number;
-	if (stringStream.fail() == true)
-	{
-		std::cout << "string3 is not a flaot\n";
-		return (0);
-	}
-	stringStream >> restString;
-	if (stringStream.fail() == true || restString != "f")
-	{
-		std::cout << "string4 is not a flaot\n";
-		return (0);
-	}
-	if (stringStream.eof() == true)
-		std::cout << "string is a float.\n";
-	else
-		std::cout << "string5 is not a float.\n";
+	character = number;
+	std::cout << "number: " << number << '\n';
+	std::cout << "character: " << character << '\n';
 	return (0);
 }
