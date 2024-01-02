@@ -1,5 +1,6 @@
-#include "ScalarConverter.hpp"
 #include "Converter.hpp"
+#include "TypeDetecter.hpp"
+#include "ScalarConverter.hpp"
 #include "ScalarPrinter.hpp"
 
 ScalarConverter::ScalarConverter(void)
@@ -24,5 +25,7 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &object)
 
 void	ScalarConverter::convert(const std::string string)
 {
-	std::string	scalarType =   
+	TypeDetecter	typeDetecter(string);
+
+	
 }
