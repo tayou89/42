@@ -9,7 +9,7 @@ class	ScalarConverter
 		~ScalarConverter(void);
 		ScalarConverter	&operator=(const ScalarConverter &object);
 
-		static void	convert(const std::string &string);
+		static void	convert(const std::string string);
 	
 	private:
 		ScalarConverter(void);

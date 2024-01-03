@@ -4,7 +4,6 @@
 #include <sstream>
 
 TypeDetecter::TypeDetecter(void)
-	: scalarType("")
 {
 }
 
@@ -21,30 +20,21 @@ TypeDetecter	&TypeDetecter::operator=(const TypeDetecter &object)
 {
 	if (this == &object)
 		return (*this);
-	scalarType = object.getScalarType();
 	return (*this);
 }
 
-TypeDetecter::TypeDetecter(const std::string &cppLiteral)
-{
-	setScalarType(cppLiteral);
-}
-
-std::string	TypeDetecter::getScalarType(void) const
-{
-	return (scalarType);
-}
-
-void	TypeDetecter::setScalarType(const std::string &cppLiteral) 
+std::string	TypeDetecter::getScalarType(const std::string &cppLiteral) throw (std::exception)
 {
 	if (isCharLiteral(cppLiteral) == true)
-		scalarType = "char";
+		return ("char");
 	else if (isIntLiteral(cppLiteral) == true)
-		scalarType = "int";
+		return ("int");
 	else if (isFloatLiteral(cppLiteral) == true)
-		scalarType = "float";
+		return ("float");
 	else if (isDoubleLiteral(cppLiteral) == true)
-		scalarType = "double";
+		return ("double");
+	else
+		throw (Converter::UnconvertableException());
 }
 
 bool	TypeDetecter::isCharLiteral(const std::string &cppLiteral)

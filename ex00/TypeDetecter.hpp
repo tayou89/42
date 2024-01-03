@@ -6,22 +6,19 @@
 class	TypeDetecter
 {
 	public:
-		TypeDetecter(void);
 		~TypeDetecter(void);
-		TypeDetecter(const TypeDetecter &object);
 		TypeDetecter	&operator=(const TypeDetecter &object);
 
-		TypeDetecter(const std::string &cppLiteral);
-		std::string	getScalarType(void) const;
+		static std::string	getScalarType(const std::string &cppLiteral) throw (std::exception);
 	
 	private:
-		void	setScalarType(const std::string &cppLiteral);
-		bool	isCharLiteral(const std::string &cppLiteral);
-		bool	isIntLiteral(const std::string &cppLiteral);
-		bool	isFloatLiteral(const std::string &cppLiteral);
-		bool	isDoubleLiteral(const std::string &cppLiteral);
+		TypeDetecter(void);
+		TypeDetecter(const TypeDetecter &object);
 
-		std::string	scalarType;
+		static bool	isCharLiteral(const std::string &cppLiteral);
+		static bool	isIntLiteral(const std::string &cppLiteral);
+		static bool	isFloatLiteral(const std::string &cppLiteral);
+		static bool	isDoubleLiteral(const std::string &cppLiteral);
 };
 
 #endif

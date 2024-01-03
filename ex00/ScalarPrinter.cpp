@@ -1,7 +1,7 @@
 #include "ScalarPrinter.hpp"
+#include "Converter.hpp"
 #include <iostream>
 #include <cmath>
-#include <iomanip>
 
 ScalarPrinter::ScalarPrinter(void)
 {
@@ -23,67 +23,130 @@ ScalarPrinter	&ScalarPrinter::operator=(const ScalarPrinter &object)
 	return (*this);
 }
 
+void	ScalarPrinter::printScalar(const char &character)
+{
+	printChar(character);
+	printInt(Converter::convertToInt(character));
+	printFloat(Converter::convertToFloat(character));
+	printDouble(Converter::convertToDouble(character));
+}
+
+void	ScalarPrinter::printScalar(const int &integer)
+{
+	try
+	{
+		char	character = Converter::convertToChar(integer);
+		printChar(character);
+	}
+	catch(const std::exception& exception)
+	{
+		printChar(exception);
+	}
+	printInt(integer);
+	printFloat(Converter::convertToFloat(integer));
+	printDouble(Converter::convertToDouble(integer));
+}
+
+void	ScalarPrinter::printScalar(const float &floatNumber)
+{
+	try
+	{
+		char	character = Converter::convertToChar(floatNumber);
+		printChar(character);
+	}
+	catch(const std::exception& exception)
+	{
+		printChar(exception);
+	}
+
+	try
+	{
+		int	integer = Converter::convertToInt(floatNumber);
+		printInt(integer);
+	}
+	catch(const std::exception& exception)
+	{
+		printInt(exception);
+	}
+	printFloat(floatNumber);
+	printDouble(Converter::convertToDouble(floatNumber));
+}
+
+void	ScalarPrinter::printScalar(const double &doubleNumber)
+{
+	try
+	{
+		char	character = Converter::convertToChar(doubleNumber);
+		printChar(character);
+	}
+	catch(const std::exception& exception)
+	{
+		printChar(exception);
+	}
+
+	try
+	{
+		int	integer = Converter::convertToInt(doubleNumber);
+		printInt(integer);
+	}
+	catch(const std::exception& exception)
+	{
+		printInt(exception);
+	}
+	printFloat(Converter::convertToFloat(doubleNumber));
+	printDouble(doubleNumber);
+}
+
+void	ScalarPrinter::printScalar(const std::exception &exception)
+{
+	printChar(exception);
+	printInt(exception);
+	printFloat(exception);
+	printDouble(exception);
+}
+
 void	ScalarPrinter::printChar(const char &character)
 {
-	if (character > 32 && character < 127)
-		std::cout << "char: \'" << character << "\'\n"; 
-	else
-		std::cout << "char: Non displayable\n";
+	std::cout << "char: \'" << character << "\'\n";
+}
+
+void	ScalarPrinter::printChar(const std::exception &exception)
+{
+	std::cout << "char: " << exception.what() << '\n';
 }
 
 void	ScalarPrinter::printInt(const int &integer)
 {
-	std::cout << "Int: " << integer << '\n';
+	std::cout << "int: " << integer << '\n';
+}
+
+void	ScalarPrinter::printInt(const std::exception &exception)
+{
+	std::cout << "int: " << exception.what() << '\n';
 }
 
 void	ScalarPrinter::printFloat(const float &floatNumber)
 {
 	if (std::isinf(floatNumber) == true)
 		std::cout << std::showpos << "float: " << floatNumber << "f\n";
-	else if (std::isnan(floatNumber) == true)
-		std::cout << "float: " << floatNumber << "f\n";
 	else
-	{
-		float	integerPart;
-		float	fractionalPart = std::modf(floatNumber, &integerPart);
-
-		std::cout << std::fixed;
-		if (fractionalPart == 0)
-			std::cout.precision(1);
 		std::cout << "float: " << floatNumber << "f\n";
-	}
+}
+
+void	ScalarPrinter::printFloat(const std::exception &exception)
+{
+	std::cout << "float: " << exception.what() << '\n';
 }
 
 void	ScalarPrinter::printDouble(const double &doubleNumber)
 {
 	if (std::isinf(doubleNumber) == true)
-		std::cout << std::showpos << "double: " << doubleNumber << '\n';
-	else if (std::isnan(doubleNumber) == true)
-		std::cout << "double: " << doubleNumber << '\n';
+		std::cout << std::showpos << "double: " << doubleNumber << '\n'; 
 	else
-	{
-		std::cout << std::fixed;
-		std::cout.precision();
 		std::cout << "double: " << doubleNumber << '\n';
-	}
-}
-
-void	ScalarPrinter::printChar(const std::exception &exception)
-{
-	std::cout << "char: " << exception.what() << std::endl;
-}
-
-void	ScalarPrinter::printInt(const std::exception &exception)
-{
-	std::cout << "int: " << exception.what() << std::endl;
-}
-
-void	ScalarPrinter::printFloat(const std::exception &exception)
-{
-	std::cout << "float: " << exception.what() << std::endl;
 }
 
 void	ScalarPrinter::printDouble(const std::exception &exception)
 {
-	std::cout << "double: " << exception.what() << std::endl;
+	std::cout << "double: " << exception.what() << '\n';
 }

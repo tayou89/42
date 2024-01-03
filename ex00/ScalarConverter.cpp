@@ -1,6 +1,6 @@
-#include "Converter.hpp"
-#include "TypeDetecter.hpp"
 #include "ScalarConverter.hpp"
+#include "TypeDetecter.hpp"
+#include "Converter.hpp"
 #include "ScalarPrinter.hpp"
 #include <iostream>
 
@@ -26,13 +26,20 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &object)
 
 void	ScalarConverter::convert(const std::string string)
 {
-	TypeDetecter	typeDetecter(string);
-
-	if (typeDetecter.getScalarType() == "char")
+	try
 	{
-		char	character = string[1];
-	
-		ScalarPrinter::printChar(character);
-		ScalarPrinter::printInt(character);
+		std::string	scalarType = TypeDetecter::getScalarType(string);
+
+		if (scalarType == "char")
+			ScalarPrinter::printScalar(Converter::convertToChar(string));
+		else if (scalarType == "int")
+			ScalarPrinter::printScalar(Converter::convertToInt(string));
+		else if (scalarType == "float")
+			ScalarPrinter::printScalar(Converter::convertToFloat(string));
+		else
+			ScalarPrinter::printScalar(Converter::convertToDouble(string));
 	}
-}
+	catch (const std::exception& exception)
+	{
+		ScalarPrinter::printScalar(exception);
+	}

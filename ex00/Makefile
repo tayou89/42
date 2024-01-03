@@ -6,7 +6,9 @@ RMFLAGS = -rf
 FILE_NAME = main \
 			ScalarConverter \
 			Converter \
-			ScalarPrinter
+			TypeDetecter \
+			ScalarPrinter \
+			ScopeChecker
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
