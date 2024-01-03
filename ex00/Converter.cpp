@@ -1,6 +1,6 @@
 #include "Converter.hpp"
 #include "ScopeChecker.hpp"
-#include <sstream>
+#include <cstdlib>
 
 Converter::Converter(void)
 {
@@ -80,7 +80,7 @@ int	Converter::convertToInt(const double &doubleNumber) throw (std::exception)
 
 float	Converter::convertToFloat(const std::string &floatLiteral)
 {
-	char	*endString = nullptr;
+	char	*endString = NULL;
 
 	return (static_cast<float>(std::strtod(floatLiteral.c_str(), &endString)));
 }
@@ -102,7 +102,7 @@ float	Converter::convertToFloat(const double &doubleNumber)
 
 double	Converter::convertToDouble(const std::string &doubleLiteral)
 {
-	char	*endString = nullptr;
+	char	*endString = NULL;
 
 	return (std::strtod(doubleLiteral.c_str(), &endString));
 }

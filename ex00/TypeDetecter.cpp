@@ -61,7 +61,7 @@ bool	TypeDetecter::isIntLiteral(const std::string &cppLiteral)
 
 bool	TypeDetecter::isFloatLiteral(const std::string &cppLiteral)
 {
-	char		*string	= nullptr;
+	char		*string	= NULL;
 	std::string	restString;	
 	float		floatNumber = 
 				static_cast<float>(std::strtod(cppLiteral.c_str(), &string));
@@ -79,7 +79,7 @@ bool	TypeDetecter::isFloatLiteral(const std::string &cppLiteral)
 
 bool	TypeDetecter::isDoubleLiteral(const std::string &cppLiteral)
 {
-	char	*restString = nullptr;
+	char	*restString = NULL;
 	double	doubleNumber = std::strtod(cppLiteral.c_str(), &restString);
 
 	if (restString[0] != '\0')

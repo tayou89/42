@@ -33,10 +33,13 @@ bool	ScopeChecker::isCharScope(const int &integer)
 
 bool	ScopeChecker::isCharScope(const float &floatNumber)
 {
+	double	charMIN = static_cast<double>(std::numeric_limits<char>::min());
+	double	charMAX = static_cast<double>(std::numeric_limits<char>::max());
+
 	if (std::isnan(floatNumber) == true || std::isinf(floatNumber) == true)
 		return (false);
-	if (floatNumber >= static_cast<float>(std::numeric_limits<char>::min()) &&
-		floatNumber <= static_cast<float>(std::numeric_limits<char>::max()))
+	if (static_cast<double>(floatNumber) > (charMIN - 1.0) &&
+		static_cast<double>(floatNumber) < (charMAX + 1.0))
 		return (true);
 	else
 		return (false);
@@ -44,10 +47,12 @@ bool	ScopeChecker::isCharScope(const float &floatNumber)
 
 bool	ScopeChecker::isCharScope(const double &doubleNumber)
 {
+	double	charMIN = static_cast<double>(std::numeric_limits<char>::min());
+	double	charMAX = static_cast<double>(std::numeric_limits<char>::max());
+
 	if (std::isnan(doubleNumber) == true || std::isinf(doubleNumber) == true)
 		return (false);
-	if (doubleNumber >= static_cast<double>(std::numeric_limits<char>::min()) &&
-		doubleNumber <= static_cast<double>(std::numeric_limits<char>::max()))
+	if (doubleNumber > (charMIN - 1.0) && doubleNumber < (charMAX + 1.0))
 		return (true);
 	else
 		return (false);
@@ -86,4 +91,26 @@ bool	ScopeChecker::isIntScope(const double &doubleNumber)
 		return (true);
 	else
 		return (false);
+}
+
+int	ScopeChecker::getPrecision(const float &floatNumber)
+{
+	float	integerPart;
+	float	fractionalPart = std::modf(floatNumber, &integerPart);
+
+	if (fractionalPart == 0.0f)
+		return (1);
+	else
+		return (6);
+}
+
+int	ScopeChecker::getPrecision(const double &doubleNumber)
+{
+	double	integerPart;
+	double	fractionalPart = std::modf(doubleNumber, &integerPart);
+
+	if (fractionalPart == 0.0)
+		return (1);
+	else
+		return (6);
 }

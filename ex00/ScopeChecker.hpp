@@ -14,6 +14,9 @@ class	ScopeChecker
 
 		static bool	isIntScope(const float &floatNumber); 
 		static bool isIntScope(const double &doubleNumber);
+
+		static int	getPrecision(const float &floatNumber);
+		static int	getPrecision(const double &doubleNumber);
 	
 	private:
 		ScopeChecker(void);

@@ -1,5 +1,6 @@
 #include "ScalarPrinter.hpp"
 #include "Converter.hpp"
+#include "ScopeChecker.hpp"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -131,7 +132,10 @@ void	ScalarPrinter::printFloat(const float &floatNumber)
 	if (std::isinf(floatNumber) == true)
 		std::cout << std::showpos << "float: " << floatNumber << "f\n";
 	else
-		std::cout << std::fixed << std::setprecision(1) << "float: " << floatNumber << "f\n";
+	{
+		std::cout.precision(ScopeChecker::getPrecision(floatNumber));
+		std::cout << std::fixed << "float: " << floatNumber << "f\n";
+	}
 }
 
 void	ScalarPrinter::printFloat(const std::exception &exception)
@@ -144,7 +148,10 @@ void	ScalarPrinter::printDouble(const double &doubleNumber)
 	if (std::isinf(doubleNumber) == true)
 		std::cout << std::showpos << "double: " << doubleNumber << '\n'; 
 	else
-		std::cout << std::fixed << std::setprecision(1) << "double: " << doubleNumber << '\n';
+	{
+		std::cout.precision(ScopeChecker::getPrecision(doubleNumber));
+		std::cout << std::fixed << "double: " << doubleNumber << '\n';
+	}
 }
 
 void	ScalarPrinter::printDouble(const std::exception &exception)
