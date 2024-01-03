@@ -39,9 +39,8 @@ void	identify(Base &p)
 {
 	try
 	{
-		A	&aREF = dynamic_cast<A&>(p);
+		(void) dynamic_cast<A&>(p);
 		std::cout << "A" << '\n';
-		aREF = A();
 	}
 	catch (const std::exception &exception)
 	{
@@ -49,9 +48,8 @@ void	identify(Base &p)
 
 	try
 	{
-		B	&bREF = dynamic_cast<B&>(p);
+		(void) dynamic_cast<B&>(p);
 		std::cout << "B" << '\n';
-		bREF = B();
 	}
 	catch (const std::exception &exception)
 	{
@@ -59,9 +57,8 @@ void	identify(Base &p)
 	
 	try
 	{
-		C	&cREF = dynamic_cast<C&>(p);
+		(void) dynamic_cast<C&>(p);
 		std::cout << "C" << '\n';
-		cREF = C();
 	}
 	catch (const std::exception &exception)
 	{
