@@ -43,3 +43,4 @@ void	ScalarConverter::convert(const std::string string)
 	{
 		ScalarPrinter::printScalar(exception);
 	}
+}
