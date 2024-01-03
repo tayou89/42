@@ -2,6 +2,7 @@
 #include "Converter.hpp"
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 ScalarPrinter::ScalarPrinter(void)
 {
@@ -130,7 +131,7 @@ void	ScalarPrinter::printFloat(const float &floatNumber)
 	if (std::isinf(floatNumber) == true)
 		std::cout << std::showpos << "float: " << floatNumber << "f\n";
 	else
-		std::cout << "float: " << floatNumber << "f\n";
+		std::cout << std::fixed << std::setprecision(1) << "float: " << floatNumber << "f\n";
 }
 
 void	ScalarPrinter::printFloat(const std::exception &exception)
@@ -143,7 +144,7 @@ void	ScalarPrinter::printDouble(const double &doubleNumber)
 	if (std::isinf(doubleNumber) == true)
 		std::cout << std::showpos << "double: " << doubleNumber << '\n'; 
 	else
-		std::cout << "double: " << doubleNumber << '\n';
+		std::cout << std::fixed << std::setprecision(1) << "double: " << doubleNumber << '\n';
 }
 
 void	ScalarPrinter::printDouble(const std::exception &exception)

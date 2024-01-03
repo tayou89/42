@@ -2,6 +2,7 @@
 #include "Converter.hpp"
 #include <cstdlib>
 #include <sstream>
+#include <cmath>
 
 TypeDetecter::TypeDetecter(void)
 {
@@ -62,24 +63,31 @@ bool	TypeDetecter::isFloatLiteral(const std::string &cppLiteral)
 {
 	char		*string	= nullptr;
 	std::string	restString;	
+	float		floatNumber = 
+				static_cast<float>(std::strtod(cppLiteral.c_str(), &string));
 
-	std::strtod(cppLiteral.c_str(), &string);
 	restString = const_cast<const char *>(string);
 	if (restString != "f")
 		return (false);
-	if (cppLiteral.find('.') == std::string::npos)
-		return (false);
+	if (!std::isnan(floatNumber) && !std::isinf(floatNumber))
+	{
+		if (cppLiteral.find('.') == std::string::npos)
+			return (false);
+	}
 	return (true);
 }
 
 bool	TypeDetecter::isDoubleLiteral(const std::string &cppLiteral)
 {
 	char	*restString = nullptr;
+	double	doubleNumber = std::strtod(cppLiteral.c_str(), &restString);
 
-	std::strtod(cppLiteral.c_str(), &restString);
 	if (restString[0] != '\0')
 		return (false);
-	if (cppLiteral.find('.') == std::string::npos)
-		return (false);
+	if (!std::isnan(doubleNumber) && !std::isinf(doubleNumber))
+	{
+		if (cppLiteral.find('.') == std::string::npos)
+			return (false);
+	}
 	return (true);
 }

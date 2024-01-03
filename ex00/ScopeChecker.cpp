@@ -63,10 +63,13 @@ bool	ScopeChecker::isDisplayableChar(const char &character)
 
 bool	ScopeChecker::isIntScope(const float &floatNumber)
 {
+	double	intMIN = static_cast<double>(std::numeric_limits<int>::min());
+	double	intMAX = static_cast<double>(std::numeric_limits<int>::max());
+
 	if (std::isnan(floatNumber) == true || std::isinf(floatNumber) == true)
 		return (false);
-	if (floatNumber >= static_cast<float>(std::numeric_limits<int>::min()) &&
-		floatNumber <= static_cast<float>(std::numeric_limits<int>::max()))
+	if (static_cast<double>(floatNumber) > (intMIN - 1.0) &&
+		static_cast<double>(floatNumber) < (intMAX + 1.0))
 		return (true);
 	else
 		return (false);
@@ -74,10 +77,12 @@ bool	ScopeChecker::isIntScope(const float &floatNumber)
 
 bool	ScopeChecker::isIntScope(const double &doubleNumber)
 {	
+	double	intMIN = static_cast<double>(std::numeric_limits<int>::min());
+	double	intMAX = static_cast<double>(std::numeric_limits<int>::max());
+
 	if (std::isnan(doubleNumber) == true || std::isinf(doubleNumber) == true)
 		return (false);
-	if (doubleNumber >= static_cast<double>(std::numeric_limits<int>::min()) &&
-		doubleNumber <= static_cast<double>(std::numeric_limits<int>::max()))
+	if (doubleNumber > (intMIN - 1.0) && doubleNumber < (intMAX + 1.0))
 		return (true);
 	else
 		return (false);

@@ -2,12 +2,10 @@
 #include <sstream>
 #include <cstdlib>
 #include <typeinfo>
+#include <limits>
 
 int	main(void)
 {
-	long long	number = 99999999999;
-	int			integer = static_cast<int>(number);
-
-	std::cout << "integer: " << integer << '\n';
+	std::cout << "size: " << sizeof(std::numeric_limits<char>::max()) << '\n';
 	return (0);
 }
