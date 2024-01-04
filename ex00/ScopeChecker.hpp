@@ -1,6 +1,8 @@
 #ifndef SCOPE_CHECKER_HPP
 # define SCOPE_CHECKER_HPP
 
+# include <string>
+
 class	ScopeChecker
 {
 	public:
@@ -22,6 +24,5 @@ class	ScopeChecker
 		ScopeChecker(void);
 		ScopeChecker(const ScopeChecker &object);
 };
-
 
 #endif
