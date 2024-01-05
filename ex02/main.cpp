@@ -1,34 +1,56 @@
 #include <iostream>
 #include "Array.hpp"
 
+template <typename T>
+void	printArray(Array<T> array, const char *name);
+template <typename T>
+void	fillArray(Array<T> &array, T data);
+
 int	main(void)
 {
-	Array<int>		A;
-	Array<char> 	B(20);
-	Array<int>		C(20);
-	Array<char> 	D(B);
-	unsigned int	i;
+	Array<int>			A;
+	Array<char> 		B(6);
+	Array<int>			C(6);
 
-	std::cout << "Array A size: " << A.size() << '\n';
-	for (i = 0; i < A.size(); i++)
-		std::cout << "A[" << i << "]: " << A[i] << '\n';
-	std::cout << '\n';
-	//std::cout << "A[" << i << "]: " << A[i] << '\n';
+	printArray(A, "A");
+	printArray(B, "B");
 
-	std::cout << "Array B size: " << B.size() << '\n';
-	for (i = 0; i < B.size(); i++)
-		std::cout << "B[" << i << "]: " << B[i] << '\n';
-	std::cout << '\n';
-	//std::cout << "B[" << i << "]: " << B[i] << '\n';
+	//A[10] = 4;
+
+	fillArray(A, 3);
+	fillArray(B, 'c');
+	fillArray(C, 10);
+	const Array<char> 	D(B);
+
+	printArray(A, "A");
+	printArray(B, "B");
+	printArray(C, "C");
 
 	A = C;
-	std::cout << "Array A size: " << A.size() << '\n';
-	for (i = 0; i < A.size(); i++)
-		std::cout << "A[" << i << "]: " << A[i] << '\n';
-	std::cout << '\n';
+	std::cout << "\'A = C\' has been occured.\n\n";
 
-	std::cout << "Array D size: " << D.size() << '\n';
-	for (i = 0; i < B.size(); i++)
-		std::cout << "D[" << i << "]: " << D[i] << '\n';
+	printArray(A, "A");
+	printArray(D, "D");
+	//D[3] = 'a';
 	return (0);
+}
+
+template <typename T>
+void	printArray(Array<T> array, const char *name)
+{
+	unsigned int 	i;
+
+	std::cout << "Array " << name << " size: " << array.size() << '\n';
+	for (i = 0; i < array.size(); i++)
+		std::cout << name << '[' << i << "]: " << array[i] << "\n";
+	std::cout << '\n';
+}
+
+template <typename T>
+void	fillArray(Array<T> &array, T data)
+{
+	unsigned int	i;
+
+	for (i = 0; i < array.size(); i++)
+		array[i] = data;
 }
