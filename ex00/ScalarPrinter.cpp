@@ -3,7 +3,6 @@
 #include "ScopeChecker.hpp"
 #include <iostream>
 #include <cmath>
-#include <iomanip>
 
 ScalarPrinter::ScalarPrinter(void)
 {

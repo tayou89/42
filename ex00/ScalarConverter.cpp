@@ -2,7 +2,6 @@
 #include "TypeDetecter.hpp"
 #include "Converter.hpp"
 #include "ScalarPrinter.hpp"
-#include <iostream>
 
 ScalarConverter::ScalarConverter(void)
 {
