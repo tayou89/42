@@ -66,7 +66,7 @@ Array<T>::Array(const unsigned int n)
 template <typename T>
 T	&Array<T>::operator[](const long long index) 
 {
-	if (index >= size())
+	if (index < 0 || index >= size())
 		throw std::exception();
 	return (element[index]);
 } 
@@ -74,7 +74,7 @@ T	&Array<T>::operator[](const long long index)
 template <typename T>
 const T	&Array<T>::operator[](const long long index) const
 {
-	if (index >= size())
+	if (index < 0 || index >= size())
 		throw std::exception();
 	return (element[index]);
 }
