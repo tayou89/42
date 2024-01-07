@@ -15,8 +15,8 @@ class	Array
 		Array	&operator=(const Array &object);
 
 		Array(const unsigned int n);
-		T	&operator[](const unsigned int index);
-		const T	&operator[](const unsigned int index) const;
+		T	&operator[](const long long index);
+		const T	&operator[](const long long index) const;
 		unsigned int	size(void) const;
 
 	private:
@@ -64,7 +64,7 @@ Array<T>::Array(const unsigned int n)
 }
 
 template <typename T>
-T	&Array<T>::operator[](const unsigned int index) 
+T	&Array<T>::operator[](const long long index) 
 {
 	if (index >= size())
 		throw std::exception();
@@ -72,7 +72,7 @@ T	&Array<T>::operator[](const unsigned int index)
 } 
 
 template <typename T>
-const T	&Array<T>::operator[](const unsigned int index) const
+const T	&Array<T>::operator[](const long long index) const
 {
 	if (index >= size())
 		throw std::exception();
