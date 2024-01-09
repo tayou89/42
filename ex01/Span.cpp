@@ -25,6 +25,11 @@ Span	&Span::operator=(const Span &object)
 	return (*this);
 }
 
+Span::Span(const unsigned int &N)
+	: _maxSize(N)
+{
+}
+
 void	Span::addNumber(const int &number) throw (std::exception)
 {
 	if (_integers.size() >= _maxSize)
@@ -32,19 +37,40 @@ void	Span::addNumber(const int &number) throw (std::exception)
 	_integers.push_back(number);
 }
 
-int	Span::shortestSpan(void) throw (std::exception)
+unsigned int	Span::shortestSpan(void) const throw (std::exception)
 {
-	int							shortestSpan = std::numeric_limits<int>::max();
-	std::vector<int>::iterator	currentPoint;
-	std::vector<int>::iterator	nextPoint;		
-	std::vector<int>::iterator	endPoint = _integers.end();
+	std::vector<int>			copyIntegers = _integers;
+	std::vector<int>::iterator	point;
+	unsigned int				shortestSpan = std::numeric_limits<unsigned int>::max();
+	unsigned int				newSpan = 0;
 
 	if (_integers.size() < 2)
 		throw (std::logic_error("Can't get shortest span: too few integers"));
-	for (currentPoint = _integers.begin(); (currentPoint + 1) != endPoint; currentPoint++)
+	std::sort(copyIntegers.begin(), copyIntegers.end());
+	for (point = copyIntegers.begin(); (point + 1) != copyIntegers.end(); point++)
 	{
-		nextPoint = currentPoint + 1;
-		shortestSpan = std::min(shortestSpan, *currentPoint - *nextPoint);
+		newSpan = *(point + 1) - *point;
+		shortestSpan = std::min(shortestSpan, newSpan);
+	}
+	return (shortestSpan);
+}
 
-	} 
+unsigned int	Span::longestSpan(void) const throw (std::exception)
+{
+	std::vector<int>	copyIntegers = _integers;
+
+	if (_integers.size() < 2)
+		throw (std::logic_error("Can't get longest span: too few integers"));
+	std::sort(copyIntegers.begin(), copyIntegers.end());
+	return (*(copyIntegers.end() - 1) - *copyIntegers.begin());
+}
+
+unsigned int	Span::getMaxSize(void) const
+{
+	return (_maxSize);
+}
+
+std::vector<int>	Span::getIntegers(void) const
+{
+	return (_integers);
 }
