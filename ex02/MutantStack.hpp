@@ -14,6 +14,10 @@ class	MutantStack : public std::stack<T, Container>
 		MutantStack	&operator=(const MutantStack &object);
 
 		MutantStack(const Container &container);
+		typename Container::iterator	begin(void);
+		typename Container::iterator	end(void);
+		typename Container::iterator	rbegin(void);
+		typename Container::iterator	rend(void);
 };
 
 template <typename T, typename Container>
@@ -46,6 +50,30 @@ template <typename T, typename Container>
 MutantStack<T, Container>::MutantStack(const Container &container)
 	: stack(container)
 {
+}
+
+template <typename T, typename Container>
+typename Container::iterator	MutantStack<T, Container>::begin(void)
+{
+	return (std::stack<T, Container>::c.begin());
+}
+
+template <typename T, typename Container>
+typename Container::iterator	MutantStack<T, Container>::rbegin(void)
+{
+	return (std::stack<T, Container>::c.rbegin());
+}
+
+template <typename T, typename Container>
+typename Container::iterator	MutantStack<T, Container>::end(void)
+{
+	return (std::stack<T, Container>::c.end());
+}
+
+template <typename T, typename Container>
+typename Container::iterator	MutantStack<T, Container>::rend(void)
+{
+	return (std::stack<T, Container>::c.rend());
 }
 
 #endif
