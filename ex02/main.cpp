@@ -3,11 +3,13 @@
 
 void	testMutantStack1(void);
 void	testList(void);
+void	testMutantStack2(void);
 
 int main()
 {
 	testMutantStack1();
 	testList();
+	testMutantStack2();
 	return (0);
 }
 
@@ -83,10 +85,50 @@ void	testList(void)
 
 void	testMutantStack2(void)
 {
+	std::cout << "\n=============== MutantStack Test 2 ===============\n";
 	typedef MutantStack<int, std::vector<int> >	VectorStack;	
 
 	int					array[] = { 5, 4, 2, 100, 30, 20, -6 };
 	std::vector<int>	vector(array, array + sizeof(array) / sizeof(int));
+	VectorStack			vectorStack(vector);	
+
+	std::cout << "vector = { ";
+	for (VectorStack::iterator iter = vector.begin(); iter != vector.end(); iter++)
+		std::cout << *iter << ", ";
+	std::cout << "}\n\n";
+
 	const VectorStack	constVectorStack(vector);
-	MutantStack<int>	mutantStack;
+	std::cout << "vector was put into stack.\n\n";
+
+	std::cout << "< Stack iterator result >\n";
+
+	VectorStack::reverse_iterator	reverseBegin = vectorStack.rbegin();
+	VectorStack::reverse_iterator	reverseEnd = vectorStack.rend();
+	
+	std::cout << "*reverseBegin: " << *reverseBegin << '\n';
+	std::cout << "*(++reverseBegin): " << *(++reverseBegin) << '\n';
+	std::cout << "*(--reverseEnd): " << *(--reverseEnd) << '\n';
+
+	VectorStack::const_iterator	constBegin = constVectorStack.begin();
+	VectorStack::const_iterator	constEnd = constVectorStack.end();
+	
+	std::cout << "*constBegin: " << *constBegin << '\n';
+	std::cout << "*(++constBegin): " << *(++constBegin) << '\n';
+	std::cout << "*(--constEnd): " << *(--constEnd) << '\n';
+
+	VectorStack::const_reverse_iterator	constReverseBegin = constVectorStack.rbegin();
+	VectorStack::const_reverse_iterator	constReverseEnd = constVectorStack.rend();
+
+	std::cout << "*constReverseBegin: " << *constReverseBegin << '\n';
+	std::cout << "*(++constReverseBegin): " << *(++constReverseBegin) << '\n';
+	std::cout << "*(--constReverseEnd): " << *(--constReverseEnd) << '\n';
+	std::cout << '\n';
+
+	std::cout << "< vectorStack >\n";
+	for (; vectorStack.empty() == false; vectorStack.pop())
+		std::cout << vectorStack.top() << '\n';
+
+	std::cout << "\n< constVectorStack >\n";
+	std::cout << "top: " << constVectorStack.top() << '\n';
+	std::cout << "Can't pop other stack elements bacause it's const type.\n";
 }

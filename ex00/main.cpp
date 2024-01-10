@@ -27,10 +27,10 @@ void	tryEasyFind(Container container, int value)
 
 int	main(void)
 {
-	int						numbers[] = {5, 4, 7, 2, 8};
-	std::vector<int>		vector(numbers, numbers + sizeof(numbers) / sizeof(int));
-	std::list<int>			list(numbers, numbers + sizeof(numbers) / sizeof(int));
-	std::deque<int>			deque(numbers, numbers + sizeof(numbers) / sizeof(int));
+	int					numbers[] = {5, 4, 7, 2, 8};
+	std::vector<int>	vector(numbers, numbers + sizeof(numbers) / sizeof(int));
+	std::list<int>		list(numbers, numbers + sizeof(numbers) / sizeof(int));
+	std::deque<int>		deque(numbers, numbers + sizeof(numbers) / sizeof(int));
 	
 	tryEasyFind(vector, 2);
 	std::cout << '\n';
