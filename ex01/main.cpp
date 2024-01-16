@@ -2,13 +2,7 @@
 #include <iostream>
 #include <sstream>
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
-	std::stringstream	stringStream("   abc    ");
-	std::string			string;
-
-	stringStream >> string;
-	std::cout << "string: " << string << '\n';
-
 	return (0);
 }

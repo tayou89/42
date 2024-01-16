@@ -3,18 +3,33 @@
 
 # include <list>
 # include <string>
+# include <stdexcept>
 
 class	RPN
 {
 	public:
-		RPN(void);
 		~RPN(void);
-		RPN(const RPN &object);
 		RPN	&operator=(const RPN &object);
+		RPN(const std::string &reversePolishNotation);
+
+		int	calculateRPN(void);	
 	
 	private:
-		std::string		reversePolishNotation;
-		std::list<int>	integers;
+		RPN(void);
+		RPN(const RPN &object);
+
+		void	_calculateIntegers(const char &operator);
+
+		bool	_isOperator(const char &c) const;
+		bool	_isOutOfInt(long long number) const;
+
+		int		_add(int number1, int number2) const;
+		int		_subtract(int number1, int number2) const;
+		int		_devide(int number1, int number2) const;
+		int		_multiple(int number1, int number2) const;
+
+		std::string		_RPNString;
+		std::list<int>	_integers;
 };
 
 #endif
