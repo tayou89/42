@@ -10,7 +10,7 @@ class	RPN
 	public:
 		~RPN(void);
 		RPN	&operator=(const RPN &object);
-		RPN(const std::string &reversePolishNotation);
+		RPN(const char *reversePolishNotation);
 
 		int	calculateRPN(void);	
 	
@@ -18,7 +18,7 @@ class	RPN
 		RPN(void);
 		RPN(const RPN &object);
 
-		void	_calculateIntegers(const char &operator);
+		void	_calculateIntegers(const char &operator_);
 
 		bool	_isOperator(const char &c) const;
 		bool	_isOutOfInt(long long number) const;

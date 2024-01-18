@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <limits>
+#include <cstdlib>
 
 BitcoinExchange::BitcoinExchange(void) {}
 

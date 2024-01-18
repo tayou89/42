@@ -21,18 +21,22 @@ RPN	&RPN::operator=(const RPN &object)
 	return (*this);
 }
 
-RPN::RPN(const std::string &reversePolishNotation)
-	: _RPNString(reversePolishNotation)
+RPN::RPN(const char *reversePolishNotation)
 {
+	if (reversePolishNotation == NULL)
+		throw (std::invalid_argument("Error: RPN expression is needed"));
+	_RPNString = reversePolishNotation;
 }
 
 int	RPN::calculateRPN(void)
 {
 	std::stringstream	stringStream(_RPNString);
 	std::string			string;
+	size_t				stringCount = 0;
 
 	while (stringStream >> string)
 	{
+		++stringCount;
 		if (string.size() > 1)
 			throw (std::runtime_error("Error: wrong RPN format"));
 		if (std::isdigit(string[0]) == true)
@@ -42,8 +46,10 @@ int	RPN::calculateRPN(void)
 		else
 			throw (std::runtime_error("Error: undefined character: " + string));
 	}
+	if (stringCount == 0)
+		throw (std::runtime_error("Error: no data to calculate"));
 	if (_integers.size() != 1)
-		throw (std::runtime_error("Error: uncalculated number exists"));
+		throw (std::runtime_error("Error: need more operator"));
 	return (_integers.back());
 }
 
@@ -59,9 +65,9 @@ void	RPN::_calculateIntegers(const char &operator_)
 
 	if (_integers.size() < 2)
 		throw (std::runtime_error("Error: can't calculate: not enough integers"));
-	number1 = _integers.back();
-	_integers.pop_back();
 	number2 = _integers.back();
+	_integers.pop_back();
+	number1 = _integers.back();
 	_integers.pop_back();
 	if (operator_ == '+')
 		result = _add(number1, number2);
@@ -92,14 +98,14 @@ int	RPN::_devide(int number1, int number2) const
 {
 	if (number2 == 0)
 		throw (std::logic_error("Error: can't devide by 0"));
-	return (number1 - number2);
+	return (number1 / number2);
 }
 
 int	RPN::_multiple(int number1, int number2) const
 {
 	if (_isOutOfInt(static_cast<long long>(number1) * static_cast<long long>(number2)))
 		throw (std::range_error("Error: can't calculate: out of int range"));
-	return (number1 - number2);
+	return (number1 * number2);
 }
 
 bool	RPN::_isOutOfInt(long long number) const

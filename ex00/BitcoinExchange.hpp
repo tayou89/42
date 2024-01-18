@@ -5,6 +5,7 @@
 # include <fstream>
 # include <string>
 # include <stdexcept>
+# include <ctime>
 
 typedef struct InputData 
 {
