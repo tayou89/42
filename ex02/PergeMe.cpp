@@ -100,6 +100,7 @@ bool	PergeMe::_isDuplicateNumber(const int &number)
 void	PergeMe::sortByVectorContainer(void)
 {
 	_setVectorChains();
+	_sortVectorMainChainByBinaryInsertion();
 }
 
 void	PergeMe::_setVectorChains(void)
