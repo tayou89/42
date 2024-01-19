@@ -1,10 +1,10 @@
-NAME = RPN 
+NAME = PmergeMe 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
-			RPN
+			PmergeMe	
 
 SOURCE_FILE = $(addsuffix .cpp, $(FILE_NAME))
 OBJECT_FILE = $(addsuffix .o, $(FILE_NAME))
