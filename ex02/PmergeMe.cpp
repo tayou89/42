@@ -5,8 +5,10 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
+#include <ctime>
 
 PmergeMe::PmergeMe(void)
+	: _vectorElapsedTime(0.0), _dequeElapsedTime(0.0)
 {
 }
 
@@ -26,46 +28,6 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &object)
 	return (*this);
 }
 
-PmergeMe::PmergeMe(char *inputIntegers[])
-{
-	_setVectorInputIntegers(inputIntegers);
-	_setDequeInputIntegers();
-}
-
-
-void	PmergeMe::_setVectorInputIntegers(char *inputIntegers[])
-{
-	std::stringstream	stringStream;
-	long long			number;
-	int					integer;
-	size_t				i = 0;
-
-	if (inputIntegers[0] == NULL)
-		throw (std::invalid_argument("Error: no integers to sort"));
-	while (inputIntegers[i] != NULL)
-	{
-		stringStream << inputIntegers[i];
-		stringStream >> number;
-		if (stringStream.fail() == true || stringStream.eof() == false)
-			throw (std::invalid_argument("Error: wrong input: " + std::string(inputIntegers[i])));
-		if (_isOutOfInt(number) == true)
-			throw (std::range_error("Error: out of int: " + std::string(inputIntegers[i])));
-		integer = std::atoi(inputIntegers[i]);
-		if (_isPositiveInteger(integer) == false)
-			throw (std::invalid_argument("Error: not a positive integer: " + std::string(inputIntegers[i])));
-		if (_isDuplicateNumber(integer) == true)
-			throw (std::invalid_argument("Error: duplicate integer: " + std::string(inputIntegers[i])));
-		_vectorInputIntegers.push_back(integer);
-		stringStream.clear();
-		stringStream.str("");
-		i++;
-	}
-}
-
-void	PmergeMe::_setDequeInputIntegers(void)
-{
-	_dequeInputIntegers.assign(_vectorInputIntegers.begin(), _vectorInputIntegers.end());
-}
 
 
 bool	PmergeMe::_isOutOfInt(const long long &number)
@@ -86,8 +48,50 @@ bool	PmergeMe::_isPositiveInteger(const int &number)
 	return (true);
 }
 
+void	PmergeMe::sortByVectorContainer(char *inputIntegers[])
+{
+	clock_t	startTime, endTime;
 
-bool	PmergeMe::_isDuplicateNumber(const int &number)
+	startTime = std::clock();
+	_setVectorInputIntegers(inputIntegers);
+	_setVectorChains();
+	_sortVectorMainChainByBinaryInsertion();
+	_mergeVectorSubChainToMain();
+	endTime = std::clock();
+	_vectorElapsedTime 
+		= static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC * 1000.0;
+}
+
+void	PmergeMe::_setVectorInputIntegers(char *inputIntegers[])
+{
+	std::stringstream	stringStream;
+	long long			number;
+	int					integer;
+	int					i = 0;
+
+	if (inputIntegers[0] == NULL)
+		throw (std::invalid_argument("Error: no integers to sort"));
+	while (inputIntegers[i] != NULL)
+	{
+		stringStream << inputIntegers[i];
+		stringStream >> number;
+		if (stringStream.fail() == true || stringStream.eof() == false)
+			throw (std::invalid_argument("Error: wrong input: " + std::string(inputIntegers[i])));
+		if (_isOutOfInt(number) == true)
+			throw (std::range_error("Error: out of int: " + std::string(inputIntegers[i])));
+		integer = std::atoi(inputIntegers[i]);
+		if (_isPositiveInteger(integer) == false)
+			throw (std::invalid_argument("Error: not a positive integer: " + std::string(inputIntegers[i])));
+		if (_isVectorDuplicateNumber(integer) == true)
+			throw (std::invalid_argument("Error: duplicate integer: " + std::string(inputIntegers[i])));
+		_vectorInputIntegers.push_back(integer);
+		stringStream.clear();
+		stringStream.str("");
+		i++;
+	}
+}
+
+bool	PmergeMe::_isVectorDuplicateNumber(const int &number)
 {
 	std::vector<int>::iterator	iterator = _vectorInputIntegers.begin();
 	std::vector<int>::iterator	endPoint = _vectorInputIntegers.end();
@@ -98,16 +102,6 @@ bool	PmergeMe::_isDuplicateNumber(const int &number)
 			return (true);
 	}
 	return (false);
-}
-
-void	PmergeMe::sortByVectorContainer(void)
-{
-	_setVectorChains();
-	_printVector(_vectorInputIntegers); std::cout << '\n';
-	_printVector(_vectorMainChain); std::cout << '\n';
-	_printVector(_vectorSubChain); std::cout << '\n';
-	_sortVectorMainChainByBinaryInsertion();
-	_mergeVectorSubChainToMain();
 }
 
 void	PmergeMe::_setVectorChains(void)
@@ -124,7 +118,7 @@ void	PmergeMe::_setVectorChains(void)
 	}
 }
 
-void	PmergeMe::_pushValuesToEachVectorChain(int number1, int number2)
+void	PmergeMe::_pushValuesToEachVectorChain(const int &number1, const int &number2)
 {
 	if (number1 > number2)
 	{
@@ -140,31 +134,69 @@ void	PmergeMe::_pushValuesToEachVectorChain(int number1, int number2)
 
 void	PmergeMe::_sortVectorMainChainByBinaryInsertion(void)
 {
-	size_t	insertIndex;
-	size_t	firstIndex = 0, lastIndex;
-	size_t	i;
-	int		mainValue, pairedValue;	
+	std::vector<int>::iterator	mainBeginPoint, subBeginPoint;
+	int							mainValue, pairedValue;	
+	int							insertIndex;
+	int							mainChainSize = _vectorMainChain.size();
+	int							i;
 
-	for (i = 1; i < _vectorMainChain.size(); i++)
+	for (i = 1; i < mainChainSize; i++)
 	{
 		mainValue = _vectorMainChain[i];
 		pairedValue = _vectorSubChain[i];
-		lastIndex = i - 1;
-		_eraseValuesFromChains(i);
-		insertIndex = _binarySearchVector(firstIndex, lastIndex, mainValue);
-		_insertValuesToChains(insertIndex, mainValue, pairedValue);
+		mainBeginPoint = _vectorMainChain.begin();
+		subBeginPoint = _vectorSubChain.begin();
+		insertIndex = _binarySearchVector(0, i - 1, mainValue);
+		if (mainValue > _vectorMainChain[insertIndex])
+			++insertIndex;
+		_vectorMainChain.erase(mainBeginPoint + i);
+		_vectorSubChain.erase(subBeginPoint + i);
+		_vectorMainChain.insert(mainBeginPoint + insertIndex, mainValue);
+		_vectorSubChain.insert(subBeginPoint + insertIndex, pairedValue);
 	}
 }
 
-void	PmergeMe::_eraseValuesFromChains(size_t &targetIndex)
+void	PmergeMe::_mergeVectorSubChainToMain(void)
 {
-	_vectorMainChain.erase(_vectorMainChain.begin() + targetIndex);
-	_vectorSubChain.erase(_vectorSubChain.begin() + targetIndex);
+	int	subChainLastIndex = _vectorSubChain.size() - 1;
+	int previousStartIndex = 0;
+	int startIndex;
+	int sortCount = 0;
+
+	_vectorMainChain.insert(_vectorMainChain.begin(), _vectorSubChain.front());
+	++sortCount;
+	while (previousStartIndex != subChainLastIndex)
+	{
+		++sortCount;
+		startIndex = _fordJohnsonEquation(sortCount) - 1;
+		if (startIndex > subChainLastIndex)
+			startIndex = subChainLastIndex;
+		_insertVectorSubChainToMain(sortCount, startIndex, previousStartIndex);
+		previousStartIndex = startIndex;
+	}
 }
 
-size_t	PmergeMe::_binarySearchVector(size_t first, size_t last, int target)
+void	PmergeMe::_insertVectorSubChainToMain(int sortCount, int startIndex, int lastIndex)
 {
-	size_t	mid;
+	int lastSearchIndex = static_cast<int>(std::pow(2.0, sortCount)) - 2;
+	int mainChainLastIndex = _vectorMainChain.size() - 1; 
+	int insertIndex, insertValue;
+
+	if (lastSearchIndex > mainChainLastIndex)
+		lastSearchIndex = mainChainLastIndex;
+	for (; startIndex > lastIndex; startIndex--)
+	{
+		insertValue = _vectorSubChain[startIndex];
+		insertIndex = _binarySearchVector(0, lastSearchIndex, insertValue);
+		if (insertValue > _vectorMainChain[insertIndex])
+			++insertIndex;
+		_vectorMainChain.insert(_vectorMainChain.begin() + insertIndex, insertValue);
+	}
+}
+
+int	PmergeMe::_binarySearchVector(int first, int last, int target)
+{
+	int mid;
 
 	if (last <= first)
 		return (first);
@@ -175,54 +207,162 @@ size_t	PmergeMe::_binarySearchVector(size_t first, size_t last, int target)
 		return (_binarySearchVector(mid + 1, last, target));
 }
 
-void	PmergeMe::_insertValuesToChains(size_t insertIndex, int &mainValue, int &pairedValue)
+void	PmergeMe::sortByDequeContainer(char *inputIntegers[])
 {
-	if (mainValue > _vectorMainChain[insertIndex])
-		++insertIndex;
-	_vectorMainChain.insert(_vectorMainChain.begin() + insertIndex, mainValue);
-	_vectorSubChain.insert(_vectorSubChain.begin() + insertIndex, pairedValue);
+	clock_t	startTime, endTime;
+
+	startTime = std::clock();
+	_setDequeInputIntegers(inputIntegers);
+	_setDequeChains();
+	_sortDequeMainChainByBinaryInsertion();
+	_mergeDequeSubChainToMain();
+	endTime = std::clock();
+	_dequeElapsedTime
+		= static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC * 1000.0;
 }
 
-void	PmergeMe::_mergeVectorSubChainToMain(void)
+void	PmergeMe::_setDequeInputIntegers(char *inputIntegers[])
 {
-	size_t	subChainLastIndex = _vectorSubChain.size() - 1;
-	size_t	lastStartIndex = 0;
-	size_t	startIndex;
-	size_t	sortCount = 0;
+	std::stringstream	stringStream;
+	long long			number;
+	int					integer;
+	size_t				i = 0;
 
-	_vectorMainChain.insert(_vectorMainChain.begin(), _vectorSubChain.front());
+	if (inputIntegers[0] == NULL)
+		throw (std::invalid_argument("Error: no integers to sort"));
+	while (inputIntegers[i] != NULL)
+	{
+		stringStream << inputIntegers[i];
+		stringStream >> number;
+		if (stringStream.fail() == true || stringStream.eof() == false)
+			throw (std::invalid_argument("Error: wrong input: " + std::string(inputIntegers[i])));
+		if (_isOutOfInt(number) == true)
+			throw (std::range_error("Error: out of int: " + std::string(inputIntegers[i])));
+		integer = std::atoi(inputIntegers[i]);
+		if (_isPositiveInteger(integer) == false)
+			throw (std::invalid_argument("Error: not a positive integer: " + std::string(inputIntegers[i])));
+		if (_isDequeDuplicateNumber(integer) == true)
+			throw (std::invalid_argument("Error: duplicate integer: " + std::string(inputIntegers[i])));
+		_dequeInputIntegers.push_back(integer);
+		stringStream.clear();
+		stringStream.str("");
+		i++;
+	}
+}
+
+bool	PmergeMe::_isDequeDuplicateNumber(const int &number)
+{
+	std::deque<int>::iterator	iterator = _dequeInputIntegers.begin();
+	std::deque<int>::iterator	endPoint = _dequeInputIntegers.end();
+
+	for (; iterator != endPoint; iterator++)
+	{
+		if (number == *iterator)
+			return (true);
+	}
+	return (false);
+}
+
+void	PmergeMe::_setDequeChains(void)
+{
+	std::deque<int>::iterator	iterator = _dequeInputIntegers.begin();
+	std::deque<int>::iterator	endPoint = _dequeInputIntegers.end();
+
+	for (; iterator != endPoint; iterator++)
+	{
+		if (iterator + 1 != endPoint)
+			_pushValuesToEachDequeChain(*iterator, *(++iterator));
+		else
+			_dequeSubChain.push_back(*iterator);
+	}
+}
+
+void	PmergeMe::_pushValuesToEachDequeChain(const int &number1, const int &number2)
+{
+	if (number1 > number2)
+	{
+		_dequeMainChain.push_back(number1);
+		_dequeSubChain.push_back(number2);
+	}
+	else
+	{
+		_dequeMainChain.push_back(number2);
+		_dequeSubChain.push_back(number1);
+	}
+}
+
+void	PmergeMe::_sortDequeMainChainByBinaryInsertion(void)
+{
+	int							mainValue, pairedValue;	
+	int							mainChainSize = _dequeMainChain.size();
+	int							insertIndex, i;
+
+	for (i = 1; i < mainChainSize; i++)
+	{
+		mainValue = _dequeMainChain[i];
+		pairedValue = _dequeSubChain[i];
+		insertIndex = _binarySearchDeque(0, i - 1, mainValue);
+		if (mainValue > _dequeMainChain[insertIndex])
+			++insertIndex;
+		_dequeMainChain.erase(_dequeMainChain.begin() + i);
+		_dequeSubChain.erase(_dequeSubChain.begin() + i);
+		_dequeMainChain.insert(_dequeMainChain.begin() + insertIndex, mainValue);
+		_dequeSubChain.insert(_dequeSubChain.begin() + insertIndex, pairedValue);
+	}
+}
+
+void	PmergeMe::_mergeDequeSubChainToMain(void)
+{
+	int	subChainLastIndex = _dequeSubChain.size() - 1;
+	int	previousStartIndex = 0;
+	int	startIndex;
+	int	sortCount = 0;
+
+	_dequeMainChain.insert(_dequeMainChain.begin(), _dequeSubChain.front());
 	++sortCount;
-	while (lastStartIndex != subChainLastIndex)
+	while (previousStartIndex != subChainLastIndex)
 	{
 		++sortCount;
 		startIndex = _fordJohnsonEquation(sortCount) - 1;
 		if (startIndex > subChainLastIndex)
 			startIndex = subChainLastIndex;
-		_insertVectorSubToMainChain(sortCount, startIndex, lastStartIndex);
-		lastStartIndex = startIndex;
+		_insertDequeSubChainToMain(sortCount, startIndex, previousStartIndex);
+		previousStartIndex = startIndex;
 	}
 }
 
-void	PmergeMe::_insertVectorSubToMainChain(size_t sortCount, size_t startIndex, size_t lastIndex)
+void	PmergeMe::_insertDequeSubChainToMain(int sortCount, int startIndex, int lastIndex)
 {
-	size_t	lastIndexToSort = static_cast<size_t>(std::pow(2.0, sortCount)) - 1;
-	size_t	mainChainLastIndex = _vectorMainChain.size() - 1; 
-	size_t	insertIndex;
-	int		insertValue;
+	int lastSearchIndex = static_cast<int>(std::pow(2.0, sortCount)) - 2;
+	int	mainChainLastIndex = _dequeMainChain.size() - 1; 
+	int	insertIndex, insertValue;
 
-	if (lastIndexToSort > mainChainLastIndex)
-		lastIndexToSort = mainChainLastIndex;
+	if (lastSearchIndex > mainChainLastIndex)
+		lastSearchIndex = mainChainLastIndex;
 	for (; startIndex > lastIndex; startIndex--)
 	{
-		insertValue = _vectorSubChain[startIndex];
-		insertIndex = _binarySearchVector(0, lastIndexToSort, insertValue);
-		if (insertValue > _vectorMainChain[insertIndex])
+		insertValue = _dequeSubChain[startIndex];
+		insertIndex = _binarySearchDeque(0, lastSearchIndex, insertValue);
+		if (insertValue > _dequeMainChain[insertIndex])
 			++insertIndex;
-		_vectorMainChain.insert(_vectorMainChain.begin() + insertIndex, insertValue);
+		_dequeMainChain.insert(_dequeMainChain.begin() + insertIndex, insertValue);
 	}
 }
 
-size_t	PmergeMe::_fordJohnsonEquation(size_t number)
+int	PmergeMe::_binarySearchDeque(int first, int last, int target)
+{
+	int mid;
+
+	if (last <= first)
+		return (first);
+	mid = (first + last) / 2;
+	if (target < _dequeMainChain[mid])
+		return (_binarySearchDeque(first, mid - 1, target));
+	else
+		return (_binarySearchDeque(mid + 1, last, target));
+}
+
+int	PmergeMe::_fordJohnsonEquation(int number)
 {
 	if (number < 2)
 		return (1);
@@ -234,9 +374,19 @@ void	PmergeMe::printVectorMainChain(void) const
 	_printVector(_vectorMainChain);
 }
 
+void	PmergeMe::printDequeMainChain(void) const
+{
+	_printDeque(_dequeMainChain);
+}
+
 void	PmergeMe::printVectorInputIntegers(void) const
 {
 	_printVector(_vectorInputIntegers);
+}
+
+void	PmergeMe::printDequeInputIntegers(void) const
+{
+	_printDeque(_dequeInputIntegers);
 }
 
 void	PmergeMe::_printVector(const std::vector<int> &vector) const
@@ -246,4 +396,23 @@ void	PmergeMe::_printVector(const std::vector<int> &vector) const
 
 	for (; iterator != endPoint; iterator++)
 		std::cout << *iterator << ' ';
+}
+
+void	PmergeMe::_printDeque(const std::deque<int> &deque) const
+{
+	std::deque<int>::const_iterator	iterator = deque.begin();
+	std::deque<int>::const_iterator	endpoint = deque.end();
+
+	for (; iterator != endpoint; iterator++)
+		std::cout << *iterator << ' ';
+}
+
+double	PmergeMe::getVectorElapsedTime(void) const
+{
+	return (_vectorElapsedTime);
+}
+
+double	PmergeMe::getDequeElapsedTime(void) const
+{
+	return (_dequeElapsedTime);
 }
