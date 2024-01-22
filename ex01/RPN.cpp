@@ -18,6 +18,7 @@ RPN	&RPN::operator=(const RPN &object)
 	if (this == &object)
 		return (*this);
 	_RPNString = object._RPNString;
+	_integers = object._integers;
 	return (*this);
 }
 

@@ -9,17 +9,12 @@ int	main(int argc, char *argv[])
 		PmergeMe	pMergeMe;
 
 		pMergeMe.sortByVectorContainer(&argv[1]);
-		pMergeMe.printVectorMainChain(); std::cout << '\n';
-		std::cout << "Vector ElapsedTime: " << pMergeMe.getVectorElapsedTime() << "\n\n"; 
-
 		pMergeMe.sortByDequeContainer(&argv[1]);
-		pMergeMe.printDequeMainChain(); std::cout << '\n';
-		std::cout << "Deque ElapsedTime: " << pMergeMe.getDequeElapsedTime() << '\n';
+		pMergeMe.printSortResult();
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
 	return (0);
 }

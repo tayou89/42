@@ -32,7 +32,6 @@ class	BitcoinExchange
 		void	_setInputData(const std::string &fileLine);
 		double	_getExchangeRate(void) const;
 
-
 		std::ifstream					_rateFileStream;	
 		std::ifstream					_valueFileStream;
 		std::map<std::string, double>	_exchangeRateMap;

@@ -14,14 +14,7 @@ class	PmergeMe
 
 		void	sortByVectorContainer(char *inputIntegers[]);
 		void	sortByDequeContainer(char *inputIntegers[]);
-
-		void	printVectorMainChain(void) const;
-		void	printDequeMainChain(void) const;
-		void	printVectorInputIntegers(void) const;
-		void	printDequeInputIntegers(void) const;
-		
-		double	getVectorElapsedTime(void) const;
-		double	getDequeElapsedTime(void) const;
+		void	printSortResult(void) const;
 
 	private:
 

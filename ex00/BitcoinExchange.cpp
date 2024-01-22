@@ -25,6 +25,7 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &object)
 {
 	if (this == &object)
 		return (*this);
+	_exchangeRateMap = object._exchangeRateMap;
 	return (*this);
 }
 
@@ -35,6 +36,52 @@ BitcoinExchange::BitcoinExchange(const std::string exchangeRateFile)
 	if (_exchangeRateMap.empty() == true)
 		throw (std::runtime_error("Error: no rate data exists"));
 	_rateFileStream.close();
+}
+
+void	BitcoinExchange::_openFile(std::ifstream &stream, const std::string &file)
+{
+	stream.open(file.c_str());
+	if (stream.is_open() == false)
+		throw (std::runtime_error("Error: failed to open: " + file));
+}
+
+void	BitcoinExchange::_setExchangeRateMap(void)
+{
+	std::string			fileLine;
+
+	ignoreOneLine(_rateFileStream);
+	while (std::getline(_rateFileStream, fileLine))
+		_setExchangeRateMapElement(fileLine);
+}
+
+void	BitcoinExchange::_setExchangeRateMapElement(const std::string &fileLine)
+{
+	std::stringstream	stringStream(fileLine);
+	std::string			string, date, rate;
+	char				*endString = NULL;
+	double				rateValue;
+	size_t				stringCount = 0;
+	size_t				seperatorIndex;
+
+	while (stringStream >> string)
+	{
+		++stringCount;
+		if (stringCount > 1)
+			throw (std::runtime_error("Error: wrong data: " + fileLine));
+		seperatorIndex = string.find(",");
+		if (seperatorIndex == std::string::npos)
+			throw (std::runtime_error("Error: no comma: " + fileLine));
+		date = string.substr(0, seperatorIndex);
+		if (isValidDate(date) == false)
+			throw (std::runtime_error("Error: wrong date: " + date));
+		rate = string.substr(seperatorIndex + 1);
+		rateValue = std::strtod(rate.c_str(), &endString);
+		if (rateValue < 0.0 || endString[0] != '\0')
+			throw (std::runtime_error("Error: wrong rate: " + rate));
+		if (isDuplicateKey(_exchangeRateMap, date) == true)
+			throw (std::runtime_error("Error: duplicate date: " + date)); 
+		_exchangeRateMap[date] = rateValue;
+	}
 }
 
 void	BitcoinExchange::printExchangedValue(const std::string exchangeValueFile)
@@ -112,51 +159,7 @@ double	BitcoinExchange::_getExchangeRate(void) const
 		return (iterator->second);
 }
 
-void	BitcoinExchange::_openFile(std::ifstream &stream, const std::string &file)
-{
-	stream.open(file.c_str());
-	if (stream.is_open() == false)
-		throw (std::runtime_error("Error: failed to open: " + file));
-}
 
-void	BitcoinExchange::_setExchangeRateMap(void)
-{
-	std::string			fileLine;
-
-	ignoreOneLine(_rateFileStream);
-	while (std::getline(_rateFileStream, fileLine))
-		_setExchangeRateMapElement(fileLine);
-}
-
-void	BitcoinExchange::_setExchangeRateMapElement(const std::string &fileLine)
-{
-	std::stringstream	stringStream(fileLine);
-	std::string			string, date, rate;
-	char				*endString = NULL;
-	double				rateValue;
-	size_t				stringCount = 0;
-	size_t				seperatorIndex;
-
-	while (stringStream >> string)
-	{
-		++stringCount;
-		if (stringCount > 1)
-			throw (std::runtime_error("Error: wrong data: " + fileLine));
-		seperatorIndex = string.find(",");
-		if (seperatorIndex == std::string::npos)
-			throw (std::runtime_error("Error: no comma: " + fileLine));
-		date = string.substr(0, seperatorIndex);
-		if (isValidDate(date) == false)
-			throw (std::runtime_error("Error: wrong date: " + date));
-		rate = string.substr(seperatorIndex + 1);
-		rateValue = std::strtod(rate.c_str(), &endString);
-		if (rateValue < 0.0 || endString[0] != '\0')
-			throw (std::runtime_error("Error: wrong rate: " + rate));
-		if (isDuplicateKey(_exchangeRateMap, date) == true)
-			throw (std::runtime_error("Error: duplicate date: " + date)); 
-		_exchangeRateMap[date] = rateValue;
-	}
-}
 
 void	checkArgcException(const int &argc)
 {
@@ -223,7 +226,6 @@ std::tm	extractTime(const std::string &date)
 	}
 	return (time);
 }
-
 
 bool	isValidTime(const std::tm &time)
 {

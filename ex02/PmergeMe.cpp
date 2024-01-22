@@ -6,6 +6,7 @@
 #include <cmath>
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 
 PmergeMe::PmergeMe(void)
 	: _vectorElapsedTime(0.0), _dequeElapsedTime(0.0)
@@ -25,10 +26,17 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &object)
 {
 	if (this == &object)
 		return (*this);
+	_vectorInputIntegers = object._vectorInputIntegers;
+	_vectorMainChain = object._vectorMainChain;
+	_vectorSubChain = object._vectorSubChain;
+	_vectorElapsedTime = object._vectorElapsedTime;
+
+	_dequeInputIntegers = object._dequeInputIntegers;
+	_dequeMainChain = object._dequeMainChain;
+	_dequeSubChain = object._dequeSubChain;
+	_dequeElapsedTime = object._dequeElapsedTime;
 	return (*this);
 }
-
-
 
 bool	PmergeMe::_isOutOfInt(const long long &number)
 {
@@ -39,7 +47,6 @@ bool	PmergeMe::_isOutOfInt(const long long &number)
 		return (true);
 	return (false);
 }
-
 
 bool	PmergeMe::_isPositiveInteger(const int &number)
 {
@@ -59,7 +66,7 @@ void	PmergeMe::sortByVectorContainer(char *inputIntegers[])
 	_mergeVectorSubChainToMain();
 	endTime = std::clock();
 	_vectorElapsedTime 
-		= static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC * 1000.0;
+		= (static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC) * 1000000.0;
 }
 
 void	PmergeMe::_setVectorInputIntegers(char *inputIntegers[])
@@ -218,7 +225,7 @@ void	PmergeMe::sortByDequeContainer(char *inputIntegers[])
 	_mergeDequeSubChainToMain();
 	endTime = std::clock();
 	_dequeElapsedTime
-		= static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC * 1000.0;
+		= (static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC) * 1000000.0;
 }
 
 void	PmergeMe::_setDequeInputIntegers(char *inputIntegers[])
@@ -293,9 +300,9 @@ void	PmergeMe::_pushValuesToEachDequeChain(const int &number1, const int &number
 
 void	PmergeMe::_sortDequeMainChainByBinaryInsertion(void)
 {
-	int							mainValue, pairedValue;	
-	int							mainChainSize = _dequeMainChain.size();
-	int							insertIndex, i;
+	int	mainValue, pairedValue;	
+	int	mainChainSize = _dequeMainChain.size();
+	int	insertIndex, i;
 
 	for (i = 1; i < mainChainSize; i++)
 	{
@@ -369,24 +376,16 @@ int	PmergeMe::_fordJohnsonEquation(int number)
 	return (static_cast<int>(std::pow(2.0, number)) - _fordJohnsonEquation(number - 1));
 }
 
-void	PmergeMe::printVectorMainChain(void) const
+void	PmergeMe::printSortResult(void) const
 {
-	_printVector(_vectorMainChain);
-}
+	const int	elementCount = _vectorInputIntegers.size();
 
-void	PmergeMe::printDequeMainChain(void) const
-{
-	_printDeque(_dequeMainChain);
-}
-
-void	PmergeMe::printVectorInputIntegers(void) const
-{
-	_printVector(_vectorInputIntegers);
-}
-
-void	PmergeMe::printDequeInputIntegers(void) const
-{
-	_printDeque(_dequeInputIntegers);
+	std::cout << "Before: "; _printVector(_vectorInputIntegers); std::cout << '\n';
+	std::cout << "After: "; _printVector(_vectorMainChain); std::cout << '\n';
+	std::cout << "Time to process a range of " << elementCount 
+			  << " elements with std::vector: " << _vectorElapsedTime << " (micro second)\n";
+	std::cout << "Time to process a range of " << elementCount 
+	          << " elements with std::deque: " << _dequeElapsedTime << " (micro second)\n";
 }
 
 void	PmergeMe::_printVector(const std::vector<int> &vector) const
@@ -405,14 +404,4 @@ void	PmergeMe::_printDeque(const std::deque<int> &deque) const
 
 	for (; iterator != endpoint; iterator++)
 		std::cout << *iterator << ' ';
-}
-
-double	PmergeMe::getVectorElapsedTime(void) const
-{
-	return (_vectorElapsedTime);
-}
-
-double	PmergeMe::getDequeElapsedTime(void) const
-{
-	return (_dequeElapsedTime);
 }
