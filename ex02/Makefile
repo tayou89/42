@@ -1,6 +1,6 @@
 NAME = PmergeMe 
 CPP = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm
 RMFLAGS = -rf
 FILE_NAME = main \
