@@ -1,0 +1,48 @@
+NAME = so_long
+CC = gcc
+CCFLAGS = -Wall -Wextra -Werror
+RM = rm
+RMFLAGS = -rf
+LIBFT = ./libft/libft.a
+LIBFT_DIR = ./libft
+SRC = so_long.c \
+	  check_map_extension.c \
+	  check_map_validation.c \
+	  check_map_is_rectangular.c check_map_surrounded_by_wall.c \
+	  check_map_component.c check_map_has_valid_path.c \
+	  check_accessibility.c \
+	  get_array_map.c get_linked_list_map.c \
+	  make_game.c \
+	  get_mlx_win_ptr.c make_map.c \
+	  get_component_image_address.c put_image_to_map.c \
+	  control_player.c \
+	  movement.c \
+	  control_node.c \
+	  utils.c \
+	  free_functions.c \
+	  print_linked_list_map.c
+OBJ = $(SRC:.c=.o)
+
+all : $(NAME)
+
+clean : 
+	make -C $(LIBFT_DIR) clean
+	$(RM) $(RMFLAGS) $(OBJ) 
+
+fclean : clean
+	make -C $(LIBFT_DIR) fclean
+	$(RM) $(RMFLAGS) $(NAME)
+
+re : fclean all
+
+$(NAME) : $(LIBFT) $(OBJ)
+	$(CC) $(CCFLAGS) -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $^
+
+$(LIBFT) : 
+	make bonus -C $(LIBFT_DIR) all
+			   
+%.o : %.c
+	$(CC) $(CCFLAGS) -I./mlx -o $@ -c $<
+
+.PHONY : all clean fclean re libft
+
