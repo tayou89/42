@@ -1,0 +1,42 @@
+services:
+    nginx:
+        depends_on:
+            - wordpress
+        build: 
+            context: ./requirements/nginx
+            dockerfile: Dockerfile
+        image: nginx
+        pull_policy: never
+        container_name: nginx
+        tty: true
+        stdin_open: true
+        ports:
+            - "443:443"
+        volumes:
+            - ./requirements/nginx/web-document:/var/www
+            - ./requirements/nginx/configuration:/etc/nginx
+            - ./requirements/nginx/ssl:/etc/ssl
+        networks:
+            - inception_net
+
+    wordpress:
+        build:
+            context: ./requirements/wordpress
+            dockerfile: Dockerfile
+        image: wordpress
+        pull_policy: never
+        privileged: true
+        container_name: wordpress
+        tty: true
+        stdin_open: true
+#        ports:
+#            - "9000:9000"
+        volumes:
+            - ./requirements/wordpress/php:/etc/php
+            - ./requirements/wordpress/web-document:/var/www/html/wordpress
+        networks:
+            - inception_net
+
+networks:
+    inception_net:
+        driver: bridge
