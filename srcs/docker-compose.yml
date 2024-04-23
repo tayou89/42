@@ -9,7 +9,6 @@ services:
         pull_policy: never
         container_name: nginx
         tty: true
-        stdin_open: true
         ports:
             - "443:443"
         volumes:
@@ -25,12 +24,12 @@ services:
             dockerfile: Dockerfile
         image: wordpress
         pull_policy: never
-        privileged: true
         container_name: wordpress
         tty: true
-        stdin_open: true
-#        ports:
-#            - "9000:9000"
+        ports:
+            - "9000:9000"
+        expose:
+            - "9000"
         volumes:
             - ./requirements/wordpress/php:/etc/php
             - ./requirements/wordpress/web-document:/var/www/html/wordpress

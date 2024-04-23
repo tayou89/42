@@ -1,7 +1,5 @@
 FROM debian:12.5
 
-#EXPOSE 9000
-
 COPY entrypoint.sh /entrypoint.sh
 
 RUN	apt update -y && apt upgrade -y && apt install aptitude -y && \
