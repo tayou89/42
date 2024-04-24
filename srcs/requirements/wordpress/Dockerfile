@@ -4,7 +4,7 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN	apt update -y && apt upgrade -y && apt install aptitude -y && \
 	aptitude install php php-curl php-fpm php-bcmath php-gd php-soap -y && \
-	aptitude install php-mbstring php-mysqlnd php-xml php-intl php-zip -y && \
+	aptitude install php-mbstring php-mysqlnd php-xml php-intl php-zip php-mysqli -y && \
 	chmod +x /entrypoint.sh
 
 WORKDIR	/var/www/html
@@ -21,6 +21,8 @@ RUN	find . -type d -exec chmod 755 {} \; && \
 COPY ./php/8.2/fpm/php.ini /etc/php/8.2/fpm/php.ini
 
 CMD	["php-fpm8.2", "-F"]
+
+EXPOSE 9000
 
 ENTRYPOINT ["/entrypoint.sh"]
 

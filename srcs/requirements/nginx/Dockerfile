@@ -2,7 +2,7 @@ FROM alpine:3.17
 
 COPY entrypoint.sh /entrypoint.sh
 
-RUN apk add --no-cache nginx bash vim curl && \
+RUN apk add --no-cache nginx bash vim curl busybox-extras && \
 	chmod +x /entrypoint.sh
 
 EXPOSE 443

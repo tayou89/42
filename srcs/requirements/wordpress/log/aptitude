@@ -1,0 +1,25 @@
+Aptitude 0.8.13: log report
+Wed, Apr 24 2024 03:34:11 +0000
+
+  IMPORTANT: this log only lists intended actions; actions which fail
+  due to dpkg problems may not be completed.
+
+Will install 10 packages, and remove 0 packages.
+5770 kB of disk space will be used
+========================================
+[INSTALL, DEPENDENCIES] libatm1:amd64 1:2.5.1-4+b2
+[INSTALL, DEPENDENCIES] libbpf1:amd64 1:1.1.0-1
+[INSTALL, DEPENDENCIES] libcap2-bin:amd64 1:2.66-4
+[INSTALL, DEPENDENCIES] libelf1:amd64 0.188-2.1
+[INSTALL, DEPENDENCIES] libmnl0:amd64 1.0.4-3
+[INSTALL, DEPENDENCIES] libpam-cap:amd64 1:2.66-4
+[INSTALL, DEPENDENCIES] libtirpc-common:amd64 1.3.3+ds-1
+[INSTALL, DEPENDENCIES] libtirpc3:amd64 1.3.3+ds-1
+[INSTALL, DEPENDENCIES] libxtables12:amd64 1.8.9-2
+[INSTALL] iproute2:amd64 6.1.0-3
+========================================
+
+Log complete.
+
+===============================================================================
+
