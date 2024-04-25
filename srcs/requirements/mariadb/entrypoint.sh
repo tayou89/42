@@ -1,6 +1,12 @@
 #!/bin/sh
 
-#service mariadb start
+if [ ! -d /var/run/mysqld ]; then
+	mkdir -p /var/run/mysqld
+fi
+
+chown -R mysql:mysql /var/run/mysqld /var/lib/mysql
+chmod 777 /var/run/mysqld
+
 echo "Starting MariaDB with settings:"
 echo "Database: ${DATABASE_NAME}"
 echo "User: ${DATABASE_USER}@${DATABASE_HOST}"
