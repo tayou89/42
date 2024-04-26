@@ -9,6 +9,3 @@ RUN apt update && apt upgrade && apt install aptitude -y && \
 EXPOSE	3306
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-CMD ["mysqld"]
-#CMD ["mysqld_safe"]

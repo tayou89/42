@@ -26,7 +26,7 @@ define( 'DB_NAME', getenv('DATABASE_NAME'));
 define( 'DB_USER', getenv('DATABASE_USER'));
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('DATABASE_PASSWORD'));
+define( 'DB_PASSWORD', getenv('DATABASE_USER_PASSWORD'));
 
 /** Database hostname */
 define( 'DB_HOST', getenv('DATABASE_HOST'));
