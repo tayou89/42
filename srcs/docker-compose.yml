@@ -13,6 +13,7 @@ services:
             - redis_config:/etc/redis
         networks:
             - inception_net
+        restart: alwalys
 
     mariadb:
         build:
@@ -26,10 +27,12 @@ services:
             - "3306:3306"
         volumes:
             - mariadb_config:/etc/mysql/mariadb.conf.d
+            - mariadb_data:/var/lib/mysql
         networks:
             - inception_net
         env_file:
             - ./.env
+        restart: alwalys
 
     wordpress:
         depends_on:
@@ -51,6 +54,7 @@ services:
             - inception_net
         env_file:
             - ./.env
+        restart: alwalys
 
     nginx:
         depends_on:
@@ -70,6 +74,7 @@ services:
             - nginx_ssl:/etc/ssl
         networks:
             - inception_net
+        restart: alwalys
 
 networks:
     inception_net:

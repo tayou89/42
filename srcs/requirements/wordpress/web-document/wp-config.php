@@ -65,6 +65,13 @@ define('NONCE_SALT',       'lWC gloCIB2@>BgUN@&8YY8+<Ps~[}(1/VKeZ#J`jtgR_&_EF!A[
  */
 $table_prefix = 'wp_';
 
+define( 'WP_REDIS_HOST', getenv('WORDPRESS_REDIS_HOST'));
+define( 'WP_REDIS_PORT', getenv('WORDPRESS_REDIS_PORT'));
+define( 'WP_REDIS_PREFIX', getenv('WORDPRESS_REDIS_PREFIX'));
+define( 'WP_REDIS_DATABASE', getenv('WORDPRESS_REDIS_DATABASE') );
+define( 'WP_REDIS_TIMEOUT', getenv('WORDPRESS_REDIS_TIMEOUT') );
+define( 'WP_REDIS_READ_TIMEOUT', getenv('WORDPRESS_REDIS_READ_TIMEOUT') );
+
 /**
  * For developers: WordPress debugging mode.
  *

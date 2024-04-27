@@ -5,6 +5,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN	apt update -y && apt upgrade -y && apt install aptitude -y && \
 	aptitude install php php-curl php-fpm php-bcmath php-gd php-soap -y && \
 	aptitude install php-mbstring php-mysqlnd php-xml php-intl php-zip php-mysqli -y && \
+	usermod -u 1000 www-data && groupmod -g 1000 www-data && \
 	chmod +x /entrypoint.sh
 
 WORKDIR	/var/www/html
