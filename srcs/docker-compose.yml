@@ -1,4 +1,19 @@
 services:
+    redis:
+        build:
+            context: ./requirements/redis
+            dockerfile: Dockerfile
+        image: redis
+        pull_policy: never
+        container_name: redis
+        tty: true
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis_config:/etc/redis
+        networks:
+            - inception_net
+
     mariadb:
         build:
             context: ./requirements/mariadb
@@ -19,6 +34,7 @@ services:
     wordpress:
         depends_on:
             - mariadb
+            - redis
         build:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
@@ -65,34 +81,47 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/tayou/inception/srcs/requirements/wordpress/php
+            device: /Users/tayou/Desktop/inception/srcs/requirements/wordpress/php
 
     wordpress_web:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/tayou/inception/srcs/requirements/wordpress/web-document 
+            device: /Users/tayou/Desktop/inception/srcs/requirements/wordpress/web-document 
 
     nginx_config:
-        driver: local 
+        driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/tayou/inception/srcs/requirements/nginx/configuration
+            device: /Users/tayou/Desktop/inception/srcs/requirements/nginx/configuration
 
     nginx_ssl:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/tayou/inception/srcs/requirements/nginx/ssl
+            device: /Users/tayou/Desktop/inception/srcs/requirements/nginx/ssl
 
     mariadb_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/tayou/inception/srcs/requirements/mariadb/configuration
+            device: /Users/tayou/Desktop/inception/srcs/requirements/mariadb/configuration
 
-    
+    mariadb_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/tayou/Desktop/inception/srcs/requirements/mariadb/data
+
+    redis_config:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/tayou/Desktop/inception/srcs/requirements/redis/configuration
+

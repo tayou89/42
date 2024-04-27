@@ -1,4 +1,0 @@
-
-Start-Date: 2024-04-24  03:34:12
-Install: libxtables12:amd64 (1.8.9-2, automatic), libtirpc-common:amd64 (1.3.3+ds-1, automatic), libcap2-bin:amd64 (1:2.66-4, automatic), libatm1:amd64 (1:2.5.1-4+b2, automatic), libbpf1:amd64 (1:1.1.0-1, automatic), libmnl0:amd64 (1.0.4-3, automatic), libpam-cap:amd64 (1:2.66-4, automatic), libelf1:amd64 (0.188-2.1, automatic), libtirpc3:amd64 (1.3.3+ds-1, automatic), iproute2:amd64 (6.1.0-3)
-End-Date: 2024-04-24  03:34:12
