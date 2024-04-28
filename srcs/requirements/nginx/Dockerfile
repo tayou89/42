@@ -8,6 +8,6 @@ RUN apk add --no-cache nginx bash vim curl shadow busybox-extras && \
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
-
 ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["nginx", "-g", "daemon off;"]

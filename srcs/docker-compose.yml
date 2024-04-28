@@ -13,7 +13,7 @@ services:
             - redis_config:/etc/redis
         networks:
             - inception_net
-        restart: alwalys
+        restart: always
 
     mariadb:
         build:
@@ -32,7 +32,7 @@ services:
             - inception_net
         env_file:
             - ./.env
-        restart: alwalys
+        restart: always
 
     wordpress:
         depends_on:
@@ -54,7 +54,7 @@ services:
             - inception_net
         env_file:
             - ./.env
-        restart: alwalys
+        restart: always
 
     nginx:
         depends_on:
@@ -74,7 +74,27 @@ services:
             - nginx_ssl:/etc/ssl
         networks:
             - inception_net
-        restart: alwalys
+        restart: always
+
+    vsftpd:
+        depends_on:
+            - wordpress
+        build:
+            context: ./requirements/vsftpd
+            dockerfile: Dockerfile
+        image: vsftpd
+        pull_policy: never
+        container_name: vsftpd
+        tty: true
+        ports:
+            - "21:21"
+        volumes:
+            - wordpress_web:/var/www/html
+            - vsftpd_config:/etc/vsftpd
+        networks:
+            - inception_net
+        restart: always
+
 
 networks:
     inception_net:
@@ -130,3 +150,9 @@ volumes:
             o: bind
             device: /Users/tayou/Desktop/inception/srcs/requirements/redis/configuration
 
+    vsftpd_config:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /Users/tayou/Desktop/inception/srcs/requirements/vsftpd/configuration
