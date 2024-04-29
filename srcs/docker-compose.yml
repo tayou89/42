@@ -11,8 +11,8 @@ services:
             - "6379:6379"
         volumes:
             - redis_config:/etc/redis
-        networks:
-            - inception_net
+        networks: 
+            - inception_net 
         restart: always
 
     mariadb:
@@ -48,8 +48,8 @@ services:
         ports:
             - "9000:9000"
         volumes:
-            - wordpress_php:/etc/php
             - wordpress_web:/var/www/html/wordpress
+            - wordpress_php:/etc/php
         networks:
             - inception_net
         env_file:
@@ -88,11 +88,14 @@ services:
         tty: true
         ports:
             - "21:21"
+            - "10000-11000:10000-11000"
         volumes:
             - wordpress_web:/var/www/html
             - vsftpd_config:/etc/vsftpd
         networks:
             - inception_net
+        env_file:
+            - ./.env
         restart: always
 
 
@@ -106,53 +109,53 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/wordpress/php
+            device: /home/tayou/inception/srcs/requirements/wordpress/php
 
     wordpress_web:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/wordpress/web-document 
+            device: /home/tayou/inception/srcs/requirements/wordpress/web-document 
 
     nginx_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/nginx/configuration
+            device: /home/tayou/inception/srcs/requirements/nginx/configuration
 
     nginx_ssl:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/nginx/ssl
+            device: /home/tayou/inception/srcs/requirements/nginx/ssl
 
     mariadb_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/mariadb/configuration
+            device: /home/tayou/inception/srcs/requirements/mariadb/configuration
 
     mariadb_data:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/mariadb/data
+            device: /home/tayou/inception/srcs/requirements/mariadb/data
 
     redis_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/redis/configuration
+            device: /home/tayou/inception/srcs/requirements/redis/configuration
 
     vsftpd_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /Users/tayou/Desktop/inception/srcs/requirements/vsftpd/configuration
+            device: /home/tayou/inception/srcs/requirements/vsftpd/configuration
