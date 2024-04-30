@@ -8,13 +8,13 @@ RUN	apt update -y && apt upgrade -y && apt install aptitude -y && \
 	usermod -u 1000 www-data && groupmod -g 1000 www-data && \
 	chmod +x /entrypoint.sh
 
-WORKDIR	/var/www/html
+WORKDIR	/var/www
 
 RUN	aptitude install wget unzip -y && \	
 	wget https://wordpress.org/latest.zip && \
 	unzip latest.zip && rm latest.zip
 
-WORKDIR /var/www/html/wordpress
+WORKDIR /var/www/wordpress
 
 RUN	find . -type d -exec chmod 755 {} \; && \
 	find . -type f -exec chmod 644 {} \;
