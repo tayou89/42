@@ -15,7 +15,7 @@ logs:
 	docker compose -f $(COMPOSE_FILE) logs
 
 clean:
-	docker compose -f $(COMPOSE_FILE) down --rmi all -v
+	docker compose -f $(COMPOSE_FILE) down --rmi all -v --remove-orphans
 
 fclean: clean
 	docker system prune -a --force
