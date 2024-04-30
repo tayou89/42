@@ -109,53 +109,53 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/wordpress/php
+            device: /Users/tayou/Desktop/inception/srcs/requirements/wordpress/php
 
     wordpress_web:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/wordpress/web-document 
+            device: /Users/tayou/Desktop/inception/srcs/requirements/wordpress/web-document 
 
     nginx_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/nginx/configuration
+            device: /Users/tayou/Desktop/inception/srcs/requirements/nginx/configuration
 
     nginx_ssl:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/nginx/ssl
+            device: /Users/tayou/Desktop/inception/srcs/requirements/nginx/ssl
 
     mariadb_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/mariadb/configuration
+            device: /Users/tayou/Desktop/inception/srcs/requirements/mariadb/configuration
 
     mariadb_data:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/mariadb/data
+            device: /Users/tayou/Desktop/inception/srcs/requirements/mariadb/data
 
     redis_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/redis/configuration
+            device: /Users/tayou/Desktop/inception/srcs/requirements/redis/configuration
 
     vsftpd_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/inception/srcs/requirements/vsftpd/configuration
+            device: /Users/tayou/Desktop/inception/srcs/requirements/vsftpd/configuration
