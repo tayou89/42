@@ -1,6 +1,6 @@
 #!/bin/sh
 
-envsubst '${SSL_CERT_PATH},${SSL_KEY_PATH}'< /etc/apache2/sites-enabled/default.conf.template > /etc/apache2/sites-enabled/000-default.conf
+envsubst '${SSL_CERT_PATH},${SSL_KEY_PATH}'< /etc/apache2/sites-enabled/wordpress.conf.template > /etc/apache2/sites-enabled/wordpress.conf
 
 chown -R www-data:www-data /var/www
 
