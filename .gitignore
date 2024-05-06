@@ -1,5 +1,0 @@
-srcs/.env
-scrs/requirements/mariadb/data/
-scrs/requirements/nginx/ssl/
-scrs/requirements/apache/ssl/
-
