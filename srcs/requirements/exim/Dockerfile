@@ -10,3 +10,5 @@ RUN apt update -y && \
 EXPOSE 25
 
 ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["exim", "-bdf"]

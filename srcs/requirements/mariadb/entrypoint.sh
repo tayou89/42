@@ -19,7 +19,7 @@ cat << EOF > /tmp/init_database.sql
 
 FLUSH PRIVILEGES;
 SET PASSWORD FOR '${DATABASE_ROOT}'@'${DATABASE_ROOT_HOST}' = PASSWORD('$DATABASE_ROOT_PASSWORD');
-CREATE DATABASE ${DATABASE_NAME};
+CREATE DATABASE IF NOT EXISTS ${DATABASE_NAME};
 CREATE USER '${DATABASE_USER}'@'${DATABASE_USER_HOST}' IDENTIFIED BY '${DATABASE_USER_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${DATABASE_NAME}.* TO '${DATABASE_USER}'@'${DATABASE_USER_HOST}';
 FLUSH PRIVILEGES;
@@ -29,10 +29,8 @@ EOF
 if [ ! -d /var/lib/mysql/mysql ]; then
 	echo  "Executing mysql_install_db..."
 	mysql_install_db --user=mysql --ldir=/var/lib/mysql
+	/usr/sbin/mysqld --user=mysql --bootstrap < /tmp/init_database.sql
 fi
 
-echo  "Executing /mysqld 1..."
-/usr/sbin/mysqld --user=mysql --bootstrap < /tmp/init_database.sql
-
-echo  "Executing /mysqld 2..."
+echo  "Executing /mysqld..."
 exec /usr/sbin/mysqld --user=mysql --console

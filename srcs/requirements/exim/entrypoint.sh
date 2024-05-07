@@ -11,6 +11,4 @@ echo "smtp.gmail.com:$GMAIL_LOGIN:$GMAIL_PASSWORD" > /etc/exim4/passwd.client
 
 update-exim4.conf
 
-service exim4 start
-
-tail -f /var/log/exim4/mainlog
+exec "$@"

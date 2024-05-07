@@ -25,4 +25,3 @@ EXPOSE 9000
 ENTRYPOINT ["/entrypoint.sh"]
 
 CMD	["php-fpm7.4", "-F"]
-#CMD	["tail", "-f", "/dev/null"]

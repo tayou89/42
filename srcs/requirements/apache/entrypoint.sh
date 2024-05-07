@@ -4,12 +4,8 @@ envsubst '${SSL_CERT_PATH},${SSL_KEY_PATH}'< /etc/apache2/sites-enabled/wordpres
 
 chown -R www-data:www-data /var/www
 
-a2enmod cgi
-a2enmod dav
-a2enmod dav_fs
-a2enmod ssl
-a2enmod rewrite
-a2enmod macro
+a2dismod mpm_event
+a2enmod mpm_prefork cgi dav dav_fs ssl rewrite macro 
 a2ensite default-ssl
 
 exec "$@"

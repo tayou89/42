@@ -15,4 +15,3 @@ EXPOSE 9001
 ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["php-fpm7.4", "-F"]
-#CMD ["tail", "-f", "/dev/null"]
