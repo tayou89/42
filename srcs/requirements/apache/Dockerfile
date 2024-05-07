@@ -1,4 +1,4 @@
-FROM debian:12.5
+FROM debian:11.9
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -13,4 +13,3 @@ ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 8443
 
 CMD ["apache2ctl", "-D", "FOREGROUND"]
-#CMD ["tail", "-f", "/dev/null"]

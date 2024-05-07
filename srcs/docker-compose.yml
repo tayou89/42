@@ -26,7 +26,7 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - mariadb_config:/etc/mysql/mariadb.conf.d
+            - mariadb_config:/etc/mysql
             - mariadb_data:/var/lib/mysql
         networks:
             - inception_net
@@ -174,95 +174,95 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/wordpress/php
+            device: /home/tayou/data/wordpress/php
 
     wordpress_web:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/wordpress/web-document 
+            device: /home/tayou/data/wordpress/web-document 
 
     nginx_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/nginx/configuration
+            device: /home/tayou/data/nginx/configuration
 
     nginx_ssl:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/nginx/ssl
+            device: /home/tayou/data/nginx/ssl
 
     mariadb_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/mariadb/configuration
+            device: /home/tayou/data/mariadb/configuration
 
     mariadb_data:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/mariadb/data
+            device: /home/tayou/data/mariadb/data
 
     redis_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/redis/configuration
+            device: /home/tayou/data/redis/configuration
 
     vsftpd_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/vsftpd/configuration
+            device: /home/tayou/data/vsftpd/configuration
 
     adminer_web:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/adminer/web-document
+            device: /home/tayou/data/adminer/web-document
 
     adminer_php:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/adminer/php
+            device: /home/tayou/data/adminer/php
     
     exim_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/exim/configuration
+            device: /home/tayou/data/exim/configuration
 
     apache_config:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/apache/configuration
+            device: /home/tayou/data/apache/configuration
 
     apache_web:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/apache/web-document
+            device: /home/tayou/data/apache/web-document
 
     apache_ssl:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/Desktop/inception/srcs/requirements/apache/ssl
+            device: /home/tayou/data/apache/ssl

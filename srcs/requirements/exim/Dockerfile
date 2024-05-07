@@ -1,4 +1,4 @@
-FROM debian:12.5
+FROM debian:11.9
 
 COPY entrypoint.sh /entrypoint.sh
 

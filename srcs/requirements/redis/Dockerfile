@@ -1,4 +1,4 @@
-FROM debian:12.5
+FROM debian:11.9
 
 RUN apt update -y && apt upgrade -y && apt install aptitude -y && \
 	apt install redis-server -y
