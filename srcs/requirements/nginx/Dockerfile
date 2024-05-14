@@ -6,6 +6,9 @@ RUN apk add --no-cache nginx bash vim curl shadow busybox-extras gettext && \
 	groupmod -g 1000 www-data && usermod -u 1000 -g www-data nginx && \
 	chmod +x /entrypoint.sh
 
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/wordpress.conf.template /etc/nginx/http.d/wordpress.conf.template
+
 EXPOSE 443
 
 ENTRYPOINT ["/entrypoint.sh"]

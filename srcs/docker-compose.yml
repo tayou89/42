@@ -7,10 +7,6 @@ services:
         pull_policy: never
         container_name: redis
         tty: true
-        ports:
-            - "6379:6379"
-        volumes:
-            - redis_config:/etc/redis
         networks: 
             - inception_net 
         restart: on-failure
@@ -23,11 +19,8 @@ services:
         pull_policy: never
         container_name: mariadb
         tty: true
-        ports:
-            - "3306:3306"
         volumes:
-            - mariadb_config:/etc/mysql
-            - mariadb_data:/var/lib/mysql
+            - mariadb:/var/lib/mysql
         networks:
             - inception_net
         env_file:
@@ -38,6 +31,7 @@ services:
         depends_on:
             - mariadb
             - redis
+            - exim
         build:
             context: ./requirements/wordpress
             dockerfile: Dockerfile
@@ -45,11 +39,8 @@ services:
         pull_policy: never
         container_name: wordpress
         tty: true
-        ports:
-            - "9000:9000"
         volumes:
-            - wordpress_web:/var/www/wordpress
-            - wordpress_php:/etc/php
+            - wordpress:/var/www/wordpress
         networks:
             - inception_net
         env_file:
@@ -70,10 +61,9 @@ services:
         ports:
             - "443:443"
         volumes:
-            - wordpress_web:/var/www/wordpress
-            - adminer_web:/var/www/adminer
-            - nginx_config:/etc/nginx
-            - nginx_ssl:/etc/ssl/inception
+            - wordpress:/var/www/wordpress
+            - adminer:/var/www/adminer
+            - ssl:${SSL_PATH}
         networks:
             - inception_net
         env_file:
@@ -94,8 +84,7 @@ services:
             - "21:21"
             - "10000-10005:10000-10005"
         volumes:
-            - wordpress_web:/var/www/wordpress
-            - vsftpd_config:/etc/vsftpd
+            - wordpress:/var/www/wordpress
         networks:
             - inception_net
         env_file:
@@ -113,11 +102,8 @@ services:
         pull_policy: never
         container_name: adminer
         tty: true
-        ports:
-            - "9001:9001"
         volumes:
-            - adminer_web:/var/www/adminer
-            - adminer_php:/etc/php
+            - adminer:/var/www/adminer
         networks:
             - inception_net
         env_file:
@@ -125,8 +111,6 @@ services:
         restart: on-failure
     
     exim:
-        depends_on:
-            - wordpress
         build:
             context: ./requirements/exim
             dockerfile: Dockerfile
@@ -134,10 +118,6 @@ services:
         pull_policy: never
         container_name: exim
         tty: true
-        ports:
-            - "25:25"
-        volumes:
-            - exim_config:/etc/exim4
         networks:
             - inception_net
         env_file:
@@ -155,9 +135,8 @@ services:
         ports:
             - "8443:8443"
         volumes:
-            - apache_config:/etc/apache2
-            - apache_web:/var/www
-            - apache_ssl:/etc/ssl/inception
+            - apache:/var/www
+            - ssl:${SSL_PATH}
         networks:
             - inception_net
         env_file:
@@ -169,100 +148,37 @@ networks:
         driver: bridge
 
 volumes:
-    wordpress_php:
+    ssl:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/data/wordpress/php
+            device: ${VOLUME_PATH}/ssl
 
-    wordpress_web:
+    wordpress:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/data/wordpress/web-document 
+            device: ${VOLUME_PATH}/wordpress
 
-    nginx_config:
+    mariadb:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/data/nginx/configuration
+            device: ${VOLUME_PATH}/mariadb
 
-    nginx_ssl:
+    adminer:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/data/nginx/ssl
+            device: ${VOLUME_PATH}/adminer
 
-    mariadb_config:
+    apache:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/tayou/data/mariadb/configuration
-
-    mariadb_data:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/mariadb/data
-
-    redis_config:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/redis/configuration
-
-    vsftpd_config:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/vsftpd/configuration
-
-    adminer_web:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/adminer/web-document
-
-    adminer_php:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/adminer/php
-    
-    exim_config:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/exim/configuration
-
-    apache_config:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/apache/configuration
-
-    apache_web:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/apache/web-document
-
-    apache_ssl:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /home/tayou/data/apache/ssl
+            device: ${VOLUME_PATH}/apache

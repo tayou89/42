@@ -1,6 +1,16 @@
 COMPOSE_FILE = srcs/docker-compose.yml
 
-all: build up
+all: dir build up
+
+restart: down up
+
+dir:
+	mkdir -p ~/data
+	mkdir -p ~/data/mariadb
+	mkdir -p ~/data/wordpress
+	mkdir -p ~/data/adminer
+	mkdir -p ~/data/apache
+	cp -rf ~/ssl ~/data
 
 build:
 	docker compose -f $(COMPOSE_FILE) build

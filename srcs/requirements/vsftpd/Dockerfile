@@ -10,6 +10,8 @@ RUN apt update && apt upgrade -y && apt install aptitude -y && \
 	chmod +x /entrypoint.sh && \
 	chmod +x /usr/bin/dumb-init
 
+COPY conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
+
 EXPOSE 21
 
 ENTRYPOINT ["/entrypoint.sh"]

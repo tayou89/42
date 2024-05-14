@@ -9,16 +9,12 @@ RUN	apt update -y && apt upgrade -y && apt install aptitude -y && \
 	mkdir -p /run/php && \
 	chmod +x /entrypoint.sh
 
+COPY conf/php.ini 				/etc/php/7.4/fpm/php.ini
+COPY conf/php-fpm.conf			/etc/php/7.4/fpm/php-fpm.conf
+COPY conf/www.conf 				/etc/php/7.4/fpm/pool.d/www.conf
+COPY web-document/wp-config.php	/wp-config.php
+
 WORKDIR	/var/www
-
-RUN	aptitude install wget unzip -y && \	
-	wget https://wordpress.org/latest.zip && \
-	unzip latest.zip && rm latest.zip
-
-WORKDIR /var/www/wordpress
-
-RUN	find . -type d -exec chmod 755 {} \; && \
-	find . -type f -exec chmod 644 {} \;
 
 EXPOSE 9000
 
