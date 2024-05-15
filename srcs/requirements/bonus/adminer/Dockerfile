@@ -7,10 +7,10 @@ RUN apt update -y && apt upgrade -y && apt install aptitude -y && \
 	chmod +x /entrypoint.sh && \
 	usermod -u 1000 www-data && groupmod -g 1000 www-data
 
-COPY conf/php.ini 		/etc/php/7.4/fpm/php.ini
-COPY conf/php-fpm.conf	/etc/php/7.4/fpm/php-fpm.conf
-COPY conf/www.conf 		/etc/php/7.4/fpm/pool.d/www.conf
-COPY conf/adminer.php	/adminer.php
+COPY conf/php.ini 				/etc/php/7.4/fpm/php.ini
+COPY conf/php-fpm.conf			/etc/php/7.4/fpm/php-fpm.conf
+COPY conf/www.conf 				/etc/php/7.4/fpm/pool.d/www.conf
+COPY web-document/adminer.php	/adminer.php
 
 EXPOSE 9001
 
