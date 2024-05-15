@@ -1,7 +1,7 @@
 services:
     redis:
         build:
-            context: ./requirements/redis
+            context: ./requirements/bonus/redis
             dockerfile: Dockerfile 
         image: redis
         pull_policy: never
@@ -74,7 +74,7 @@ services:
         depends_on:
             - wordpress
         build:
-            context: ./requirements/vsftpd
+            context: ./requirements/bonus/vsftpd
             dockerfile: Dockerfile
         image: vsftpd
         pull_policy: never
@@ -96,7 +96,7 @@ services:
             - mariadb
             - wordpress
         build:
-            context: ./requirements/adminer
+            context: ./requirements/bonus/adminer
             dockerfile: Dockerfile
         image: adminer
         pull_policy: never
@@ -112,7 +112,7 @@ services:
     
     exim:
         build:
-            context: ./requirements/exim
+            context: ./requirements/bonus/exim
             dockerfile: Dockerfile
         image: exim
         pull_policy: never
@@ -126,7 +126,7 @@ services:
         
     apache:
         build:
-            context: ./requirements/apache
+            context: ./requirements/bonus/apache
             dockerfile: Dockerfile
         image: apache
         pull_policy: never
