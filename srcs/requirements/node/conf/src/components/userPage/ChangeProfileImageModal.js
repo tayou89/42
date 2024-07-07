@@ -71,6 +71,8 @@ async function changeProfileImage(myId, retryCount = 0) {
 		const input = document.querySelector("#change-profile-image-input");
 		const file = input.files[0];
 		if (!file) return "no file";
+		const maxSizeMB = 10;
+		if (file.size > maxSizeMB * 1024 * 1024) return "file too large";
 		const formData = new FormData();
 		formData.append("avatar", file);
 		const response = await fetch(`/user/api/users/${myId}/`, {
@@ -98,8 +100,12 @@ async function onClickChangeProfileImageSubmit(event, myId, setRefreshUpper) {
 		if (result === "success") {
 			notifyStatusById("successfully changed!", true, "change-profile-image-status");
 			setRefreshUpper(current => !current);
-		} else {
+		} else if (result === "no file") {
 			notifyStatusById("no file!", false, "change-profile-image-status");
+		} else if (result === "file too large") {
+			notifyStatusById("file must smaller then 10MB!", false, "change-profile-image-status");
+		} else {
+			notifyStatusById("unknown error!", false, "change-profile-image-status");
 		}
 	} catch (error) {
 		console.log("onClickChangeProfileImageSubmit Error: ", error);
