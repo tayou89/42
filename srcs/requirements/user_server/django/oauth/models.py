@@ -5,7 +5,7 @@ import random
 
 class OTPModel(models.Model):
 	code = models.CharField(max_length=6)
-	created_at = models.DateTimeField(auto_now_add=True)
+	created_at = models.DateTimeField(auto_now=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
  
 	class Meta:
