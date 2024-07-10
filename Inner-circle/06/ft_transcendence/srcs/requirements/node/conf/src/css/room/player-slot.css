@@ -1,0 +1,149 @@
+#slot-pong {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    min-width: 400px;
+    font-size: 50px;
+    gap: 10px;
+    color: white;
+}
+
+#slot-box-pong {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    border-radius: 20px;
+    background: rgba(250, 250, 250, 0.2);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    height: 700px;
+    color: white;
+    gap: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+#slot-box-pong:hover {
+    background: linear-gradient(0deg,rgba(255, 255, 255, 0.4) 0%,rgba(0, 0, 0, 0.3) 100%);
+}
+
+#photo-box-pong {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    user-select: none;
+}
+
+#photo-pong {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+#slot-mtt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 350px;
+    min-width: 250px;
+    font-size: 50px;
+    gap: 10px;
+    color: white;
+    transition: background 0.3s ease-in-out;
+}
+
+#slot-box-mtt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    border-radius: 20px;
+    background: rgba(250, 250, 250, 0.2);
+    backdrop-filter: blur(2px);
+    width: 100%;
+    height: 700px;
+    color: white;
+}
+
+#slot-box-mtt:hover {
+    background: linear-gradient(0deg,rgba(255, 255, 255, 0.3) 0%,rgba(0, 0, 0, 0.3) 100%);
+}
+
+#photo-box-mtt {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#photo-mtt {
+    user-select: none;
+    display: flex;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+#slot-pong:nth-child(1) {
+    animation: slide-in-left 1s ease-in-out forwards;
+}
+
+#slot-pong:nth-child(2) {
+    animation: slide-in-right 1s ease-in-out forwards;
+}
+
+#slot-mtt:nth-child(1) {
+    animation: slide-in-left 1s ease-in-out forwards;
+}
+
+#slot-mtt:nth-child(2) {
+    animation: slide-in-left 1s ease-in-out forwards;
+}
+
+#slot-mtt:nth-child(3) {
+    animation: slide-in-right 1s ease-in-out forwards;
+}
+
+#slot-mtt:nth-child(4) {
+    animation: slide-in-right 1s ease-in-out forwards;
+}
+
+#slot-title, #name, #level {
+    user-select: none;
+}

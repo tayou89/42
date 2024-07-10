@@ -1,0 +1,17 @@
+include:
+  - path: ./compose_files/ELK_stack.yml
+    env_file: ./envs/ELK_stack.env
+
+  - path: ./compose_files/grafana_stack.yml
+    env_file: ./envs/grafana_stack.env
+
+  - path: ./compose_files/security.yml
+    env_file: ./envs/security.env
+
+  - path: ./compose_files/web.yml
+    env_file: ./envs/web.env
+
+networks:
+  my_net:
+    name: my_net
+    driver: bridge

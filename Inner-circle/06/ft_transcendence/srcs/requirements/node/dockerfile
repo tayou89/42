@@ -1,0 +1,6 @@
+FROM node:21-alpine3.18
+RUN apk add curl
+COPY ./conf /workspace
+WORKDIR /workspace
+RUN npm install
+CMD [ "npm", "start" ]
